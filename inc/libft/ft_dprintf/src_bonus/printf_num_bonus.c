@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 00:05:56 by nuferron          #+#    #+#             */
-/*   Updated: 2023/11/29 15:27:57 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:20:04 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "libftprintf.h"
 
 int	num_len(int num)
 {

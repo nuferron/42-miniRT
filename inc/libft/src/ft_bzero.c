@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:17:27 by nuferron          #+#    #+#             */
-/*   Updated: 2023/09/13 20:21:41 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:04:07 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

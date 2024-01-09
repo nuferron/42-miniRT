@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 00:03:59 by nuferron          #+#    #+#             */
-/*   Updated: 2023/11/29 15:54:49 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:19:15 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "libftprintf.h"
 
 static int	hex_conversion_cap(int fd, unsigned int dec_num)
 {

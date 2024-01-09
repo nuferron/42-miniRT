@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 00:02:27 by nuferron          #+#    #+#             */
-/*   Updated: 2023/09/13 21:23:58 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:19:52 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "libftprintf.h"
 
 void	left_padding_zero(char *str, char *final_str, t_flags *flags)
 {

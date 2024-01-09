@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 19:36:56 by nuferron          #+#    #+#             */
-/*   Updated: 2023/09/13 20:21:42 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:07:14 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 static int	ft_charcmp(char c, char const *set)
 {

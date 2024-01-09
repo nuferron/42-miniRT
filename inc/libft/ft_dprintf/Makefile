@@ -6,7 +6,7 @@
 #    By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 00:01:43 by nuferron          #+#    #+#              #
-#    Updated: 2024/01/09 21:36:28 by nuferron         ###   ########.fr        #
+#    Updated: 2024/01/09 22:24:26 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ OBJDIR_BNS = obj_bonus/
 SRCDIR = src/
 SRCDIR_BNS = src_bonus/
 NAME = libftprintf.a
-HEADER = libftprintf.h
+INC = inc/
 CFLAGS = -Wall -Wextra -Werror
 COLUMNS = $(shell tput cols)
 
@@ -63,17 +63,17 @@ norm:
 	| awk '{if($$2 == "Error!") print "\n${RED}"$$1" "$$2; \
 	else print "${RESET}"$$0}'
 
-${OBJDIR}%.o:	${SRCDIR}%.c ${HEADER} | ${OBJDIR}
+${OBJDIR}%.o:	${SRCDIR}%.c ${INC} | ${OBJDIR}
 		@printf "${WHITE}FT_DPRINTF:${CYAN}Compiling files: ${WHITE}$(notdir $<)...${RESET}\r"
-		@cc $(CFLAGS) -I $(HEADER) -c $< -o $@
+		@cc $(CFLAGS) -I $(INC) -c $< -o $@
 		@printf "\r%-${COLUMNS}s\r" ""
 
 ${OBJDIR}:
 		mkdir -p $(dir $@)
 
-${OBJDIR_BNS}%.o:	${SRCDIR_BNS}%.c ${HEADER} | ${OBJDIR_BNS}
+${OBJDIR_BNS}%.o:	${SRCDIR_BNS}%.c ${INC} | ${OBJDIR_BNS}
 		@printf "${WHITE}FT_DPRINTF:${CYAN}Compiling files: ${WHITE}$(notdir $<)...${RESET}\r"
-		@cc $(CFLAGS) -I $(HEADER) -c $< -o $@
+		@cc $(CFLAGS) -I $(INC) -c $< -o $@
 		@printf "\r%-${COLUMNS}s\r" ""
 
 ${OBJDIR_BNS}:

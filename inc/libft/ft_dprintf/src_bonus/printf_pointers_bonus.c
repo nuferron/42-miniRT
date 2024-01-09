@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 00:09:18 by nuferron          #+#    #+#             */
-/*   Updated: 2023/11/29 15:28:55 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:21:00 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "libftprintf.h"
 
 static int	hex_conversion_pointers(unsigned long long num)
 {

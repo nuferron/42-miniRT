@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:21:18 by nuferron          #+#    #+#             */
-/*   Updated: 2023/09/13 20:21:42 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:06:00 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {

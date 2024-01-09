@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 00:02:41 by nuferron          #+#    #+#             */
-/*   Updated: 2023/09/13 21:23:58 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:19:54 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "libftprintf.h"
 
 int	precision_len(char type, int len, t_flags *flags)
 {

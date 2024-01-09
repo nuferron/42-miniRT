@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:57:06 by nuferron          #+#    #+#             */
-/*   Updated: 2023/09/13 20:21:42 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:06:17 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 static int	ft_wordcount(const char *s, char c)
 {

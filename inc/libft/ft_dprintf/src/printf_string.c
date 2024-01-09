@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:17:27 by nuferron          #+#    #+#             */
-/*   Updated: 2023/11/29 15:17:44 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:19:37 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "libftprintf.h"
 
 int	print_string(int fd, char *str)
 {

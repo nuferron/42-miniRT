@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 00:04:11 by nuferron          #+#    #+#             */
-/*   Updated: 2023/11/29 15:56:11 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:20:41 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "libftprintf.h"
 
 static int	hex_conversion_min(int fd, unsigned int dec_num)
 {

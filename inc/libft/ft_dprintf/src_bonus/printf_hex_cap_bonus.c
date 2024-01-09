@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 00:03:48 by nuferron          #+#    #+#             */
-/*   Updated: 2023/11/29 15:27:13 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:20:00 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "libftprintf.h"
 
 static int	hex_conversion_cap_bonus(unsigned int num)
 {

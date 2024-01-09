@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 00:06:10 by nuferron          #+#    #+#             */
-/*   Updated: 2023/11/29 15:28:13 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:20:06 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "libftprintf.h"
 
 int	percentage_bonus(int fd, t_flags *flags)
 {

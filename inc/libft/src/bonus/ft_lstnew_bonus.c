@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 00:50:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/09 21:34:32 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:08:14 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 struct s_list	*ft_lstnew(void *content)
 {

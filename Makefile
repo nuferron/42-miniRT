@@ -6,7 +6,7 @@
 #    By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/01/09 16:44:59 by nuferron         ###   ########.fr        #
+#    Updated: 2024/01/09 22:53:03 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,28 +24,26 @@ SRCDIR = src/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 OBJDIR = obj/
 NAME = miniRT
-HEADER =
 CFLAGS = -Wall -Wextra -Werror -O3 #-fsanitize=address
-MLXHEADER = mlx.h
-LIB = libftprintf.a
+LIB = inc/libft/libft.a
 MLXFLAGS = -Linc/minilibx -lmlx -framework OpenGL -framework AppKit
 COLUMNS = $(shell tput cols)
 
 all: make_libs ${NAME}
 
 make_libs:
-	make -C inc/ft_printf bonus --no-print-directory
+	make -C inc/libft bonus --no-print-directory
+	@make -s -C inc/minilibx --no-print-directory
 
 ${NAME}: ${OBJS}
-	cp inc/ft_printf/libftprintf.a .
-	cc ${CFLAGS} ${OBJS} ${MLXFLAGS} libftprintf.a -o ${NAME}
+	cc ${CFLAGS} ${OBJS} ${MLXFLAGS} ${LIB} -o ${NAME}
 	echo "${WHITE}${NAME}: ${GREEN}Binary successfully created!${RESET}"
 
 norm:
-	make -C inc/ft_printf norm --no-print-directory
-	printf "${WHITE}${NAME}${RESET}\n"
-	norminette $(addprefix ${SRCDIR},$(SRCS)) $(addprefix ${SRCDIR_BNS},$(SRCS_BNS)) ${HEADER} | grep -v "OK" \
-	| awk '{if($$2 == "Error!") print "${RED}"$$1" "$$2; \
+	make -C inc/libft norm --no-print-directory
+	printf "${WHITE}${NAME}${RESET}"
+	(norminette ${SRCDIR} && echo " ${GREEN}All good")  | grep -v "OK" \
+	| awk '{if($$2 == "Error!") print "\n${RED}"$$1" "$$2; \
 	else print "${RESET}"$$0}'
 
 leaks: ${NAME}
@@ -62,7 +60,7 @@ clean:
 		rm -rf ${OBJDIR} ${OBJDIR_BNS} combination; \
 		printf "${WHITE}${NAME}: ${RED}Objects have been deleted${RESET}\n"; \
 	fi
-	make -C inc/ft_printf clean --no-print-directory
+	make -C inc/libft clean --no-print-directory
 
 fclean: 	clean
 	if [ -e ${NAME} ] || [ -e ${LIB} ] ; then \
@@ -70,9 +68,10 @@ fclean: 	clean
 		printf "${WHITE}${NAME}: ${RED}All existing binaries have been deleted${RESET}\n" ; \
 	else printf "${WHITE}${NAME}: ${PURPLE}Already cleaned${RESET}\n" ; \
 	fi
-	make -C inc/ft_printf fclean --no-print-directory
+	make -C inc/libft fclean --no-print-directory
+	@make -s -C inc/minilibx clean --no-print-directory
 
 re:	fclean all
 
-.SILENT: norm make_libs clean fclean leaks ${NAME}
+.SILENT: norm clean fclean leaks make_libs ${NAME}
 .PHONY: all clean fclean re leaks norm

@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:42:24 by nuferron          #+#    #+#             */
-/*   Updated: 2023/09/13 20:21:41 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:04:15 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {

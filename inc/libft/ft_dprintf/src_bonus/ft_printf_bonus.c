@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 23:59:47 by nuferron          #+#    #+#             */
-/*   Updated: 2023/11/29 15:21:33 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:19:43 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "libftprintf.h"
 
 int	is_specifier(char c)
 {

@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:15:43 by nuferron          #+#    #+#             */
-/*   Updated: 2023/09/13 20:21:41 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:05:18 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 static int	ft_intlen(int num)
 {

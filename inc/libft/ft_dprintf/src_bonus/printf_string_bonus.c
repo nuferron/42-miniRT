@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 00:07:10 by nuferron          #+#    #+#             */
-/*   Updated: 2023/11/29 15:29:16 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:20:11 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "libftprintf.h"
 
 static char	*getting_string(char *str, t_flags *flags)
 {
