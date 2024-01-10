@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 15:50:10 by nuferron         ###   ########.fr       */
+/*   Created: 2024/01/10 13:07:57 by nuferron          #+#    #+#             */
+/*   Updated: 2024/01/10 15:48:02 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef ERRORS_H
+# define ERRORS_H
 
-#include <math.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-#include "errors.h"
-#include "libft/inc/libft.h"
-
-int	check_input(int argc, char **argv);
+#define ERROR	RED "Error\n" RESET
+#define ARGS	ERROR "Invalid number of arguments: " \
+				"you must provide ONE file *.rt"
+#define FNF		ERROR "File not found:"
+#define TYPE	ERROR "The file must end with the extension \".rt\""
 
 #endif
