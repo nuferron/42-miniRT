@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:58:50 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 13:21:57 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:57:42 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	main(int argc, char **argv)
 {
-	if (check_input(argc, argv))
+	t_sc	sc;
+
+	if (check_input(argc, argv, &sc))
 		return (1);
+	printf("main: sc sp x %f\n", sc.sp->x);
 	return (0);
 }
