@@ -6,14 +6,15 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:58:50 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/09 21:16:54 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/10 13:21:57 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "miniRT.h"
+
 int	main(int argc, char **argv)
 {
-	(void)argv;
-	if (argc != 2)
+	if (check_input(argc, argv))
 		return (1);
 	return (0);
 }
