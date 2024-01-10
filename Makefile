@@ -6,7 +6,7 @@
 #    By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/01/09 22:53:03 by nuferron         ###   ########.fr        #
+#    Updated: 2024/01/10 15:13:11 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,21 +19,22 @@ CYAN = \033[1;36m
 WHITE = \033[1;37m
 RESET = \033[0m
 
-SRCS =	main.c
+SRCS =	main.c check_input.c
 SRCDIR = src/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 OBJDIR = obj/
 NAME = miniRT
 CFLAGS = -Wall -Wextra -Werror -O3 #-fsanitize=address
 LIB = inc/libft/libft.a
-MLXFLAGS = -Linc/minilibx -lmlx -framework OpenGL -framework AppKit
+INC = inc/
+MLXFLAGS = -Linc/mlx -lmlx -framework OpenGL -framework AppKit
 COLUMNS = $(shell tput cols)
 
 all: make_libs ${NAME}
 
 make_libs:
 	make -C inc/libft bonus --no-print-directory
-	@make -s -C inc/minilibx --no-print-directory
+	@make -s -C inc/mlx --no-print-directory
 
 ${NAME}: ${OBJS}
 	cc ${CFLAGS} ${OBJS} ${MLXFLAGS} ${LIB} -o ${NAME}
@@ -52,7 +53,7 @@ leaks: ${NAME}
 ${OBJDIR}%.o: ${SRCDIR}%.c ${HEADER}
 	@printf "${WHITE}${NAME}: ${CYAN}Compiling files: ${WHITE}$(notdir $<)...${RESET}\r"
 	@mkdir -p $(dir $@)
-	@cc ${CFLAGS} -c $< -o $@
+	@cc ${CFLAGS} -I ${INC} -c $< -o $@
 	@printf "\r%-${COLUMNS}s\r"
 
 clean:
@@ -69,7 +70,7 @@ fclean: 	clean
 	else printf "${WHITE}${NAME}: ${PURPLE}Already cleaned${RESET}\n" ; \
 	fi
 	make -C inc/libft fclean --no-print-directory
-	@make -s -C inc/minilibx clean --no-print-directory
+	@make -s -C inc/mlx clean --no-print-directory
 
 re:	fclean all
 
