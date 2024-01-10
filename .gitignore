@@ -6,3 +6,4 @@ inc/mlx/*.o
 inc/libft/do_bonus
 inc/libft/ft_dprintf/do_bonus
 inc/libft/ft_dprintf/obj_bonus/
+test*
