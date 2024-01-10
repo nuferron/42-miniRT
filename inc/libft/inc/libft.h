@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:39:28 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 17:25:03 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/10 22:09:31 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_isdigit(int num);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
-int		ft_iswhitespace(int c);
+int		is_whitespace(int c);
 void	ft_bzero(void *s, size_t n);
 
 /* MEMORY FUNCTIONS */
@@ -69,6 +69,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_atoi(const char *str);
+double	ft_atod(char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
