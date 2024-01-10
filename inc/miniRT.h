@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 17:14:56 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/10 20:47:04 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@
 #include "libft/inc/libft.h"
 
 int	check_input(int argc, char **argv, t_sc *sc);
+int	get_ambient(char *line, int i, t_sc *sc);
 
 #endif
