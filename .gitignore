@@ -1,4 +1,6 @@
-.obj/
-./miniRT
+obj
+miniRT
 .*.swp
 *.a
+inc/mlx/*.o
+inc/libft/do_bonus
