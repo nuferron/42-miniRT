@@ -6,7 +6,7 @@
 #    By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 00:01:43 by nuferron          #+#    #+#              #
-#    Updated: 2024/01/09 22:24:26 by nuferron         ###   ########.fr        #
+#    Updated: 2024/01/10 14:30:50 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,11 @@ CYAN = \033[1;36m
 WHITE = \033[1;37m
 RESET = \033[0m
 
-SRCS =	ft_printf.c printf_char.c printf_string.c printf_num.c \
+SRCS =	ft_dprintf.c printf_char.c printf_string.c printf_num.c \
 		printf_unsigned_num.c printf_pointers.c printf_hex_cap.c \
 		printf_hex_min.c
 
-SRCS_BNS =	ft_printf_bonus.c printf_char_bonus.c printf_string_bonus.c \
+SRCS_BNS =	ft_dprintf_bonus.c printf_char_bonus.c printf_string_bonus.c \
 				printf_num_bonus.c 	printf_unsigned_num_bonus.c \
 				printf_pointers_bonus.c printf_hex_cap_bonus.c \
 				printf_hex_min_bonus.c printf_percentage.c pf_bonus_padding.c \

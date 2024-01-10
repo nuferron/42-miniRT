@@ -6,7 +6,7 @@
 #    By: nuferron <nuferron@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 18:05:14 by nuferron          #+#    #+#              #
-#    Updated: 2024/01/09 22:39:15 by nuferron         ###   ########.fr        #
+#    Updated: 2024/01/10 15:10:26 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,21 +41,17 @@ NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror
 COLUMNS = $(shell tput cols)
 
-all: 		${NAME}
+all: 		${NAME} make_libs
 
-${NAME}:	${OBJS} make_printf
+${NAME}:	${OBJS}
 		ar rcs ${NAME} ${OBJS}
-		make -s -C ft_dprintf bonus
-		cp ft_dprintf/libftprintf.a ${NAME}
 		printf "${WHITE}LIBFT: ${GREEN}Library compiled!${RESET}\n"
 
-bonus:	do_bonus
+bonus:	do_bonus make_libs
 
-make_printf: 
-		if [ -e ${NAME} ]; then \
-			make -s -C ft_dprintf bonus ; \
-			cp ft_dprintf/libftprintf.a ${NAME} ; \
-		fi
+make_libs:
+	make -s -C ft_dprintf bonus
+	cp ft_dprintf/libftprintf.a ${NAME}
 
 do_bonus:	${OBJS} ${OBJS_BNS}
 		ar rcs ${NAME} ${OBJS} ${OBJS_BNS}
@@ -95,5 +91,5 @@ fclean: 	clean
 
 re:		fclean all
 
-.SILENT: fclean clean ${NAME} do_bonus ${OBJDIR} norm make_printf
-.PHONY: all clean fclean re bonus make_printf
+.SILENT: fclean clean ${NAME} do_bonus ${OBJDIR} norm make_libs
+.PHONY: all clean fclean re bonus make_libs

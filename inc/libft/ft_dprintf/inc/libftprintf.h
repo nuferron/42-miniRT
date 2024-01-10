@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 00:01:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/09 22:25:43 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:26:25 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		print_hex_cap(int fd, unsigned int dec_num);
 
 /***********************  BONUS  ************************/
 
-int		ft_printf_bonus(int fd, char const *format, ...);
+int		ft_dprintf_bonus(int fd, char const *format, ...);
 int		is_specifier(char c);
 
 /*FLAGS PRE-PROCESSORS*/
