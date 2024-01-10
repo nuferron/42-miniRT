@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:39:28 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 14:25:43 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:25:03 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		ft_isdigit(int num);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
+int		ft_iswhitespace(int c);
 void	ft_bzero(void *s, size_t n);
 
 /* MEMORY FUNCTIONS */
@@ -90,5 +91,8 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/* GET_NEXT_LINE */
+char	*get_next_line(int fd);
 
 #endif
