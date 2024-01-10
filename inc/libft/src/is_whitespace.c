@@ -6,13 +6,13 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:22:15 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 17:24:10 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/10 20:58:09 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_iswhitespace(int c)
+int	is_whitespace(int c)
 {
 	if ((c >= '\t' && c <= '\r') || c == ' ')
 		return (1);
