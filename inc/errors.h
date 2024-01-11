@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:07:57 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 21:21:56 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/11 22:12:19 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 #define EMPTY	ERROR "This file is empty!\n" RESET
 #define LINE	ERROR "Invalid line: \"%s\"\nProgram stopped\n" RESET
 #define MEM		ERROR "Memory problems\n" RESET
-#define RANGE	ERROR "The input (%s)is either invalid" \
-				"or out of range (%s)\n" RESET
+#define RANGE	ERROR "In line \"%s\", the input is either invalid " \
+				"or out of range ([%d - %d])\n" RESET
+#define REPE	ERROR "Element repeated: %s\n" RESET
 
 #endif
