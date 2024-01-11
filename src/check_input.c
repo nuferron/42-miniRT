@@ -56,6 +56,7 @@ static int	check_file(int fd, t_sc *sc)
 		return (ft_dprintf(2, EMPTY), 1);
 	while (line)
 	{
+		line[ft_strlen(line) - 1] = '\0';
 		if (check_content(sc, line))
 			return (1);
 		line = get_next_line(fd);
