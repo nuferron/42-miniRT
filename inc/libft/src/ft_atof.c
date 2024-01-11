@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <float.h>
 
 static double	get_floating(char *str)
 {
@@ -26,7 +27,17 @@ static double	get_floating(char *str)
 	return (fl / 10);
 }
 
-double	ft_atod(char *str)
+int	float_len(char *str)
+{
+	int	len;
+
+	len = 0;
+	while (str[len] >= '0' && str[len] <= '9')
+		len++;
+	return (len);
+}
+
+float	ft_atof(char *str)
 {
 	int		i;
 	double	nb;
@@ -46,5 +57,5 @@ double	ft_atod(char *str)
 		nb = (nb * 10) + (str[i++] - '0');
 	if (str[i++] == '.')
 		nb += get_floating(&str[i]);
-	return (nb);
+	return ((float)(nb * neg));
 }

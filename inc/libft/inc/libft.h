@@ -69,7 +69,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_atoi(const char *str);
-double	ft_atod(char *str);
+float	ft_atof(char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
