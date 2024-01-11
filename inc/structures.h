@@ -6,12 +6,19 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 17:13:53 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:39:16 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+typedef struct s_vec
+{
+	float	x;
+	float	y;
+	float	z;
+} t_vec;
 
 typedef struct s_amb	//AMBIENT LIGHTNING
 {
@@ -21,52 +28,36 @@ typedef struct s_amb	//AMBIENT LIGHTNING
 
 typedef struct s_cam	//CAMERA
 {
-	float	x;
-	float	y;
-	float	z;
-	float	vx;		//3D normalized orientation vector for x [-1.0 - 1.0]
-	float	vy;		//3D normalized orientation vector for y [-1.0 - 1.0]
-	float	vz;		//3D normalized orientation vector for z [-1.0 - 1.0]
+	t_vec	pos;
+	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
 	float	fov;	//horizontal field of view in degrees [0 - 180]
 } t_cam;
 
 typedef struct s_light
 {
-	float	x;
-	float	y;
-	float	z;
+	t_vec	pos;
 	float	b;		//light brightness ratio [0.0 - 1.0]
 	int		rgb[3];	//(bonus)
 } t_light;
 
 typedef struct s_sp		//SPHERE
 {
-	float	x;
-	float	y;
-	float	z;
+	t_vec	pos;
 	float	d;		//diameter
 	int		rgb[3];
 } t_sp;
 
 typedef struct s_pl		//PLANE
 {
-	float	x;
-	float	y;
-	float	z;
-	float	vx;		//3D normalized orientation vector for x [-1.0 - 1.0]
-	float	vy;		//3D normalized orientation vector for y [-1.0 - 1.0]
-	float	vz;		//3D normalized orientation vector for z [-1.0 - 1.0]
+	t_vec	pos;
+	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
 	int		rgb[3];
 } t_pl;
 
 typedef struct s_cy		//CYLINDER
 {
-	float	x;
-	float	y;
-	float	z;
-	float	vx;		//3D normalized orientation vector for x [-1.0 - 1.0]
-	float	vy;		//3D normalized orientation vector for y [-1.0 - 1.0]
-	float	vz;		//3D normalized orientation vector for z [-1.0 - 1.0]
+	t_vec	pos;
+	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
 	float	d;		//diameter
 	float	h;		//height
 	int		rgb[3];
