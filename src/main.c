@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:58:50 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 20:45:27 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/11 20:44:35 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_sc	sc;
+	static t_sc	sc = {NULL, NULL, NULL, NULL, NULL, NULL};
 
 	if (check_input(argc, argv, &sc))
 		return (1);
