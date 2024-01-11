@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 20:47:04 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:00:07 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@
 #include "structures.h"
 #include "libft/inc/libft.h"
 
-int	check_input(int argc, char **argv, t_sc *sc);
-int	get_ambient(char *line, int i, t_sc *sc);
+/* CHECKING INPUT + INITIALIZING STRUCTS */
+int		check_input(int argc, char **argv, t_sc *sc);
+int		get_ambient(char *line, int i, t_sc *sc);
+
+/* UTILS */
+int		is_number(char *str);
+void	free_all(t_sc *sc);
 
 #endif
