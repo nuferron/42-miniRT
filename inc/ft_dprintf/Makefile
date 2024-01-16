@@ -6,7 +6,7 @@
 #    By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 00:01:43 by nuferron          #+#    #+#              #
-#    Updated: 2024/01/15 21:49:41 by nuferron         ###   ########.fr        #
+#    Updated: 2024/01/16 19:46:33 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,14 +53,14 @@ ${OBJDIR}:
 		mkdir -p $(dir $@)
 
 clean:
-	if [ -d ${OBJDIR} ] || [ -d ${OBJDIR_BNS} ]; then \
+	if [ -d ${OBJDIR} ] ; then \
 		rm -rf ${OBJDIR} ${OBJDIR_BNS} ; \
 		printf "${WHITE}FT_DPRINTF: ${RED}Objects have been deleted${RESET}\n" ; \
 	fi
 
 fclean: 	clean
-		if [ -e ${NAME} ] || [ -e do_bonus ] ; then \
-			rm -rf ${NAME} do_bonus ; \
+		if [ -e ${NAME} ] ; then \
+			rm -rf ${NAME} ; \
 			printf "${WHITE}FT_DPRINTF: ${RED}Static library has been deleted${RESET}\n" ; \
 		else printf "${WHITE}FT_DPRINTF: ${PURPLE}Already cleaned${RESET}\n" ; \
 		fi

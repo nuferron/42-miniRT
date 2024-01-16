@@ -6,7 +6,7 @@
 #    By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/01/16 12:20:39 by nuferron         ###   ########.fr        #
+#    Updated: 2024/01/16 19:54:33 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,10 @@ CYAN = \033[1;36m
 WHITE = \033[1;37m
 RESET = \033[0m
 
-SRCS =	main.c check_input.c init_scene.c num_utils.c mem_utils.c init_utils.c \
-		utils.c init_objects.c
+SRCS_INPUT = check_input.c init_scene.c num_utils.c mem_utils.c init_utils.c \
+			utils.c init_objects.c
+SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
+		main.c
 SRCDIR = src/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 OBJDIR = obj/
@@ -72,7 +74,7 @@ clean:
 	make -C inc/ft_dprintf clean --no-print-directory
 
 fclean: 	clean
-	if [ -e ${NAME} ] || [ -e ${LIB} ] ; then \
+	if [ -e ${NAME} ] ; then \
 		rm -f ${NAME} ${LIB} do_bonus ; \
 		printf "${WHITE}${NAME}: ${RED}All existing binaries have been deleted${RESET}\n" ; \
 	else printf "${WHITE}${NAME}: ${PURPLE}Already cleaned${RESET}\n" ; \
