@@ -6,12 +6,11 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 21:23:28 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 22:11:49 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:25:45 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <float.h>
 
 static double	get_floating(char *str)
 {
@@ -19,22 +18,15 @@ static double	get_floating(char *str)
 	int		len;
 
 	fl = 0;
+	len = 0;
 	if (!str)
 		return (0);
-	len = ft_strlen(str) - 1;
+	while (str[len] && ft_isdigit(str[len]))
+		len++;
+	len--;
 	while (len >= 0 && str[len] >= '0' && str[len] <= '9')
 		fl = (fl / 10) + (str[len--] - '0');
 	return (fl / 10);
-}
-
-int	float_len(char *str)
-{
-	int	len;
-
-	len = 0;
-	while (str[len] >= '0' && str[len] <= '9')
-		len++;
-	return (len);
 }
 
 float	ft_atof(char *str)
