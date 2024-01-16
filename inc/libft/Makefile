@@ -6,7 +6,7 @@
 #    By: nuferron <nuferron@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 18:05:14 by nuferron          #+#    #+#              #
-#    Updated: 2024/01/10 22:08:42 by nuferron         ###   ########.fr        #
+#    Updated: 2024/01/15 21:37:24 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 	   ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c \
 	   ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c \
 	   ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c gnl/gnl.c gnl/gnl_utils.c \
-	   is_whitespace.c ft_atof.c
+	   ft_atof.c is_whitespace.c
 
 SRCS_BNS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 			ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
@@ -34,7 +34,6 @@ SRCS_BNS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 OBJS_BNS = $(addprefix $(OBJDIR), $(addprefix bonus/, $(SRCS_BNS:.c=.o)))
-#OBJS_BNS = $(addprefix $(OBJDIR), $(SRCS_BNS:.c=.o))
 OBJDIR = obj/
 SRCDIR = src/
 HEADER = inc
@@ -42,17 +41,13 @@ NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror
 COLUMNS = $(shell tput cols)
 
-all: 		${NAME} make_libs
+all: 		${NAME}
 
 ${NAME}:	${OBJS}
 		ar rcs ${NAME} ${OBJS}
 		printf "${WHITE}LIBFT: ${GREEN}Library compiled!${RESET}\n"
 
-bonus:	do_bonus make_libs
-
-make_libs:
-	make -s -C ft_dprintf bonus
-	cp ft_dprintf/libftprintf.a ${NAME}
+bonus:	do_bonus
 
 do_bonus:	${OBJS} ${OBJS_BNS}
 		ar rcs ${NAME} ${OBJS} ${OBJS_BNS}
@@ -60,7 +55,6 @@ do_bonus:	${OBJS} ${OBJS_BNS}
 		touch do_bonus
 
 norm:
-	make -C ft_dprintf norm --no-print-directory
 	printf "${WHITE}LIBFT${RESET}"
 	(norminette ${SRCDIR} && echo " ${GREEN}All good")  | grep -v "OK" \
 	| awk '{if($$2 == "Error!") print "\n${RED}"$$1" "$$2; \
@@ -77,14 +71,12 @@ ${OBJDIR}:
 		mkdir -p ${OBJDIR}/gnl
 
 clean:
-		make -C ft_dprintf clean --no-print-directory
 		if [ -d ${OBJDIR} ] ; then \
 			rm -rf ${OBJDIR} ; \
 			printf "${WHITE}LIBFT: ${RED}Objects have been deleted${RESET}\n" ; \
 		fi
 
 fclean: 	clean
-		make -C ft_dprintf fclean --no-print-directory
 		if [ -e ${NAME} ] || [ -e do_bonus ] ; then \
 			rm -rf ${NAME} do_bonus ; \
 			printf "${WHITE}LIBFT: ${RED}Static library has been deleted${RESET}\n" ; \

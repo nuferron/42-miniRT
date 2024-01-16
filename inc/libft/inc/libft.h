@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:39:28 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 22:09:31 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/15 21:41:51 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# include "../ft_dprintf/inc/libftprintf.h"
 
 #define RED		"\033[1;31m"
 #define GREEN	"\033[1;32m"
