@@ -6,7 +6,7 @@
 #    By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/01/11 20:48:50 by nuferron         ###   ########.fr        #
+#    Updated: 2024/01/16 12:20:39 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,29 +19,33 @@ CYAN = \033[1;36m
 WHITE = \033[1;37m
 RESET = \033[0m
 
-SRCS =	main.c check_input.c scene_init.c num_utils.c free_stuff.c
+SRCS =	main.c check_input.c init_scene.c num_utils.c mem_utils.c init_utils.c \
+		utils.c init_objects.c
 SRCDIR = src/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 OBJDIR = obj/
 NAME = miniRT
 CFLAGS = -Wall -Wextra -Werror -O3 #-fsanitize=address
-LIB = inc/libft/libft.a
+LIB = inc/libft/libft.a inc/ft_dprintf/libftprintf.a
 INC = inc/
 MLXFLAGS = -Linc/mlx -lmlx -framework OpenGL -framework AppKit
 COLUMNS = $(shell tput cols)
+TEST = test.rt
 
 all: make_libs ${NAME}
 
 make_libs:
 	make -C inc/libft bonus --no-print-directory
+	make -C inc/ft_dprintf --no-print-directory
 	@make -s -C inc/mlx --no-print-directory
 
-${NAME}: ${OBJS}
-	cc ${CFLAGS} ${OBJS} ${MLXFLAGS} ${LIB} -o ${NAME}
+${NAME}: ${OBJS} ${LIB}
+	cc ${CFLAGS} ${LIB} ${OBJS} ${MLXFLAGS} -o ${NAME}
 	echo "${WHITE}${NAME}: ${GREEN}Binary successfully created!${RESET}"
 
 norm:
 	make -C inc/libft norm --no-print-directory
+	make -C inc/ft_dprintf norm --no-print-directory
 	printf "${WHITE}${NAME}${RESET}"
 	(norminette ${SRCDIR} && echo " ${GREEN}All good")  | grep -v "OK" \
 	| awk '{if($$2 == "Error!") print "\n${RED}"$$1" "$$2; \
@@ -49,6 +53,9 @@ norm:
 
 leaks: ${NAME}
 	leaks -atExit -- ./${NAME} ${MAP}
+
+run: ${NAME}
+	./${NAME} ${TEST}
 
 ${OBJDIR}%.o: ${SRCDIR}%.c ${HEADER}
 	@printf "${WHITE}${NAME}: ${CYAN}Compiling files: ${WHITE}$(notdir $<)...${RESET}\r"
@@ -62,6 +69,7 @@ clean:
 		printf "${WHITE}${NAME}: ${RED}Objects have been deleted${RESET}\n"; \
 	fi
 	make -C inc/libft clean --no-print-directory
+	make -C inc/ft_dprintf clean --no-print-directory
 
 fclean: 	clean
 	if [ -e ${NAME} ] || [ -e ${LIB} ] ; then \
@@ -70,9 +78,10 @@ fclean: 	clean
 	else printf "${WHITE}${NAME}: ${PURPLE}Already cleaned${RESET}\n" ; \
 	fi
 	make -C inc/libft fclean --no-print-directory
+	make -C inc/ft_dprintf fclean --no-print-directory
 	@make -s -C inc/mlx clean --no-print-directory
 
 re:	fclean all
 
-.SILENT: norm clean fclean leaks make_libs ${NAME}
-.PHONY: all clean fclean re leaks norm
+.SILENT: norm clean fclean leaks make_libs ${NAME} run
+.PHONY: all clean fclean re leaks norm run
