@@ -6,12 +6,19 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/11 21:39:16 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:31:38 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+typedef struct	s_item
+{
+	void	*obj;
+	size_t	size;
+	int		total;
+} t_item;
 
 typedef struct s_vec
 {
@@ -65,12 +72,12 @@ typedef struct s_cy		//CYLINDER
 
 typedef struct s_sc		//SCENE
 {
-	t_amb		*amb;
-	t_cam		*cam;
-	t_light		*light;
-	t_sp		*sp;
-	t_pl		*pl;
-	t_cy		*cy;
+	t_amb		amb;
+	t_cam		cam;
+	t_light		light;
+	t_item		sp;
+	t_item		pl;
+	t_item		cy;
 } t_sc;
 
 #endif
