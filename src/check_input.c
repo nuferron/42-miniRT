@@ -6,12 +6,29 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 20:57:01 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:18:02 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+/*It gets the first 5 (non-space like) characters and returns them*/
+static char	*get_element(char *line, int i)
+{
+	char	tmp[5];
+	int		j;
+
+	j = 0;
+	while (j < 5 && line[i] && !is_whitespace(line[i]))
+		tmp[j++] = line[i++];
+	if (!line[i])
+		return (&line[i]);
+	tmp[j] = '\0';
+	line = tmp;
+	return (line);
+}
+
+/*It checks that the file name ends with ".rt"*/
 static int	check_file_type(char *file)
 {
 	int	len;
@@ -22,33 +39,39 @@ static int	check_file_type(char *file)
 	return (0);
 }
 
+/*It reads the first part of the line and calls the correspondig
+ function. If no coincidence is found, it throws an error message and
+ returns 1*/
 static int	check_content(t_sc *sc, char *line)
 {
-	int	i;
+	int		i;
+	char	*element;
 
 	i = 0;
-	while (is_whitespace(line[i]))
-		i++;
-	if (!ft_strncmp(&line[i], "A ", 2))
-		return (get_ambient(line, ++i, sc));
-	/*else if (!ft_strncmp(&line[i], "C ", 2))
-		return (get_camera(line, i, sc));
-	else if (!ft_strncmp(&line[i], "L ", 2))
-		return (get_light(line, i, sc));
-	else if (!ft_strncmp(&line[i], "sp ", 3))
-		return (get_sphere(line, i, sc));
-	else if (!ft_strncmp(&line[i], "pl ", 3))
-		return (get_plane(line, i, sc));
-	else if (!ft_strncmp(&line[i], "cy ", 3))
-		return (get_cylinder(line, i, sc));
+	skip_space(line, &i);
+	if (!line[i])
+		return (0);
+	element = get_element(line, i);
+	if (!ft_strncmp(element, "A", 2))
+		return (get_ambient(line, ++i, &sc->amb));
+	else if (!ft_strncmp(element, "C", 2))
+		return (get_camera(line, ++i, &sc->cam));
+	else if (!ft_strncmp(element, "L", 2))
+		return (get_light(line, ++i, &sc->light));
+	else if (!ft_strncmp(element, "sp", 3))
+		return (get_sphere(line, i + 2, &sc->sp));
+	else if (!ft_strncmp(element, "pl", 3))
+		return (get_plane(line, i + 2, &sc->pl));
+	else if (!ft_strncmp(element, "cy", 3))
+		return (get_cylinder(line, i + 2, &sc->cy));
 	else
-		return (ft_dprintf(2, LINE, line), free(line), 1);*/
+		return (ft_dprintf(2, ELEM, element), 1);
 	return (0);
 }
 
+/*It reads the document by lines and calls check_content*/
 static int	check_file(int fd, t_sc *sc)
 {
-	(void)fd;
 	char	*line;
 
 	line = get_next_line(fd);
@@ -58,12 +81,15 @@ static int	check_file(int fd, t_sc *sc)
 	{
 		line[ft_strlen(line) - 1] = '\0';
 		if (check_content(sc, line))
-			return (1);
+			return (free(line), free_all(sc), 1);
+		free(line);
 		line = get_next_line(fd);
 	}
 	return (0);
 }
 
+/*It does a preliminary check (arguments and fd)
+ and calls the functions to check the file name and the content*/
 int	check_input(int argc, char **argv, t_sc *sc)
 {
 	int	fd;
