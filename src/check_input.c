@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/16 17:18:02 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:37:07 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int	check_input(int argc, char **argv, t_sc *sc)
 {
 	int	fd;
 
-	(void)sc;
 	if (argc != 2)
 		return (ft_dprintf(2, ARGS), 1);
 	if (check_file_type(argv[1]))
