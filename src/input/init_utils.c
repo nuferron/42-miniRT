@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 21:10:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/16 17:23:47 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:06:59 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "input.h"
 
 /*It initializes a variable of type t_vec*/
 int	init_vec(t_vec *vec, char *line, int *i, char t)
@@ -91,4 +91,34 @@ int	set_rgb(int *rgb, char *line, int i)
 	if (line[i])
 		return (ft_dprintf(2, PARAM, line), 0);
 	return (1);
+}
+
+static void	translation(t_vec *new_origin, t_vec *p)
+{
+	p->x -= new_origin->x;
+	p->y -= new_origin->y;
+	p->z -= new_origin->z;
+}
+
+void	coord_transformation(t_sc *sc)
+{
+	int		i;
+	t_sp	*sp;
+	t_pl	*pl;
+	t_cy	*cy;
+
+	translation(&sc->cam.pos, &sc->light.pos);
+	sp = sc->sp.obj;
+	pl = sc->pl.obj;
+	cy = sc->cy.obj;
+	i = -1;
+	while (++i < sc->sp.total)
+		translation(&sc->cam.pos, &sp->pos);
+	i = -1;
+	while (++i < sc->pl.total)
+		translation(&sc->cam.pos, &pl->pos);
+	i = -1;
+	while (++i < sc->cy.total)
+		translation(&sc->cam.pos, &cy->pos);
+	translation(&sc->cam.pos, &sc->cam.pos);
 }
