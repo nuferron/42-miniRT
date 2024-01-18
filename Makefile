@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+         #
+#    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/01/16 19:54:33 by nuferron         ###   ########.fr        #
+#    Updated: 2024/01/18 21:33:49 by nzhuzhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,10 @@ RESET = \033[0m
 
 SRCS_INPUT = check_input.c init_scene.c num_utils.c mem_utils.c init_utils.c \
 			utils.c init_objects.c
+SRC_MLX = mlx.c draw.c
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
-		main.c
+$(addprefix mlx/,$(SRC_MLX)) \
+main.c
 SRCDIR = src/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 OBJDIR = obj/
