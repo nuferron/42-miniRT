@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/16 19:36:03 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:57:13 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,25 @@ typedef struct s_cy //CYLINDER
 	int		rgb[3];
 }	t_cy;
 
+typedef struct s_img
+{
+	void	*ipt;
+	char	*ppt;
+	int		bits;
+	int		endian;
+	int		line;
+}	t_img;
+
+typedef struct s_mlx
+{
+	void	*init;
+	void	*win;
+	double	x;
+	double	y;
+	int		color;
+	t_img	img;
+}	t_mlx;
+
 typedef struct s_sc //SCENE
 {
 	t_amb		amb;
@@ -81,6 +100,7 @@ typedef struct s_sc //SCENE
 	t_item		sp;
 	t_item		pl;
 	t_item		cy;
+	t_mlx		*mlx;
 }	t_sc;
 
 #endif

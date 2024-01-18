@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:58:50 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/16 17:09:49 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:52:47 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int argc, char **argv)
 	if (check_input(argc, argv, &sc))
 		return (1);
 	printf("main: L pos x %f\n", sc.light.pos.x);
+	init_mlx(&sc);
 	free_all(&sc);
 	return (0);
 }
