@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/18 18:06:16 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:28:48 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 #include "structures.h"
 #include "libft/inc/libft.h"
 #include "ft_dprintf/inc/libftprintf.h"
+
+/* GETTING DATA */
+int	check_input(int argc, char **argv, t_sc *sc);
+int	coord_transformation(t_sc *sc);
 
 /* MEMORY UTILS */
 void	free_all(t_sc *sc);
