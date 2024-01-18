@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/16 19:37:07 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:06:00 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "input.h"
 
 /*It gets the first 5 (non-space like) characters and returns them*/
 static char	*get_element(char *line, int i)
@@ -103,5 +103,7 @@ int	check_input(int argc, char **argv, t_sc *sc)
 		return (ft_dprintf(2, FNF, argv[1]), 1);
 	if (check_file(fd, sc))
 		return (1);
+	if (sc->amb.ratio == -1 || sc->cam.fov == -1 || sc->light.b == -1)
+		return (ft_dprintf(2, MUST), 1);
 	return (0);
 }
