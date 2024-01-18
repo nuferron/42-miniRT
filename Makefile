@@ -6,7 +6,7 @@
 #    By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/01/16 19:54:33 by nuferron         ###   ########.fr        #
+#    Updated: 2024/01/18 18:09:52 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ CYAN = \033[1;36m
 WHITE = \033[1;37m
 RESET = \033[0m
 
-SRCS_INPUT = check_input.c init_scene.c num_utils.c mem_utils.c init_utils.c \
-			utils.c init_objects.c
+SRCS_INPUT = check_input.c init_scene.c init_utils.c init_objects.c
+SRCS_UTILS = num_utils.c utils.c mem_utils.c
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
 		main.c
 SRCDIR = src/
