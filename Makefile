@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+         #
+#    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/01/18 18:30:09 by nuferron         ###   ########.fr        #
+#    Updated: 2024/01/19 20:39:15 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,13 @@ CYAN = \033[1;36m
 WHITE = \033[1;37m
 RESET = \033[0m
 
+SRC_MLX = mlx.c draw.c
 SRCS_INPUT = check_input.c init_scene.c init_utils.c init_objects.c
 SRCS_UTILS = num_utils.c utils.c mem_utils.c
+
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
 		$(addprefix utils/,$(SRCS_UTILS)) \
+		$(addprefix mlx/,$(SRC_MLX)) \
 		main.c
 SRCDIR = src/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
