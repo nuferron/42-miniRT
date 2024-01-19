@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:50:51 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/01/18 21:35:46 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/01/19 20:21:03 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int	init_mlx(t_sc *sc)
 {
 	t_img	img;
+//	t_mlx	mlx;
 
+//	sc->mlx = mlx; 
 	sc->mlx.init = NULL;
 	sc->mlx.win = NULL;
 	sc->mlx.init = mlx_init();
@@ -39,7 +41,6 @@ int	init_mlx(t_sc *sc)
 
 void	maintain_mlx(t_sc *sc)
 {
-	
 	mlx_hook(sc->mlx.win, 17, 0, ft_exit_mlx, sc);
 	mlx_key_hook(sc->mlx.win, ft_key_hook, sc);
 	mlx_loop(sc->mlx.init);
