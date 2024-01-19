@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/19 20:38:27 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/19 20:41:03 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 #include "ft_dprintf/inc/libftprintf.h"
 
 /* GETTING DATA */
-int	check_input(int argc, char **argv, t_sc *sc);
-int	coord_transformation(t_sc *sc);
+int		check_input(int argc, char **argv, t_sc *sc);
+void	coord_transformation(t_sc *sc);
 
 /* MEMORY UTILS */
 void	free_all(t_sc *sc);
