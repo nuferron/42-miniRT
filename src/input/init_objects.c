@@ -6,11 +6,11 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/16 17:22:30 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:12:14 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "input.h"
 
 /*It adds a t_sp and sets its variables.
   Returns 1 with fail and 0 with success*/
@@ -86,4 +86,26 @@ int	get_cylinder(char *line, int i, t_item *item)
 	if (!set_rgb(cy[id].rgb, line, i))
 		return (1);
 	return (0);
+}
+
+/*It does a realloc of size 1 (kind of) of t_item structures*/
+void	add_obj(t_item *item)
+{
+	void	*ret;
+
+	if (!item->total)
+	{
+		item->obj = ft_calloc(1, item->size);
+		if (!item->obj)
+			exit(ft_dprintf(2, MEM));
+		item->total++;
+		return ;
+	}
+	ret = ft_calloc(item->total + 1, item->size);
+	if (!ret)
+		exit(ft_dprintf(2, MEM));
+	ft_memmove(ret, item->obj, (item->total * item->size));
+	free(item->obj);
+	item->obj = ret;
+	item->total++;
 }

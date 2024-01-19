@@ -19,9 +19,10 @@ CYAN = \033[1;36m
 WHITE = \033[1;37m
 RESET = \033[0m
 
-SRCS_INPUT = check_input.c init_scene.c num_utils.c mem_utils.c init_utils.c \
-			utils.c init_objects.c
 SRC_MLX = mlx.c draw.c
+SRCS_INPUT = check_input.c init_scene.c init_utils.c init_objects.c
+SRCS_UTILS = num_utils.c utils.c mem_utils.c
+
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
 $(addprefix mlx/,$(SRC_MLX)) \
 main.c
