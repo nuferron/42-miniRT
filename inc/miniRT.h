@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/19 17:38:34 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/19 21:00:46 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,13 @@
 
 #include "errors.h"
 #include "structures.h"
+#include "mlx_rt.h"
 #include "libft/inc/libft.h"
 #include "ft_dprintf/inc/libftprintf.h"
+
+/* GETTING DATA */
+int		check_input(int argc, char **argv, t_sc *sc);
+void	coord_transformation(t_sc *sc);
 
 /* MEMORY UTILS */
 void	free_all(t_sc *sc);
