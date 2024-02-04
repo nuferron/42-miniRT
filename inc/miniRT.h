@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/19 20:41:03 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/01/19 21:00:46 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,9 @@ void	add_obj(t_item *item);
 int		is_float(char *str);
 void	skip_space(char *line, int *i);
 void	skip_number(char *line, int *i);
+
+/* MATH UTILS */
+double	exp_n(double b, int n);
+double	exp_2(double b);
 
 #endif
