@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:46:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/19 20:09:46 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/04 22:35:17 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,18 @@ double	dot_product(t_vec *a, t_vec *b)
 	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
 
-double	vec_mod(t_vec *v)
+/* The lenth of the vector */
+double	vec_mod(t_vec v)
 {
-	return (sqrt(exp_2(v->x) + exp_2(v->y) + exp_2(v->z)));
+	return (sqrt(exp_2(v.x) + exp_2(v.y) + exp_2(v.z)));
 }
 
+/* saves in the t_vec n the normalized t_vec v */
 void	unit_vector(t_vec *v, t_vec *n)
 {
 	double	mod;
 
-	mod = vec_mod(v);
+	mod = vec_mod(*v);
 	n->x = v->x / mod;
 	n->y = v->y / mod;
 	n->z = v->z / mod;

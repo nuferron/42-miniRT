@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/19 21:00:46 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/04 22:40:05 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,18 @@ void	skip_number(char *line, int *i);
 /* MATH UTILS */
 double	exp_n(double b, int n);
 double	exp_2(double b);
+
+/* vector_utils.c - vector operations  **************/
+double	dot_product(t_vec *a, t_vec *b);	
+double	vec_mod(t_vec v);					//returns the lenth of the vector
+void	unit_vector(t_vec *v, t_vec *n);	//normalizes vector v and saves it in n
+
+/* vector_utils2.c - vector operations  **************/
+t_vec	sum_vec(t_vec a, t_vec b);			// returns the sum of two vectors
+t_vec	substr_vec(t_vec from, t_vec what);	// returns the substruction of the vector "what" from the vector "from"
+t_vec	mult_fac(t_vec v, double factor);	// return a the vector v multiplied by the float "factor"
+t_vec	div_fac(t_vec v, double factor);	// return a the vector v divided by the float "factor"
+double	dist(t_vec point1, t_vec point2);	// returns a distance from the point1 to the point2
+/****************************************************/
 
 #endif
