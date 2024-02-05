@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/18 18:06:00 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/02 20:40:06 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,10 @@ int	check_input(int argc, char **argv, t_sc *sc)
 		return (1);
 	if (sc->amb.ratio == -1 || sc->cam.fov == -1 || sc->light.b == -1)
 		return (ft_dprintf(2, MUST), 1);
+	sc->screen.width = sin(fov * M_PI / 360) * 2 * FOCAL;
+	sc->screen.pix_rat = sc->screen / WITDH;
+	sc->screen.center.x = sc->cam.nov.x * FOCAL;
+	sc->screen.center.y = sc->cam.nov.y * FOCAL;
+	sc->screen.center.z = sc->cam.nov.z * FOCAL;
 	return (0);
 }

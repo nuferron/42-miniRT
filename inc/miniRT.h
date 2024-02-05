@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/19 21:00:46 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/05 16:20:25 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "errors.h"
 #include "structures.h"
@@ -41,5 +42,10 @@ void	skip_number(char *line, int *i);
 /* MATH UTILS */
 double	exp_n(double b, int n);
 double	exp_2(double b);
+
+/* VECTOR UTILS */
+void	unit_vector(t_vec *v1, t_vec *v2);
+
+int	intersection_sp(t_item *item, t_vec *ray);
 
 #endif

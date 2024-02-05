@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:38:35 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/01/18 21:35:12 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:23:41 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define WIDTH 1900
 # define HEIGHT 1000
+# define FOCAL	150
 # define ESC 53
 
 # include "./mlx/mlx.h"
