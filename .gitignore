@@ -7,3 +7,5 @@ inc/libft/do_bonus
 inc/libft/ft_dprintf/do_bonus
 inc/libft/ft_dprintf/obj_bonus/
 test*
+a.out
+src/*/a.out
