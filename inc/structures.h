@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/18 21:38:37 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/05 16:44:55 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_vec
 	float	y;
 	float	z;
 }	t_vec;
+
+typedef struct s_vec t_point;
 
 typedef struct s_amb //AMBIENT LIGHTNING
 {
@@ -73,6 +75,8 @@ typedef struct s_cy //CYLINDER
 	int		rgb[3];
 }	t_cy;
 
+
+
 typedef struct s_img
 {
 	void	*ipt;
@@ -84,12 +88,12 @@ typedef struct s_img
 
 typedef struct s_mlx
 {
+	t_img	img;
 	void	*init;
 	void	*win;
 	int		x;
 	int		y;
 	int		color;
-	t_img	img;
 }	t_mlx;
 
 typedef struct s_sc //SCENE
