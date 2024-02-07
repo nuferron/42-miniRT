@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/05 16:44:55 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/07 20:59:20 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ typedef struct s_cy //CYLINDER
 	float	h;		//height
 	int		rgb[3];
 }	t_cy;
-
-
 
 typedef struct s_img
 {
