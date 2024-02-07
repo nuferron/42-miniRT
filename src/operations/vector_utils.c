@@ -6,15 +6,35 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:46:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/05 16:45:00 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/07 22:55:29 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-double	dot_product(t_vec *a, t_vec *b)
+t_vec	vec_new(double x, double y, double z)
+{
+	t_vec	new;
+
+	new.x = x;
+	new.y = y;
+	new.z = z;
+	return (new);
+}
+
+double	dot_prod(t_vec *a, t_vec *b)
 {
 	return (a->x * b->x + a->y * b->y + a->z * b->z);
+}
+
+t_vec	cross_prod(t_vec *v1, t_vec *v2)
+{
+	t_vec	res;
+
+	res.x = v1->y * v2->z - v1->z * v2->y;
+	res.y = v1->z * v2->x - v1->x * v2->z;
+	res.z = v1->x * v2->y - v1->y * v2->x;
+	return (res);
 }
 
 /* The lenth of the vector */
