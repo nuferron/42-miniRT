@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:43:51 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/05 17:54:45 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:30:04 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ float get_vec_plane(t_vec *n, float *p, double *d)
 	return ((float)(-b - sqrt(disc)) / (2 * a));
 }
 
-int main()
+/*int main()
 {
 	t_vec	n;
 
@@ -76,4 +76,5 @@ int main()
 	float	p = 25.4;
 	printf("c parabola: %f\n", get_c_parabola(&n, &n.y, &d));
 	printf("c gwv: %f\n", get_vec_plane(&n, &p, &d));
-}
+	printf("cam %zu\namb %zu\nlight %zu\nitem %zu\nmlx %zu\nscreen %zu\n", sizeof(t_cam), sizeof(t_amb), sizeof(t_light), sizeof(t_item), sizeof(t_mlx), sizeof(t_screen));
+}*/

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/05 16:07:47 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:16:00 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ Size is a sizeof the structure and total the number we have of them*/
 typedef struct s_item
 {
 	void	*obj;
-	size_t	size;
 	int		total;
+	size_t	size;
 }	t_item;
 
 /*Structure for coordinates ("absolute" or normalized)*/
@@ -55,7 +55,7 @@ typedef struct s_light
 typedef struct s_sp //SPHERE
 {
 	t_vec	pos;	//center point
-	float	d;		//diameter
+	float	r;		//radiusr
 	int		rgb[3];
 }	t_sp;
 
@@ -70,7 +70,7 @@ typedef struct s_cy //CYLINDER
 {
 	t_vec	pos;	//center point
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
-	float	d;		//diameter
+	float	r;		//radius
 	float	h;		//height
 	int		rgb[3];
 }	t_cy;
@@ -86,19 +86,19 @@ typedef struct s_img
 
 typedef struct s_mlx
 {
+	t_img	img;
 	void	*init;
 	void	*win;
 	int		x;
 	int		y;
 	int		color;
-	t_img	img;
 }	t_mlx;
 
 typedef struct s_screen
 {
-	double	width;
-	double	pix_rat;
 	t_vec	center;
+	float	width;
+	float	pix_rat;
 }	t_screen;
 
 typedef struct s_sc //SCENE
