@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/07 16:16:00 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:48:04 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_cam //CAMERA
 {
 	t_vec	pos;	//center point
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
-	float	fov;	//horizontal field of view in degrees [0 - 180]
+	float	fov;	//horizontal field of view taken DEG [0 - 180] saved as RAD
 }	t_cam;
 
 typedef struct s_light
@@ -55,7 +55,7 @@ typedef struct s_light
 typedef struct s_sp //SPHERE
 {
 	t_vec	pos;	//center point
-	float	r;		//radiusr
+	float	r;		//radius
 	int		rgb[3];
 }	t_sp;
 
@@ -103,14 +103,14 @@ typedef struct s_screen
 
 typedef struct s_sc //SCENE
 {
-	t_cam		cam;
-	t_amb		amb;
+	t_mlx		mlx;
+	t_screen	screen;
 	t_light		light;
+	t_amb		amb;
+	t_cam		cam;
 	t_item		sp;
 	t_item		pl;
 	t_item		cy;
-	t_mlx		mlx;
-	t_screen	screen;
 }	t_sc;
 
 #endif
