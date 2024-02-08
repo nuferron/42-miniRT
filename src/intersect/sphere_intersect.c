@@ -6,21 +6,36 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/08 17:58:55 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/09 00:51:28 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	sph_intersect(t_item *item, t_vec *ray)
+int	sph_intersect(t_sp *sp, t_ray *ray)
 {
-	t_sp	*sp;
-	size_t	dist;
-	double	disc;
+	t_vars	var;
+	t_vec	v1;
+	t_point	p1;
+	t_point	p2;
 
-	sp = item->obj;
-	disc = exp_2(dot_product(ray, sp[0].pos)) - (dot_product(sp[0].pos) - sp[0].d / 2 );
-	if (disc < 0)
-		return (-1);
+	var.oc = substr_vec(&ray->ray_orig, &sp->pos);
+	var.vo = substr_vec(&ray->ray_vec, &ray->ray_orig); // D
+	var.vo_dot = dot_prod(&var.vo, &var.vo); // k1
+	var.k2 = 2 * dot_prod(&var.oc, &var.vo);
+	var.discr = var.k2 * var.k2 - 4 * var.vo_dot * (dot_prod(&var.oc, &var.oc) - sp->r * sp->r);
+	if (var.discr < 0)
+		return (-1); // no intersections
+	else if (var.discr == 0)
+		return (-var.k2 / (2 * var.vo_dot));	// here what we do if there is one point
+	v1 = mult_new(&var.vo, (-var.k2 - var.discr) / (2 * var.vo_dot));  // - discr
+	p1 = sum_vec(&ray->ray_orig, &v1); 
+	mult_fac(&var.vo, (-var.k2 + var.discr) / (2 * var.vo_dot));  // + discr
+	p2 = sum_vec(&ray->ray_orig, &var.vo); 
+	if (dist(&p1, &ray->ray_orig) < ray->dist)
+		ray->dist = dist(&p1, &ray->ray_orig);
+	if (dist(&p2, &ray->ray_orig) < ray->dist)
+		ray->dist = dist(&p2, &ray->ray_orig);
+	// how to save the intersection point?
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/08 17:20:58 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/09 00:18:40 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 
 #include "mlx_rt.h"
 
+/* A variable structure for sphere intersection */
+typedef struct s_vars
+{
+	t_vec	oc;		//	ray origin - sphere center
+	t_vec	vo;		//	ray vector - ray origin
+	double	vo_dot;	//	dot product (vo, vo)
+	double	k2;		//	2 * dot product (oc, vo)
+	double	discr;	//	discriminant
+}	t_vars;
 /*Structure that can contain a t_sp, a t_pl or a t_cy pointer in void *obj
 Size is a sizeof the structure and total the number we have of them*/
 typedef struct s_item
