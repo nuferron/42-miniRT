@@ -99,8 +99,8 @@ typedef struct s_mlx
 typedef struct s_screen
 {
 	t_point	center;
-	float	width;
-	float	pix_rat;
+	float	width;		//half the screen width
+	float	pix_rat;	//ratio between visual and virtual width
 }	t_screen;
 
 typedef struct s_sc //SCENE
