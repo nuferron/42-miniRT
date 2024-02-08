@@ -106,7 +106,7 @@ int	check_input(int argc, char **argv, t_sc *sc)
 		return (1);
 	if (sc->amb.ratio == -1 || sc->cam.fov == -1 || sc->light.b == -1)
 		return (ft_dprintf(2, MUST), 1);
-	sc->screen.width = sin(sc->cam.fov / 2) * 2 * FOCAL;
+	sc->screen.width = sin(sc->cam.fov / 2) * FOCAL;
 	sc->screen.pix_rat = sc->screen.width / WIDTH;
 	sc->screen.center.x = sc->cam.nov.x * FOCAL;
 	sc->screen.center.y = sc->cam.nov.y * FOCAL;
