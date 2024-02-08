@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/07 22:46:49 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:20:58 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,13 @@ typedef struct s_cy //CYLINDER
 	float	h;		//height
 	int		rgb[3];
 }	t_cy;
+
+typedef struct s_ray
+{
+	t_point	ray_orig;	// the coordinates of the screen point
+	t_vec	ray_vec;	// the ray vector
+	double	dist;		// the minimal distance
+}	t_ray;
 
 typedef struct s_img
 {

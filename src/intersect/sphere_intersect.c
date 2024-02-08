@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_sphere.c                                 :+:      :+:    :+:   */
+/*   sphere_intersect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 21:23:44 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/01 19:17:53 by nuferron         ###   ########.fr       */
+/*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
+/*   Updated: 2024/02/08 17:58:55 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	intersection_sp(t_item *item, t_vec *ray)
+int	sph_intersect(t_item *item, t_vec *ray)
 {
 	t_sp	*sp;
 	size_t	dist;
