@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "errors.h"
 #include "structures.h"
@@ -42,9 +43,5 @@ void	skip_number(char *line, int *i);
 /* MATH UTILS */
 double	exp_n(double b, int n);
 double	exp_2(double b);
-
-
-
-
 
 #endif

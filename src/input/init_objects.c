@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/18 18:12:14 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:39:55 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_sphere(char *line, int i, t_item *item)
 	skip_space(line, &i);
 	if (!is_float(&line[i]) || line[i] == ',')
 		return (ft_dprintf(2, LINE, line), 1);
-	sp[id].d = ft_atof(&line[i]);
+	sp[id].r = ft_atof(&line[i]) / 2;
 	skip_number(line, &i);
 	if (!set_rgb(sp[id].rgb, line, i))
 		return (1);
@@ -76,11 +76,11 @@ int	get_cylinder(char *line, int i, t_item *item)
 		|| init_vec(&cy[id].nov, line, &i, 0))
 		return (1);
 	skip_space(line, &i);
-	cy[id].d = check_range(line, 0, i);
+	cy[id].r = check_range(line, 0, i) / 2;
 	skip_number(line, &i);
 	skip_space(line, &i);
 	cy[id].h = check_range(line, 0, i);
-	if (cy[id].d == -2 || cy[id].h == -2)
+	if (cy[id].r == -2 || cy[id].h == -2)
 		return (1);
 	skip_number(line, &i);
 	if (!set_rgb(cy[id].rgb, line, i))

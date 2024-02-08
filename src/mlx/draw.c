@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:58:21 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/01/18 21:38:42 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:12:07 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ void	put_pixel(t_sc *sc)
 {
 	char	*pix;
 
-	sc->mlx.color = 5 ; // =camera_ray(sc, sc->mlx.x, sc->mlx.y)
+	sc->mlx.color = 0x4a5d7d; // =camera_ray(sc, sc->mlx.x, sc->mlx.y)
 	pix = sc->mlx.img.ppt + (sc->mlx.img.line * sc->mlx.y + sc->mlx.x * \
 	(sc->mlx.img.bits / 8));
 	*(int *)pix = sc->mlx.color;
 }
-
