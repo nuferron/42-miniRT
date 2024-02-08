@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/07 21:08:54 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/07 22:46:49 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ typedef struct s_mlx
 	t_img	img;
 	void	*init;
 	void	*win;
-	int		x;
-	int		y;
+	int		w;		// not sure about it
+	int		h;		// not sure about it
 	int		color;
 }	t_mlx;
 
@@ -114,5 +114,6 @@ typedef struct s_sc //SCENE
 	t_item		pl;
 	t_item		cy;
 }	t_sc;
+
 
 #endif
