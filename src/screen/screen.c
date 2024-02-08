@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include <stdbool.h>
+
 /*
 int	inter_square(t_vec *ray)
 {
@@ -24,7 +24,7 @@ int	inter_square(t_vec *ray)
 		return (1);
 	return (0);
 }
-*/
+
 
 double	screen_width(double fov)
 {
@@ -35,46 +35,47 @@ double	pixel_ratio(double screen)
 {
 	return (screen / WIDTH);
 }
-
-double	scalar_prod(t_vec *v, t_vec *w)
+*/
+void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax)
 {
-	return (v->x * w->x + v->y * w->y + v->z * w->z);
+	x_ax->x = 0;
+	x_ax->y = 0;
+	x_ax->z = 0;
+	if (z_ax->x && z_ax->y && z_ax->z)
+	{
+		x_ax->x = 1;
+		x_ax->y = 1;
+		x_ax->z = -(z_ax->x + z_ax->y) / z_ax->z;
+	}
+	else
+	{
+		if (!z_ax->x)
+			x_ax->x = 1;
+		if (!z_ax->y)
+			x_ax->y = 1;
+		if (!z_ax->z)
+			x_ax->z = 1;
+	}
+	y_ax->x = z_ax->y * x_ax->z - z_ax->z * x_ax->y;
+	y_ax->y = z_ax->z * x_ax->x - z_ax->x * x_ax->z;
+	y_ax->z = z_ax->x * x_ax->y - z_ax->y * x_ax->x;
 }
 
-double	get_c_parabola(t_vec *v, float *p, double *d)
+void	throw_rays(t_sc *sc, t_vec *x, t_vec *y, t_vec *z)
 {
-	double	z_sqd;
-	double	vy_p;
+	t_point	o;
 
-	z_sqd = v->z * v->z;
-	vy_p = v->y * *p;
-	return (vy_p * vy_p + 2 * vy_p * z_sqd + z_sqd * z_sqd);
+	o.x = (x->x * sc->screen.width) + (y->x * sc->screen.width);
+	o.x =
 }
 
-float get_vec_plane(t_vec *n, float *p, double *d)
+int main()
 {
-	double	a;
-	double	b;
-	double	disc;
+	t_vec	x, y, z;
 
-	a = n->x * n->x + n->y * n->y;
-	b = -2 * n->y - 2 * *p * n->x * n->x;
-	disc = b * b - 4 * a * get_c_parabola(n, p, d);
-	if (disc < 0)
-		return (-1);
-	return ((float)(-b - sqrt(disc)) / (2 * a));
+	z.x = 1;
+	z.y = 2;
+	z.z = 3;
+	get_screen_vec(&z, &x, &y);
+	printf("x: x %f\ty %f\tz %f\ny %f\ty %f\tz %f\n", x.x, x.y, x.z, y.x, y.y, y.z);
 }
-
-/*int main()
-{
-	t_vec	n;
-
-	n.x = 3;
-	n.y = 2;
-	n.z = 1;
-	double d = 150;
-	float	p = 25.4;
-	printf("c parabola: %f\n", get_c_parabola(&n, &n.y, &d));
-	printf("c gwv: %f\n", get_vec_plane(&n, &p, &d));
-	printf("cam %zu\namb %zu\nlight %zu\nitem %zu\nmlx %zu\nscreen %zu\n", sizeof(t_cam), sizeof(t_amb), sizeof(t_light), sizeof(t_item), sizeof(t_mlx), sizeof(t_screen));
-}*/
