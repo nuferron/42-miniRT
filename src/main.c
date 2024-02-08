@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 	coord_transformation(&sc);
 	printf("main: L pos x %f\n", sc.light.pos.x);
 	printf("main: C pos x %f\n", sc.cam.pos.x);
-  init_mlx(&sc);
+  	init_mlx(&sc);
 	draw_scene(&sc);
 	maintain_mlx(&sc);
   //	free_all(&sc); // don't think we need it, I do it in ft_exit_mlx as a reaction to the keys

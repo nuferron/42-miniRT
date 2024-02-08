@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/07 16:48:04 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/07 22:46:49 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_vec
 	float	z;
 }	t_vec;
 
+typedef struct s_vec t_point;
+
 typedef struct s_amb //AMBIENT LIGHTNING
 {
 	float	ratio;	//ambient lightning ratio [0.0- 1.0]
@@ -40,35 +42,35 @@ typedef struct s_amb //AMBIENT LIGHTNING
 
 typedef struct s_cam //CAMERA
 {
-	t_vec	pos;	//center point
+	t_point	pos;	//center point
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
 	float	fov;	//horizontal field of view taken DEG [0 - 180] saved as RAD
 }	t_cam;
 
 typedef struct s_light
 {
-	t_vec	pos;	//center point
+	t_point	pos;	//center point
 	float	b;		//light brightness ratio [0.0 - 1.0]
 	int		rgb[3];	//(bonus)
 }	t_light;
 
 typedef struct s_sp //SPHERE
 {
-	t_vec	pos;	//center point
+	t_point	pos;	//center point
 	float	r;		//radius
 	int		rgb[3];
 }	t_sp;
 
 typedef struct s_pl //PLANE
 {
-	t_vec	pos;	//center point
+	t_point	pos;	//center point
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
 	int		rgb[3];
 }	t_pl;
 
 typedef struct s_cy //CYLINDER
 {
-	t_vec	pos;	//center point
+	t_point	pos;	//center point
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
 	float	r;		//radius
 	float	h;		//height
@@ -89,14 +91,14 @@ typedef struct s_mlx
 	t_img	img;
 	void	*init;
 	void	*win;
-	int		x;
-	int		y;
+	int		w;		// not sure about it
+	int		h;		// not sure about it
 	int		color;
 }	t_mlx;
 
 typedef struct s_screen
 {
-	t_vec	center;
+	t_point	center;
 	float	width;
 	float	pix_rat;
 }	t_screen;
@@ -112,5 +114,6 @@ typedef struct s_sc //SCENE
 	t_item		pl;
 	t_item		cy;
 }	t_sc;
+
 
 #endif
