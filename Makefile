@@ -21,11 +21,12 @@ RESET = \033[0m
 
 SRC_MLX = mlx.c draw.c
 SRCS_INPUT = check_input.c init_scene.c init_utils.c init_objects.c
-SRCS_UTILS = num_utils.c utils.c mem_utils.c math_utils.c vector_utils2.c \
-vector_utils.c
+SRCS_UTILS = num_utils.c utils.c mem_utils.c math_utils.c
+SRCS_OPERATIONS = vector_utils.c vector_utils2.c vector_utils3.c
 
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
 		$(addprefix utils/,$(SRCS_UTILS)) \
+		$(addprefix operations/,$(SRCS_OPERATIONS)) \
 		$(addprefix mlx/,$(SRC_MLX)) \
 		main.c
 SRCDIR = src/
