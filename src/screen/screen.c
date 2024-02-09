@@ -12,7 +12,6 @@
 
 #include "miniRT.h"
 
-/*
 int	inter_square(t_vec *ray)
 {
 	double	x, y = 0;
@@ -25,17 +24,11 @@ int	inter_square(t_vec *ray)
 	return (0);
 }
 
-
-double	screen_width(double fov)
+int	inter_square(t_ray *ray)
 {
-	return (sin(fov * M_PI / 360) * 2 * FOCAL);
+
 }
 
-double	pixel_ratio(double screen)
-{
-	return (screen / WIDTH);
-}
-*/
 void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax)
 {
 	x_ax->x = 0;
@@ -63,10 +56,26 @@ void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax)
 
 void	throw_rays(t_sc *sc, t_vec *x, t_vec *y, t_vec *z)
 {
-	t_point	o;
+	t_ray	ray;
+	int		i;
+	int		j;
+	int		h;
 
-	o.x = (x->x * sc->screen.width) + (y->x * sc->screen.width);
-	o.x =
+	j = -sc->screen.pix_rat * HEIGHT;
+	h = -j;
+	while (j < h)
+	{
+		i = -sc->screen.width;
+		while (i < sc->screen.width)
+		{
+			ray.ray_orig.x = sc->screen.center.x + i * x.x + j * y.x;
+			ray.ray_orig.y = sc->screen.center.y + i * x.y + j * y.y;
+			ray.ray_orig.z = sc->screen.center.z + i * x.z + j * y.z;
+			unit_vector(&ray.ray_orig, &ray.ray_vec);
+			i++;
+		}
+		j++;
+	}
 }
 
 int main()
