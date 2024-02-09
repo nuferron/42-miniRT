@@ -20,7 +20,7 @@ typedef struct s_vec t_point;
 t_vec	vec_new(double x, double y, double z);
 double	dot_prod(t_vec *a, t_vec *b);
 t_vec	cross_prod(t_vec *v1, t_vec *v2);
-double	vec_mod(t_vec *v);					//returns the lenth of the vector
+double	vec_mod(t_vec *v);					//returns the length of the vector
 void	unit_vector(t_vec *v, t_vec *n);	//normalizes vector v and saves it in n
 
 /* vector_utils2.c - vector operations  **************/

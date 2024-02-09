@@ -12,23 +12,6 @@
 
 #include "miniRT.h"
 
-int	inter_square(t_vec *ray)
-{
-	double	x, y = 0;
-	double	lambda = 50 / ray->z;
-
-	x = ray->x * lambda;
-	y = ray->y * lambda;
-	if (x > 400 && x < 600 && y > 400 && y < 600)
-		return (1);
-	return (0);
-}
-
-int	inter_square(t_ray *ray)
-{
-
-}
-
 void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax)
 {
 	x_ax->x = 0;
@@ -54,7 +37,7 @@ void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax)
 	y_ax->z = z_ax->x * x_ax->y - z_ax->y * x_ax->x;
 }
 
-void	throw_rays(t_sc *sc, t_vec *x, t_vec *y, t_vec *z)
+void	throw_rays(t_sc *sc, t_vec *x, t_vec *y)
 {
 	t_ray	ray;
 	int		i;
@@ -68,9 +51,9 @@ void	throw_rays(t_sc *sc, t_vec *x, t_vec *y, t_vec *z)
 		i = -sc->screen.width;
 		while (i < sc->screen.width)
 		{
-			ray.ray_orig.x = sc->screen.center.x + i * x.x + j * y.x;
-			ray.ray_orig.y = sc->screen.center.y + i * x.y + j * y.y;
-			ray.ray_orig.z = sc->screen.center.z + i * x.z + j * y.z;
+			ray.ray_orig.x = sc->screen.center.x + i * x->x + j * y->x;
+			ray.ray_orig.y = sc->screen.center.y + i * x->y + j * y->y;
+			ray.ray_orig.z = sc->screen.center.z + i * x->z + j * y->z;
 			unit_vector(&ray.ray_orig, &ray.ray_vec);
 			i++;
 		}
@@ -80,11 +63,20 @@ void	throw_rays(t_sc *sc, t_vec *x, t_vec *y, t_vec *z)
 
 int main()
 {
-	t_vec	x, y, z;
-
-	z.x = 1;
-	z.y = 2;
-	z.z = 3;
-	get_screen_vec(&z, &x, &y);
-	printf("x: x %f\ty %f\tz %f\ny %f\ty %f\tz %f\n", x.x, x.y, x.z, y.x, y.y, y.z);
+	t_sc sc;
+	t_vec	nx;
+	t_vec	ny;
+	
+	sc.screen.center.x = 0;
+	sc.screen.center.y = 0;
+	sc.screen.center.z = 150;
+	sc.screen.pix_rat = 0.5;
+	sc.screen.width = 5;
+	nx.x = 1;
+	nx.y = 0;
+	nx.z = 0;
+	ny.x = 0;
+	ny.y = 1;
+	ny.z = 0;
+	throw_rays(&sc, &nx, &ny);
 }
