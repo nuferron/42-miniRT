@@ -103,6 +103,13 @@ typedef struct s_screen
 	float	pix_rat;	//ratio between visual and virtual width
 }	t_screen;
 
+typedef struct s_ray
+{
+	t_point	ray_orig;	// the coordinates of the screen point
+	t_vec	ray_vec;	// the ray vector
+	double	dist;		// the minimal distance
+}	t_ray;
+
 typedef struct s_sc //SCENE
 {
 	t_mlx		mlx;
