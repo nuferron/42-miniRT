@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/09 00:18:40 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/09 18:59:17 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_vars
 {
 	t_vec	oc;		//	ray origin - sphere center
 	t_vec	vo;		//	ray vector - ray origin
-	double	vo_dot;	//	dot product (vo, vo)
+	double	vo_dot;	//	dot product (vo, vo) - iquals to k1
 	double	k2;		//	2 * dot product (oc, vo)
 	double	discr;	//	discriminant
 }	t_vars;
@@ -88,8 +88,9 @@ typedef struct s_cy //CYLINDER
 
 typedef struct s_ray
 {
-	t_point	ray_orig;	// the coordinates of the screen point
+	t_point	ray_orig;	// the coordinates of the screen point or (0,0,0) ???
 	t_vec	ray_vec;	// the ray vector
+	t_point	hit;
 	double	dist;		// the minimal distance
 }	t_ray;
 
