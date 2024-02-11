@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/02/11 18:44:54 by nzhuzhle         ###   ########.fr        #
+#    Updated: 2024/02/11 21:09:37 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,12 +24,14 @@ SRCS_INPUT = check_input.c init_scene.c init_utils.c init_objects.c
 SRCS_UTILS = num_utils.c utils.c mem_utils.c math_utils.c
 SRCS_OPER = vector_utils.c vector_utils2.c vector_utils3.c
 SRCS_INTERSEC = plane_intersect.c sphere_intersect.c ray_intersect.c
+SRCS_SCREEN = screen.c
 
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
 		$(addprefix utils/,$(SRCS_UTILS)) \
 		$(addprefix mlx/,$(SRCS_MLX)) \
 		$(addprefix operations/,$(SRCS_OPER)) \
 		$(addprefix intersect/,$(SRCS_INTERSEC)) \
+		$(addprefix screen/,$(SRCS_SCREEN)) \
 		main.c
 SRCDIR = src/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
@@ -45,7 +47,7 @@ TEST = test.rt
 all: make_libs ${NAME}
 
 make_libs:
-	make -C inc/libft --no-print-directory
+	make -C inc/libft bonus --no-print-directory
 	make -C inc/ft_dprintf --no-print-directory
 	@make -s -C inc/mlx --no-print-directory
 
