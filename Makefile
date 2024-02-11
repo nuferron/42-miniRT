@@ -45,7 +45,7 @@ TEST = test.rt
 all: make_libs ${NAME}
 
 make_libs:
-	make -C inc/libft bonus --no-print-directory
+	make -C inc/libft --no-print-directory
 	make -C inc/ft_dprintf --no-print-directory
 	@make -s -C inc/mlx --no-print-directory
 

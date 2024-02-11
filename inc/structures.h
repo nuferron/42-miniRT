@@ -109,17 +109,24 @@ typedef struct s_mlx
 	t_img	img;
 	void	*init;
 	void	*win;
-	int		w;		// not sure about it
-	int		h;		// not sure about it
+	int		x;		// not sure about it
+	int		y;		// not sure about it
 	int		color;
 }	t_mlx;
 
 typedef struct s_screen
 {
 	t_point	center;
-	float	width;
-	float	pix_rat;
+	float	width;		//half the screen width
+	float	pix_rat;	//ratio between visual and virtual width
 }	t_screen;
+
+typedef struct s_ray
+{
+	t_point	ray_orig;	// the coordinates of the screen point
+	t_vec	ray_vec;	// the ray vector
+	double	dist;		// the minimal distance
+}	t_ray;
 
 typedef struct s_sc //SCENE
 {
