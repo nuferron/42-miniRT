@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/11 17:07:24 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:13:27 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,24 @@ typedef struct s_cy //CYLINDER
 	float	h;		//height
 	int		rgb[3];
 }	t_cy;
+
+/* A variable structure for sphere intersection */
+typedef struct s_vars
+{
+	t_vec	oc;		//	ray origin - sphere center
+	double	k2;		//	2 * dot product (oc, vo)
+	double	discr;	//	discriminant
+	double	t;
+}	t_vars;
+
+typedef struct s_ray
+{
+	t_point	zero;	// the coordinates of the camera
+	t_vec	norm;	// the normalized ray vector
+	t_point	hit;	// the minimal point of intersection
+	double	k1;		// dot_prod(norm, norm)
+	double	dist;		// the minimal distance
+}	t_ray;
 
 typedef struct s_img
 {

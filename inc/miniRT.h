@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/07 22:24:26 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:46:10 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <limits.h>
 
 #include "errors.h"
 #include "structures.h"
 #include "operations.h"
+#include "intersections.h"
 #include "mlx_rt.h"
 #include "libft/inc/libft.h"
 #include "ft_dprintf/inc/libftprintf.h"

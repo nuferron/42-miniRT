@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/02/11 17:05:47 by nuferron         ###   ########.fr        #
+#    Updated: 2024/02/11 18:44:54 by nzhuzhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,15 +19,17 @@ CYAN = \033[1;36m
 WHITE = \033[1;37m
 RESET = \033[0m
 
-SRC_MLX = mlx.c draw.c
+SRCS_MLX = mlx.c draw.c
 SRCS_INPUT = check_input.c init_scene.c init_utils.c init_objects.c
 SRCS_UTILS = num_utils.c utils.c mem_utils.c math_utils.c
-SRCS_OPERATIONS = vector_utils.c vector_utils2.c vector_utils3.c
+SRCS_OPER = vector_utils.c vector_utils2.c vector_utils3.c
+SRCS_INTERSEC = plane_intersect.c sphere_intersect.c ray_intersect.c
 
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
 		$(addprefix utils/,$(SRCS_UTILS)) \
-		$(addprefix operations/,$(SRCS_OPERATIONS)) \
-		$(addprefix mlx/,$(SRC_MLX)) \
+		$(addprefix mlx/,$(SRCS_MLX)) \
+		$(addprefix operations/,$(SRCS_OPER)) \
+		$(addprefix intersect/,$(SRCS_INTERSEC)) \
 		main.c
 SRCDIR = src/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
