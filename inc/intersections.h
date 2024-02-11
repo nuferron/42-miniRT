@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:01:29 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/11 18:46:18 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:10:25 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	sph_intersect(t_sp *sp, t_ray *ray);
 
 
 /* ray_intersect.c - dealing with ray variables  **************/
-t_ray	ray_init(t_point *orig);
+void	ray_init(t_ray *ray);
 void	check_dist(t_point *p, t_ray *ray, double dist);
+void	all_intersect(t_sc *sc, t_ray *ray);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/11 18:46:10 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:04:49 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,8 @@ void	skip_number(char *line, int *i);
 /* MATH UTILS */
 double	exp_n(double b, int n);
 double	exp_2(double b);
+
+void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax);
+void	throw_rays(t_sc *sc, t_screen *pic);
 
 #endif
