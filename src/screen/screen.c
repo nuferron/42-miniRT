@@ -6,75 +6,96 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:43:51 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/07 16:30:04 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:59:14 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include <stdbool.h>
+
+void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax)
+{
+	x_ax->x = 0;
+	x_ax->y = 0;
+	x_ax->z = 0;
+	if (z_ax->x && z_ax->y && z_ax->z)
+	{
+		x_ax->x = 1;
+		x_ax->y = 1;
+		x_ax->z = -(z_ax->x + z_ax->y) / z_ax->z;
+	}
+	else
+	{
+		if (!z_ax->x)
+			x_ax->x = 1;
+		if (!z_ax->y)
+			x_ax->y = 1;
+		if (!z_ax->z)
+			x_ax->z = 1;
+	}
+	y_ax->x = z_ax->y * x_ax->z - z_ax->z * x_ax->y;
+	y_ax->y = z_ax->z * x_ax->x - z_ax->x * x_ax->z;
+	y_ax->z = z_ax->x * x_ax->y - z_ax->y * x_ax->x;
+}
 /*
-int	inter_square(t_vec *ray)
+void	throw_rays(t_sc *sc, t_screen *pic)
 {
-	double	x, y = 0;
-	double	lambda = 50 / ray->z;
+	t_ray	ray;
+	int		i;
+	int		j;
+	int		h;
 
-	x = ray->x * lambda;
-	y = ray->y * lambda;
-	if (x > 400 && x < 600 && y > 400 && y < 600)
-		return (1);
-	return (0);
-}
-*/
+	j = -pic->pix_rat * HEIGHT;
+	h = -j;
+	sc->mlx.h = 0
+	while (sc->mlx < h)
+	{
+		i = -pic->width;
+		while (i < pic->width)
+		{
+			ray.orig.x = pic->center.x + i * pic->w_vec.x + j * y->x;
+			ray.orig.y = pic->center.y + i * pic->w_vec.y + j * y->y;
+			ray.orig.z = pic->center.z + i * x->z + j * y->z;
+			unit_vector(&ray.ray_orig, &ray.ray_vec);
+			//call intersections
+			ray_init(&ray);
+			all_intersect(sc, &ray);
+			i++;
+		}
+		j++;
+	}
+}*/
 
-double	screen_width(double fov)
+void	throw_rays(t_sc *sc, t_screen *pic)
 {
-	return (sin(fov * M_PI / 360) * 2 * FOCAL);
-}
+	t_ray	ray;
 
-double	pixel_ratio(double screen)
-{
-	return (screen / WIDTH);
-}
-
-double	scalar_prod(t_vec *v, t_vec *w)
-{
-	return (v->x * w->x + v->y * w->y + v->z * w->z);
-}
-
-double	get_c_parabola(t_vec *v, float *p, double *d)
-{
-	double	z_sqd;
-	double	vy_p;
-
-	z_sqd = v->z * v->z;
-	vy_p = v->y * *p;
-	return (vy_p * vy_p + 2 * vy_p * z_sqd + z_sqd * z_sqd);
-}
-
-float get_vec_plane(t_vec *n, float *p, double *d)
-{
-	double	a;
-	double	b;
-	double	disc;
-
-	a = n->x * n->x + n->y * n->y;
-	b = -2 * n->y - 2 * *p * n->x * n->x;
-	disc = b * b - 4 * a * get_c_parabola(n, p, d);
-	if (disc < 0)
-		return (-1);
-	return ((float)(-b - sqrt(disc)) / (2 * a));
+	ray.orig.x = pic->start.x + -pic->w_vec.x * pic->pix_rat * sc->mlx.w + \
+				 -pic->h_vec.x * pic->pix_rat * sc->mlx.h;
+	ray.orig.y = pic->start.y + -pic->w_vec.y * pic->pix_rat * sc->mlx.w + \
+				 -pic->h_vec.y * pic->pix_rat * sc->mlx.h;
+	ray.orig.z = pic->start.z + -pic->w_vec.z * pic->pix_rat * sc->mlx.w + \
+				 -pic->h_vec.z * pic->pix_rat * sc->mlx.h;
+	ray_init(&ray);
+	all_intersect(sc, &ray);
 }
 
-/*int main()
+/*
+int main()
 {
-	t_vec	n;
-
-	n.x = 3;
-	n.y = 2;
-	n.z = 1;
-	double d = 150;
-	float	p = 25.4;
-	printf("c parabola: %f\n", get_c_parabola(&n, &n.y, &d));
-	printf("c gwv: %f\n", get_vec_plane(&n, &p, &d));
-	printf("cam %zu\namb %zu\nlight %zu\nitem %zu\nmlx %zu\nscreen %zu\n", sizeof(t_cam), sizeof(t_amb), sizeof(t_light), sizeof(t_item), sizeof(t_mlx), sizeof(t_screen));
+	t_sc sc;
+	t_vec	nx;
+	t_vec	ny;
+	
+	sc.screen.center.x = 0;
+	sc.screen.center.y = 0;
+	sc.screen.center.z = 150;
+	sc.screen.pix_rat = 0.5;
+	sc.screen.width = 5;
+	nx.x = 1;
+	nx.y = 0;
+	nx.z = 0;
+	ny.x = 0;
+	ny.y = 1;
+	ny.z = 0;
+	throw_rays(&sc, &nx, &ny);
 }*/

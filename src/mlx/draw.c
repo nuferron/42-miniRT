@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:58:21 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/01/25 17:12:07 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:14:50 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 void	draw_scene(t_sc *sc)
 {
-	while (sc->mlx.x < WIDTH)
+	sc->mlx.w = 0;
+	while (sc->mlx.w < WIDTH)
 	{
-		sc->mlx.y = 0;
-		while (sc->mlx.y < HEIGHT)
+		sc->mlx.h = 0;
+		while (sc->mlx.h < HEIGHT)
 		{
+			throw_rays(sc, &sc->screen);
 			put_pixel(sc);
-			sc->mlx.y++;
+			sc->mlx.h++;
 		}
-		sc->mlx.x++;
+		sc->mlx.w++;
 	}
 	mlx_put_image_to_window(sc->mlx.init, sc->mlx.win, sc->mlx.img.ipt, 0, 0);
 }
@@ -31,8 +33,8 @@ void	put_pixel(t_sc *sc)
 {
 	char	*pix;
 
-	sc->mlx.color = 0x4a5d7d; // =camera_ray(sc, sc->mlx.x, sc->mlx.y)
-	pix = sc->mlx.img.ppt + (sc->mlx.img.line * sc->mlx.y + sc->mlx.x * \
+//	sc->mlx.color = 0x4a5d7d; // =camera_ray(sc, sc->mlx.x, sc->mlx.y)
+	pix = sc->mlx.img.ppt + (sc->mlx.img.line * sc->mlx.h + sc->mlx.w * \
 	(sc->mlx.img.bits / 8));
 	*(int *)pix = sc->mlx.color;
 }
