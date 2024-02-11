@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:50:51 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/01/19 20:21:03 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:31:30 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	init_mlx(t_sc *sc)
 		return (ft_error_mlx(sc, 1));
 	sc->mlx.img.ppt = mlx_get_data_addr(sc->mlx.img.ipt, &sc->mlx.img.bits, \
 	&sc->mlx.img.line, &sc->mlx.img.endian);
-	sc->mlx.x = 0;
-	sc->mlx.y = 0;
+	sc->mlx.w = 0;
+	sc->mlx.h = 0;
 	sc->mlx.color = 0;
 	return (0);
 }

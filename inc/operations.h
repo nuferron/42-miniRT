@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:27:20 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/08 17:27:35 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:23:46 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ double	dist(t_point *point1, t_point *point2);	// returns a distance from the po
 
 
 /* vector_utils3.c - vector operations: multipliction, division  ***********/
-t_vec	mult_new(t_vec *v, double factor);	// returns a the vector v multiplied by the float "factor"
-void	mult_fac(t_vec *v, double factor);	// changes the vector v multiplying it by a factor 
+t_vec	mult_new(t_vec *v, double *factor);	// returns a the vector v multiplied by the float "factor"
+void	mult_fac(t_vec *v, double *factor);	// changes the vector v multiplying it by a factor 
 t_vec	mult_vec(t_vec *v1, t_vec *v2);		// returns a the vector, that is a multiplication of v1 and v2
-t_vec	div_new(t_vec *v, double factor);	// returns a the vector v divided by the float "factor"
-void	div_fac(t_vec *v, double factor);	// changes the vector v dividing it by a factor 
+t_vec	div_new(t_vec *v, double *factor);	// returns a the vector v divided by the float "factor"
+void	div_fac(t_vec *v, double *factor);	// changes the vector v dividing it by a factor 
 /****************************************************/
 
 #endif

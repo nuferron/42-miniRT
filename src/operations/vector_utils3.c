@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:12:15 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/07 23:02:47 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:24:31 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 /* returns a vector which is the product of the vector v and 
 a number "factor" */
-t_vec	mult_new(t_vec *v, double factor)
+t_vec	mult_new(t_vec *v, double *factor)
 {
 	t_vec	res;
 
-	res.x = v->x * factor;
-	res.y = v->y * factor;
-	res.z = v->z * factor;
+	res.x = v->x * *factor;
+	res.y = v->y * *factor;
+	res.z = v->z * *factor;
 	return (res);
 }
 
 /* multiplies the same vector v by a number "factor" */
-void	mult_fac(t_vec *v, double factor)
+void	mult_fac(t_vec *v, double *factor)
 {
-	v->x *= factor;
-	v->y *= factor;
-	v->z *= factor;
+	v->x *= *factor;
+	v->y *= *factor;
+	v->z *= *factor;
 }
 
 /* returns a vector which is the product of the vector v1 and 
@@ -46,20 +46,20 @@ t_vec	mult_vec(t_vec *v1, t_vec *v2)
 
 /* returns a vector which is a resust of division of the vector v by 
 a number "factor" */
-t_vec	div_new(t_vec *v, double factor)
+t_vec	div_new(t_vec *v, double *factor)
 {
 	t_vec	res;
 
-	res.x = v->x / factor;
-	res.y = v->y / factor;
-	res.z = v->z / factor;
+	res.x = v->x / *factor;
+	res.y = v->y / *factor;
+	res.z = v->z / *factor;
 	return (res);
 }
 
 /* divides the vector v by a number "factor" */
-void	div_fac(t_vec *v, double factor)
+void	div_fac(t_vec *v, double *factor)
 {
-	v->x /= factor;
-	v->y /= factor;
-	v->z /= factor;
+	v->x /= *factor;
+	v->y /= *factor;
+	v->z /= *factor;
 }
