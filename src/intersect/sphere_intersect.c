@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/11 18:44:07 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:05:39 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	sph_intersect(t_sp *sp, t_ray *ray)
 	var.t = (-var.k2 + var.discr) / (2 * ray->k1);
 	if (var.t > 0) // what do we do if the intrsection is in the zero point???
 	{
-		p = mult_new(&ray->norm, &var.t);
+		p = mult_new(&ray->norm, var.t);
 		check_dist(&p, ray, dist(&p, &ray->zero));
 	}
 	if (!var.discr)
@@ -34,6 +34,6 @@ void	sph_intersect(t_sp *sp, t_ray *ray)
 	var.t = (-var.k2 - var.discr) / (2 * ray->k1);
 	if (var.t <= 0)
 		return ;
-	p = mult_new(&ray->norm, &var.t);
+	p = mult_new(&ray->norm, var.t);
 	check_dist(&p, ray, dist(&p, &ray->zero));
 }

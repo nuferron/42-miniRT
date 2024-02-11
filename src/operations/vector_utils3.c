@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:12:15 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/11 18:24:31 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:39:20 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 /* returns a vector which is the product of the vector v and 
 a number "factor" */
-t_vec	mult_new(t_vec *v, double *factor)
+t_vec	mult_new(t_vec *v, double factor)
 {
 	t_vec	res;
 
-	res.x = v->x * *factor;
-	res.y = v->y * *factor;
-	res.z = v->z * *factor;
+	res.x = v->x * factor;
+	res.y = v->y * factor;
+	res.z = v->z * factor;
 	return (res);
 }
 

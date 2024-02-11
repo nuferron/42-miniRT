@@ -37,7 +37,7 @@ t_vec	cross_prod(t_vec *v1, t_vec *v2)
 	return (res);
 }
 
-/* The length of the vector */
+/* The lenth of the vector */
 double	vec_mod(t_vec *v)
 {
 	return (sqrt(v->x * v->x + v->y * v->y + v->z * v->z));

@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:43:51 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/11 17:04:02 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:59:14 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,30 +36,49 @@ void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax)
 	y_ax->y = z_ax->z * x_ax->x - z_ax->x * x_ax->z;
 	y_ax->z = z_ax->x * x_ax->y - z_ax->y * x_ax->x;
 }
-
-void	throw_rays(t_sc *sc, t_vec *x, t_vec *y)
+/*
+void	throw_rays(t_sc *sc, t_screen *pic)
 {
 	t_ray	ray;
 	int		i;
 	int		j;
 	int		h;
 
-	j = -sc->screen.pix_rat * HEIGHT;
+	j = -pic->pix_rat * HEIGHT;
 	h = -j;
-	while (j < h)
+	sc->mlx.h = 0
+	while (sc->mlx < h)
 	{
-		i = -sc->screen.width;
-		while (i < sc->screen.width)
+		i = -pic->width;
+		while (i < pic->width)
 		{
-			ray.ray_orig.x = sc->screen.center.x + i * x->x + j * y->x;
-			ray.ray_orig.y = sc->screen.center.y + i * x->y + j * y->y;
-			ray.ray_orig.z = sc->screen.center.z + i * x->z + j * y->z;
+			ray.orig.x = pic->center.x + i * pic->w_vec.x + j * y->x;
+			ray.orig.y = pic->center.y + i * pic->w_vec.y + j * y->y;
+			ray.orig.z = pic->center.z + i * x->z + j * y->z;
 			unit_vector(&ray.ray_orig, &ray.ray_vec);
+			//call intersections
+			ray_init(&ray);
+			all_intersect(sc, &ray);
 			i++;
 		}
 		j++;
 	}
+}*/
+
+void	throw_rays(t_sc *sc, t_screen *pic)
+{
+	t_ray	ray;
+
+	ray.orig.x = pic->start.x + -pic->w_vec.x * pic->pix_rat * sc->mlx.w + \
+				 -pic->h_vec.x * pic->pix_rat * sc->mlx.h;
+	ray.orig.y = pic->start.y + -pic->w_vec.y * pic->pix_rat * sc->mlx.w + \
+				 -pic->h_vec.y * pic->pix_rat * sc->mlx.h;
+	ray.orig.z = pic->start.z + -pic->w_vec.z * pic->pix_rat * sc->mlx.w + \
+				 -pic->h_vec.z * pic->pix_rat * sc->mlx.h;
+	ray_init(&ray);
+	all_intersect(sc, &ray);
 }
+
 /*
 int main()
 {
