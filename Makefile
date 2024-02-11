@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/02/05 16:52:42 by nzhuzhle         ###   ########.fr        #
+#    Updated: 2024/02/11 17:05:47 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ TEST = test.rt
 all: make_libs ${NAME}
 
 make_libs:
-	make -C inc/libft bonus --no-print-directory
+	make -C inc/libft --no-print-directory
 	make -C inc/ft_dprintf --no-print-directory
 	@make -s -C inc/mlx --no-print-directory
 
