@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/07 17:04:54 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:09:21 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ static int	check_file(int fd, t_sc *sc)
 		line[ft_strlen(line) - 1] = '\0';
 		if (check_content(sc, line))
 			exit(1);
-			//return (free(line), free_all(sc), 1);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -108,8 +107,14 @@ int	check_input(int argc, char **argv, t_sc *sc)
 		return (ft_dprintf(2, MUST), 1);
 	sc->screen.width = sin(sc->cam.fov / 2) * 2 * FOCAL;
 	sc->screen.pix_rat = sc->screen.width / WIDTH;
-	sc->screen.center.x = sc->cam.nov.x * FOCAL;
-	sc->screen.center.y = sc->cam.nov.y * FOCAL;
-	sc->screen.center.z = sc->cam.nov.z * FOCAL;
+	sc->screen.height = sc->screen.pix_rat * HEIGHT;
+	sc->screen.center = mult_new(&sc->cam.nov, FOCAL);
+	get_screen_vec(&sc->cam.nov, &sc->screen.w_vec, &sc->screen.h_vec);
+	sc->screen.start.x = sc->screen.center.x + sc->screen.w_vec.x \
+		* sc->screen.width / 2 + sc->screen.h_vec.x * sc->screen.height / 2;
+	sc->screen.start.y = sc->screen.center.y + sc->screen.w_vec.y \
+		* sc->screen.width / 2 + sc->screen.h_vec.y * sc->screen.height / 2;
+	sc->screen.start.z = sc->screen.center.z + sc->screen.w_vec.z \
+		* sc->screen.width / 2 + sc->screen.h_vec.z * sc->screen.height / 2;
 	return (0);
 }

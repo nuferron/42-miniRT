@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/11 18:13:27 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:55:23 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_ray
 {
 	t_point	zero;	// the coordinates of the camera
 	t_vec	norm;	// the normalized ray vector
+	t_point	orig;
 	t_point	hit;	// the minimal point of intersection
 	double	k1;		// dot_prod(norm, norm)
 	double	dist;		// the minimal distance
@@ -117,7 +118,11 @@ typedef struct s_mlx
 typedef struct s_screen
 {
 	t_point	center;
+	t_vec	w_vec;
+	t_vec	h_vec;
+	t_point	start;
 	float	width;
+	float	height;
 	float	pix_rat;
 }	t_screen;
 

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 21:44:54 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/05 17:20:08 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:51:22 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* returns a vector which is a sum of vectors a and b */
 t_vec	sum_vec(t_vec *a, t_vec *b)
 {
-	t_vec res;
+	t_vec	res;
 
 	res.x = a->x + b->x;
 	res.y = a->y + b->y;
@@ -28,7 +28,7 @@ what - is a vector which you are substructing
 returns a resulting vector*/
 t_vec	substr_vec(t_vec *from, t_vec *what)
 {
-	t_vec res;
+	t_vec	res;
 
 	res.x = from->x - what->x;
 	res.y = from->y - what->y;
