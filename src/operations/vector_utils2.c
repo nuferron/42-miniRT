@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 21:44:54 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/12 11:04:38 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:53:26 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* returns a vector which is a sum of vectors a and b */
 t_vec	sum_vec(t_vec *a, t_vec *b)
 {
-	t_ve	res;
+	t_vec	res;
 
 	res.x = a->x + b->x;
 	res.y = a->y + b->y;
