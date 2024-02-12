@@ -6,14 +6,14 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:04:16 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/18 18:29:40 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:07:44 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INPUT_H
-#define INPUT_H
+# define INPUT_H
 
-#include "miniRT.h"
+# include "miniRT.h"
 
 /* CHECKING INPUT + INITIALIZING STRUCTS */
 int		get_ambient(char *line, int i, t_amb *amb);

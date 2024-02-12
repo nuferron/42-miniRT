@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:37:09 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/07 17:06:26 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:08:06 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	get_camera(char *line, int i, t_cam *cam)
 		|| init_vec(&cam->nov, line, &i, 'n'))
 		return (1);
 	skip_space(line, &i);
-	cam->fov = check_range(line, 'f', i);// error
+	cam->fov = check_range(line, 'f', i);
 	if (cam->fov == -2)
 		return (1);
 	if (cam->fov != (int)cam->fov)

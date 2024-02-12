@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:50:51 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/11 17:31:30 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:05:50 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,11 @@ int	ft_key_hook(int key, t_sc *sc)
 	return (0);
 }
 
-
 /* Cleans up and exits in case of error 
 flag = -1 - no display, only structure free
 flag = 0 - only mlx.init is allocated
 flag = 1 - we should destroy the display */
-int ft_error_mlx(t_sc *sc, int flag)
+int	ft_error_mlx(t_sc *sc, int flag)
 {
 	free_all(sc);
 	if (flag > 0)
@@ -68,7 +67,7 @@ int ft_error_mlx(t_sc *sc, int flag)
 	exit (1);
 }
 
-int ft_exit_mlx(t_sc *sc)
+int	ft_exit_mlx(t_sc *sc)
 {
 	free_all(sc);
 	if (sc->mlx.win)
