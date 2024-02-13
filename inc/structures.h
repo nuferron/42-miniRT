@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/13 18:30:30 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/13 22:42:20 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ typedef struct s_ray
 typedef struct s_hit
 {
 	t_obj	*obj;
-	t_point	hit;
-	
+	t_point	*hit;	// the minimal point of intersection
+	t_vec	*hit_vec;	// normalized vector of the hit
 }
 
 typedef struct s_img
