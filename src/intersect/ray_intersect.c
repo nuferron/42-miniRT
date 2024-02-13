@@ -28,21 +28,18 @@ void	check_dist(t_point *p, t_ray *ray, double dist)
 	ray->hit = *p;
 }
 
-/*unsigned int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-*/
 unsigned int	create_rgb(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
 }
 
-void	obj_color(t_sc *sc, int *color, t_vec *light, t_vec *norm)
+void	obj_color(t_sc *sc, int *color, t_point *hit, t_vec *norm)
 {
 	double	dot;
+	t_vec	hit_l;
 
-	dot = dot_prod(light, norm);
+	hit_l = substr_vec(hit, &sc->light.pos);
+	dot = dot_prod(&hit_l, norm);
 	if (dot <= 0)
 		*color = 0x000000;
 	else
@@ -51,16 +48,17 @@ void	obj_color(t_sc *sc, int *color, t_vec *light, t_vec *norm)
 
 void	all_intersect(t_sc *sc, t_ray *ray)
 {
+	printf("hola \n");
 	t_sp	*sp0;
 
-	sph_intersect(&sc->sp.obj[0], ray);
-	t_sp	*sp = &sc->sp.obj[0];
-	sc->mlx.color = create_rgb(sp->rgb[0], sp->rgb[1], sp->rgb[2]);
-	sp0 = (t_sp *)&sc->sp.obj[0];
+	sph_intersect(&((t_sp *)sc->sp.obj)[0], ray);
+	sp0 = &((t_sp *)sc->sp.obj)[0];
+	sc->mlx.color = create_rgb(sp0->rgb[0], sp0->rgb[1], sp0->rgb[2]);
 	if (ray->dist < MAXFLOAT)
 	{
 		ray->hit_vec = substr_vec(&ray->hit, &sp0->pos);
 		norm_vector(&ray->hit_vec);
+		obj_color(sc, &sc->mlx.color, &ray->hit_vec, &ray->norm);
 	}
 	/*if (ray->dist < MAXFLOAT)
 		sc->mlx.color = 0xFF0000;
