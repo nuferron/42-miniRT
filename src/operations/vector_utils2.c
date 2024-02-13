@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 21:44:54 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/12 11:51:22 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/12 21:47:02 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,14 @@ double	dist(t_point *p1, t_point *p2)
 
 	temp = substr_vec(p1, p2);
 	return (vec_mod(&temp));
+}
+
+void	norm_vector(t_vec *n)
+{
+	double	mod;
+
+	mod = vec_mod(n);
+	n->x = n->x / mod;
+	n->y = n->y / mod;
+	n->z = n->z / mod;
 }

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/12 11:57:36 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/12 21:55:32 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,17 @@ void	check_dist(t_point *p, t_ray *ray, double dist)
 
 void	all_intersect(t_sc *sc, t_ray *ray)
 {
+	t_sp	*sp0;
+
 	sph_intersect(&sc->sp.obj[0], ray);
+	sp0 = (t_sp *)&sc->sp.obj[0];
 	if (ray->dist < MAXFLOAT)
 	{
-		sc->mlx.color = 0xFF0000 * sc->light.b;
+		ray->hit_vec = substr_vec(&ray->hit, &sp0->pos);
+		norm_vector(&ray->hit_vec);
 	}
+	/*if (ray->dist < MAXFLOAT)
+		sc->mlx.color = 0xFF0000;
 	else
-	{
-		sc->mlx.color = 0x0000FF * sc->amb.ratio;
-	}
+		sc->mlx.color = 0x0000FF;*/
 }
