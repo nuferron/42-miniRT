@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/12 21:04:20 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:30:30 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 
 /*Structure that can contain a t_sp, a t_pl or a t_cy pointer in void *obj
 Size is a sizeof the structure and total the number we have of them*/
-typedef struct s_item
+
+typedef union u_obj
 {
-	void	*obj;
-	int		total;
-	size_t	size;
-}	t_item;
+	t_sp	*sp;
+	t_pl	*pl;
+	t_cy	*cy;
+}	t_obj;
 
 /*Structure for coordinates ("absolute" or normalized)*/
 typedef struct s_vec
@@ -97,6 +98,13 @@ typedef struct s_ray
 	double	dist;	// the minimal distance
 }	t_ray;
 
+typedef struct s_hit
+{
+	t_obj	*obj;
+	t_point	hit;
+	
+}
+
 typedef struct s_img
 {
 	void	*ipt;
@@ -126,6 +134,13 @@ typedef struct s_screen
 	float	height;
 	float	pix_rat;
 }	t_screen;
+
+typedef struct s_item
+{
+	t_obj	*type;
+	void	(*intersect)(t_obj *, t_ray *, t_hit *);
+	size_t	size;
+}	t_item;
 
 typedef struct s_sc //SCENE
 {
