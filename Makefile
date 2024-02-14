@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/02/11 21:09:37 by nuferron         ###   ########.fr        #
+#    Updated: 2024/02/14 23:06:07 by nzhuzhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,12 @@ WHITE = \033[1;37m
 RESET = \033[0m
 
 SRCS_MLX = mlx.c draw.c
-SRCS_INPUT = check_input.c init_scene.c init_utils.c init_objects.c
+SRCS_INPUT = check_input.c init_scene.c init_utils.c init_objects.c \
+translation.c
 SRCS_UTILS = num_utils.c utils.c mem_utils.c math_utils.c
 SRCS_OPER = vector_utils.c vector_utils2.c vector_utils3.c
-SRCS_INTERSEC = plane_intersect.c sphere_intersect.c ray_intersect.c
+SRCS_INTERSEC = plane_intersect.c sphere_intersect.c ray_intersect.c \
+cylinder_intersect.c
 SRCS_SCREEN = screen.c
 
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
@@ -37,7 +39,7 @@ SRCDIR = src/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 OBJDIR = obj/
 NAME = miniRT
-CFLAGS = -Wall -Wextra -Werror -O3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -O3 -fsanitize=address
 LIB = inc/libft/libft.a inc/ft_dprintf/libftprintf.a
 INC = inc/
 MLXFLAGS = -Linc/mlx -lmlx -framework OpenGL -framework AppKit
@@ -69,7 +71,7 @@ leaks: ${NAME}
 run: ${NAME}
 	./${NAME} ${TEST}
 
-${OBJDIR}%.o: ${SRCDIR}%.c ${HEADER}
+${OBJDIR}%.o: ${SRCDIR}%.c ${HEADER} Makefile
 	@printf "${WHITE}${NAME}: ${CYAN}Compiling files: ${WHITE}$(notdir $<)...${RESET}\r"
 	@mkdir -p $(dir $@)
 	@cc ${CFLAGS} -I ${INC} -c $< -o $@

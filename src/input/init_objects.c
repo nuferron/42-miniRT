@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_objects.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/07 16:39:55 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/14 23:21:18 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,98 +14,109 @@
 
 /*It adds a t_sp and sets its variables.
   Returns 1 with fail and 0 with success*/
-int	get_sphere(char *line, int i, t_item *item)
+int	get_sphere(char *line, int i, t_sc *sc)
 {
-	int		id;
 	t_sp	*sp;
+	t_item	*obj;
 
-	id = item->total;
-	add_obj(item);
-	sp = (t_sp *)item->obj;
+	obj = add_obj(sc->objs, sc);
+	sp = malloc(sizeof(t_sp));
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&sp[id].pos, line, &i, 0))
+
+	if (init_vec(&sp->pos, line, &i, 0))
 		return (1);
+
 	skip_space(line, &i);
 	if (!is_float(&line[i]) || line[i] == ',')
 		return (ft_dprintf(2, LINE, line), 1);
-	sp[id].r = ft_atof(&line[i]) / 2;
+	sp->r = ft_atof(&line[i]) / 2;
 	skip_number(line, &i);
-	if (!set_rgb(sp[id].rgb, line, i))
+	if (!set_rgb(sp->rgb, line, i))
 		return (1);
+	obj->type.sp = sp;
+//	exit(1);
+	obj->intersect = sph_intersect;
+	obj->trans = sph_translation;
+	obj->obj_free = sp_free;
 	return (0);
 }
 
 /*It adds a t_pl and sets its variables.
   Returns 1 with fail and 0 with success*/
-int	get_plane(char *line, int i, t_item *item)
+int	get_plane(char *line, int i, t_sc *sc)
 {
-	int		id;
 	t_pl	*pl;
+	t_item	*obj;
 
-	id = item->total;
-	add_obj(item);
-	pl = (t_pl *)item->obj;
+	obj = add_obj(sc->objs, sc);
+	pl = malloc(sizeof(t_pl));
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&pl[id].pos, line, &i, 0)
-		|| init_vec(&pl[id].nov, line, &i, 0))
+	if (init_vec(&pl->pos, line, &i, 0)
+		|| init_vec(&pl->nov, line, &i, 0))
 		return (1);
 	skip_space(line, &i);
-	if (!set_rgb(pl[id].rgb, line, i))
+	if (!set_rgb(pl->rgb, line, i))
 		return (1);
+	obj->type.pl = pl;
+	obj->intersect = pl_intersect;
+	obj->trans = pl_translation;
+	obj->obj_free = pl_free;
 	return (0);
 }
 
 /*It adds a t_cy and sets its variables.
   Returns 1 with fail and 0 with success*/
-int	get_cylinder(char *line, int i, t_item *item)
+int	get_cylinder(char *line, int i, t_sc *sc)
 {
-	int		id;
 	t_cy	*cy;
+	t_item	*obj;
 
-	id = item->total;
-	add_obj(item);
-	cy = (t_cy *)item->obj;
+	obj = add_obj(sc->objs, sc);
+	cy = malloc(sizeof(t_cy));
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&cy[id].pos, line, &i, 0)
-		|| init_vec(&cy[id].nov, line, &i, 0))
+	if (init_vec(&cy->pos, line, &i, 0)
+		|| init_vec(&cy->nov, line, &i, 0))
 		return (1);
 	skip_space(line, &i);
-	cy[id].r = check_range(line, 0, i) / 2;
+	cy->r = check_range(line, 0, i) / 2;
 	skip_number(line, &i);
 	skip_space(line, &i);
-	cy[id].h = check_range(line, 0, i);
-	if (cy[id].r == -2 || cy[id].h == -2)
+	cy->h = check_range(line, 0, i);
+	if (cy->r == -2 || cy->h == -2)
 		return (1);
 	skip_number(line, &i);
-	if (!set_rgb(cy[id].rgb, line, i))
+	if (!set_rgb(cy->rgb, line, i))
 		return (1);
+	obj->type.cy = cy;
+	obj->intersect = cy_intersect;
+	obj->trans = cy_translation;
+	obj->obj_free = cy_free;
 	return (0);
 }
 
 /*It does a realloc of size 1 (kind of) of t_item structures*/
-void	add_obj(t_item *item)
+t_item	*add_obj(t_item *item, t_sc *sc)
 {
-	void	*ret;
+	t_item	*ret;
 
-	if (!item->total)
-	{
-		item->obj = ft_calloc(1, item->size);
-		if (!item->obj)
-			exit(ft_dprintf(2, MEM));
-		item->total++;
-		return ;
-	}
-	ret = ft_calloc(item->total + 1, item->size);
+	ret = ft_calloc(1, sizeof(t_item));
 	if (!ret)
 		exit(ft_dprintf(2, MEM));
-	ft_memmove(ret, item->obj, (item->total * item->size));
+//	printf("[ADD OBJ] new item pointer: %p\n", ret);
+	ret->next = NULL;
+	if (!item)
+		sc->objs = ret;
+	else
+		item_lstlast(item)->next = ret;
+	/*ft_memmove(ret, item->obj, (item->total * item->size));
 	free(item->obj);
 	item->obj = ret;
-	item->total++;
+	item->total++;*/
+	return (ret);
 }

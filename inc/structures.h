@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/14 19:52:22 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/14 23:20:01 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_vec
 }	t_vec;
 
 typedef struct s_vec t_point;
+typedef struct s_vec t_rgb;
 
 //  ----------------------------------------------------------------/
 //	RAYS, HITS -----------------------------------------------------/
@@ -36,11 +37,14 @@ typedef struct s_vars
 	double	t;
 }	t_vars;
 
+typedef union u_obj	t_obj;
 typedef struct s_hit
 {
-	t_obj	*obj;
-	t_point	p;	// the minimal point of intersection
+	t_point	p;		// the minimal point of intersection
 	t_vec	norm;	// normalized vector of the hit
+	void	*obj;	// pointer to the winner object
+	int		type; 	// 0 - no obj, 1 - plane, 2 - sphere, 3 - cylinder, 4 - cone
+	bool	rec; 	// 0 if not a record
 }	t_hit;
 
 typedef struct s_ray
@@ -90,8 +94,11 @@ typedef union u_obj
 
 typedef struct s_item
 {
-	t_obj	*type;
-	void	(*intersect)(t_obj *, t_ray *, t_hit *);
+	t_obj			type;
+	void			(*intersect)(t_obj *, t_ray *);
+	void			(*trans)(t_obj *obj, t_sc *sc);
+	void			(*obj_free)(t_obj *obj);
+	struct s_item	*next;
 }	t_item;
 //	OBJECTS SET UP -------------------------------------------------/
 //  ----------------------------------------------------------------/

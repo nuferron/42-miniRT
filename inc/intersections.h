@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:01:29 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/11 21:10:25 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/14 22:59:01 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ typedef struct s_ray t_ray;
 typedef struct s_sp t_sp;
 
 /* plane_intersect.c - intersection with plane equations  **************/
+void	pl_intersect(t_obj *obj, t_ray *ray);
 
-/* sphere_intersect.c - intersection with plane equations  **************/
-void	sph_intersect(t_sp *sp, t_ray *ray);
+/* sphere_intersect.c - intersection with sphere equations  **************/
+void	sph_intersect(t_obj *obj, t_ray *ray);
+void	sp_get_norm(t_sp *sp, t_ray *ray);
 
+/* cylinder_intersect.c - intersection with cylinder equations  **************/
+void	cy_intersect(t_obj *obj, t_ray *ray);
 
 /* ray_intersect.c - dealing with ray variables  **************/
 void	ray_init(t_ray *ray);

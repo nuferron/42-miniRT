@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/12 21:55:32 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/14 23:27:53 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ray_init(t_ray *ray)
 	unit_vector(&ray->orig, &ray->norm);
 	ray->k1 = dot_prod(&ray->norm, &ray->norm);
 	ray->dist = MAXFLOAT;
+	ray->hit.obj = NULL;
+	ray->hit.rec = false;
 }
 
 void	check_dist(t_point *p, t_ray *ray, double dist)
@@ -25,22 +27,22 @@ void	check_dist(t_point *p, t_ray *ray, double dist)
 	if (dist > ray->dist)
 		return ;
 	ray->dist = dist;
-	ray->hit = *p;
+	ray->hit.p = *p;
+	ray->hit.rec = true;
 }
 
 void	all_intersect(t_sc *sc, t_ray *ray)
 {
-	t_sp	*sp0;
+	t_item	*obj;
 
-	sph_intersect(&sc->sp.obj[0], ray);
-	sp0 = (t_sp *)&sc->sp.obj[0];
-	if (ray->dist < MAXFLOAT)
+	obj = sc->objs;
+	while (obj)
 	{
-		ray->hit_vec = substr_vec(&ray->hit, &sp0->pos);
-		norm_vector(&ray->hit_vec);
+		obj->intersect(&obj->type, ray);
+		obj = obj -> next;
 	}
-	/*if (ray->dist < MAXFLOAT)
+	if (ray->dist < MAXFLOAT)
 		sc->mlx.color = 0xFF0000;
 	else
-		sc->mlx.color = 0x0000FF;*/
+		sc->mlx.color = 0x0000FF;
 }
