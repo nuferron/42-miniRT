@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/13 22:42:20 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/14 19:52:22 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,7 @@
 
 #include "mlx_rt.h"
 
-/*Structure that can contain a t_sp, a t_pl or a t_cy pointer in void *obj
-Size is a sizeof the structure and total the number we have of them*/
-
-typedef union u_obj
-{
-	t_sp	*sp;
-	t_pl	*pl;
-	t_cy	*cy;
-}	t_obj;
-
-/*Structure for coordinates ("absolute" or normalized)*/
+/* Structure for coordinates ("absolute" or normalized) */
 typedef struct s_vec
 {
 	float	x;
@@ -35,26 +25,38 @@ typedef struct s_vec
 
 typedef struct s_vec t_point;
 
-typedef struct s_amb //AMBIENT LIGHTNING
+//  ----------------------------------------------------------------/
+//	RAYS, HITS -----------------------------------------------------/
+/* A variable structure for sphere intersection */
+typedef struct s_vars
 {
-	float	ratio;	//ambient lightning ratio [0.0- 1.0]
-	int		rgb[3];
-}	t_amb;
+	t_vec	oc;		//	ray origin - sphere center
+	double	k2;		//	2 * dot product (oc, vo)
+	double	discr;	//	discriminant
+	double	t;
+}	t_vars;
 
-typedef struct s_cam //CAMERA
+typedef struct s_hit
 {
-	t_point	pos;	//center point
-	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
-	float	fov;	//horizontal field of view taken DEG [0 - 180] saved as RAD
-}	t_cam;
+	t_obj	*obj;
+	t_point	p;	// the minimal point of intersection
+	t_vec	norm;	// normalized vector of the hit
+}	t_hit;
 
-typedef struct s_light
+typedef struct s_ray
 {
-	t_point	pos;	//center point
-	float	b;		//light brightness ratio [0.0 - 1.0]
-	int		rgb[3];	//(bonus)
-}	t_light;
+	t_point	zero;	// the coordinates of the camera
+	t_vec	norm;	// the normalized ray vector
+	t_point	orig;	// point on the screen
+	double	k1;		// dot_prod(norm, norm)
+	double	dist;	// the minimal distance
+	t_hit	hit;
+}	t_ray;
+//	RAYS, HITS -----------------------------------------------------/
+//  ----------------------------------------------------------------/
 
+//  ----------------------------------------------------------------/
+//	OBJECTS SET UP -------------------------------------------------/
 typedef struct s_sp //SPHERE
 {
 	t_point	pos;	//center point
@@ -78,33 +80,60 @@ typedef struct s_cy //CYLINDER
 	int		rgb[3];
 }	t_cy;
 
-/* A variable structure for sphere intersection */
-typedef struct s_vars
+/* Union that can contain a t_sp, a t_pl or a t_cy pointer -  obj.sp/pl/cy */
+typedef union u_obj
 {
-	t_vec	oc;		//	ray origin - sphere center
-	double	k2;		//	2 * dot product (oc, vo)
-	double	discr;	//	discriminant
-	double	t;
-}	t_vars;
+	t_sp	*sp;
+	t_pl	*pl;
+	t_cy	*cy;
+}	t_obj;
 
-typedef struct s_ray
+typedef struct s_item
 {
-	t_point	zero;	// the coordinates of the camera
-	t_vec	norm;	// the normalized ray vector
-	t_point	orig;	// point on the screen
-	t_point	hit;	// the minimal point of intersection
-	t_vec	hit_vec;	// normalized vector of the hit
-	double	k1;		// dot_prod(norm, norm)
-	double	dist;	// the minimal distance
-}	t_ray;
+	t_obj	*type;
+	void	(*intersect)(t_obj *, t_ray *, t_hit *);
+}	t_item;
+//	OBJECTS SET UP -------------------------------------------------/
+//  ----------------------------------------------------------------/
 
-typedef struct s_hit
+//	SCENE SET UP ---------------------------------------------------/
+typedef struct s_amb //AMBIENT LIGHTNING
 {
-	t_obj	*obj;
-	t_point	*hit;	// the minimal point of intersection
-	t_vec	*hit_vec;	// normalized vector of the hit
-}
+	float	ratio;	//ambient lightning ratio [0.0- 1.0]
+	int		rgb[3];
+}	t_amb;
 
+typedef struct s_cam //CAMERA
+{
+	t_point	pos;	//center point
+	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
+	float	fov;	//horizontal field of view taken DEG [0 - 180] saved as RAD
+}	t_cam;
+
+typedef struct s_light
+{
+	t_point	pos;	//center point
+	float	b;		//light brightness ratio [0.0 - 1.0]
+	int		rgb[3];	//(bonus)
+}	t_light;
+//	SCENE SET UP ---------------------------------------------------/
+//  ----------------------------------------------------------------/
+
+//  SCREEN SET UP --------------------------------------------------/
+typedef struct s_screen
+{
+	t_point	center;
+	t_vec	w_vec;
+	t_vec	h_vec;
+	t_point	start;
+	float	width;
+	float	height;
+	float	pix_rat;
+}	t_screen;
+//  SCREEN SET UP --------------------------------------------------/
+//  ----------------------------------------------------------------/
+
+//	MLX AND IMAGE --------------------------------------------------/
 typedef struct s_img
 {
 	void	*ipt;
@@ -119,40 +148,22 @@ typedef struct s_mlx
 	t_img	img;
 	void	*init;
 	void	*win;
-	int		w;		// not sure about it
-	int		h;		// not sure about it
+	int		w;
+	int		h;
 	int		color;
 }	t_mlx;
+//	MLX AND IMAGE --------------------------------------------------/
+//  ----------------------------------------------------------------/
 
-typedef struct s_screen
-{
-	t_point	center;
-	t_vec	w_vec;
-	t_vec	h_vec;
-	t_point	start;
-	float	width;
-	float	height;
-	float	pix_rat;
-}	t_screen;
-
-typedef struct s_item
-{
-	t_obj	*type;
-	void	(*intersect)(t_obj *, t_ray *, t_hit *);
-	size_t	size;
-}	t_item;
-
-typedef struct s_sc //SCENE
+//	SCENE - MAIN STRUCTURE------------------------------------------/
+typedef struct s_sc
 {
 	t_mlx		mlx;
 	t_screen	screen;
 	t_light		light;
 	t_amb		amb;
 	t_cam		cam;
-	t_item		sp;
-	t_item		pl;
-	t_item		cy;
+	t_item		*objs;
 }	t_sc;
-
 
 #endif
