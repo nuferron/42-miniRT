@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:01:29 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/14 22:59:01 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/15 00:05:58 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	cy_intersect(t_obj *obj, t_ray *ray);
 void	ray_init(t_ray *ray);
 void	check_dist(t_point *p, t_ray *ray, double dist);
 void	all_intersect(t_sc *sc, t_ray *ray);
+void	memorize(t_obj *obj, t_ray *ray, int type);
 
 #endif

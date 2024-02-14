@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/14 23:20:01 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/15 00:04:54 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_hit
 {
 	t_point	p;		// the minimal point of intersection
 	t_vec	norm;	// normalized vector of the hit
-	void	*obj;	// pointer to the winner object
+	t_obj	*obj;	// pointer to the winner object
 	int		type; 	// 0 - no obj, 1 - plane, 2 - sphere, 3 - cylinder, 4 - cone
 	bool	rec; 	// 0 if not a record
 }	t_hit;

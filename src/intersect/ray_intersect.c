@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/14 23:27:53 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/15 00:06:18 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ray_init(t_ray *ray)
 	ray->k1 = dot_prod(&ray->norm, &ray->norm);
 	ray->dist = MAXFLOAT;
 	ray->hit.obj = NULL;
+	ray->hit.type = 0;
 	ray->hit.rec = false;
 }
 
@@ -41,8 +42,17 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 		obj->intersect(&obj->type, ray);
 		obj = obj -> next;
 	}
+	if (ray->hit.type == 2)
+		sp_get_norm(ray->hit.obj->sp, ray);
 	if (ray->dist < MAXFLOAT)
 		sc->mlx.color = 0xFF0000;
 	else
 		sc->mlx.color = 0x0000FF;
+}
+
+void	memorize(t_obj *obj, t_ray *ray, int type)
+{
+		ray->hit.obj = obj;
+		ray->hit.type = type;
+		ray->hit.rec = false;
 }
