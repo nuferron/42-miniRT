@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/15 12:23:34 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:27:46 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,32 +76,6 @@ void	obj_color(t_sc *sc, t_hit *hit, unsigned int *color)
 	}
 }
 
-/*
-void	all_intersect(t_sc *sc, t_ray *ray)
-{
-	t_item	*obj;
-
-<<<<<<< HEAD
-	ft_dprintf(2, "all_intersect\n");
-	sph_intersect(&((t_sp *)sc->sp.obj)[0], ray);
-	sp0 = &((t_sp *)sc->sp.obj)[0];
-	sc->mlx.color = create_rgb(sp0->rgb[0], sp0->rgb[1], sp0->rgb[2]);
-	dprintf(2, "ray->hit x %f\ty %f\tz %f\n", ray->hit.x, ray->hit.y, ray->hit.z);
-	dprintf(2, "sp0->pos x %f\ty %f\tz %f\n", sp0->pos.x, sp0->pos.y, sp0->pos.z);
-	if (ray->dist < MAXFLOAT)
-	{
-		ray->hit_vec = substr_vec(&ray->hit, &sp0->pos);
-		exit(1);
-		norm_vector(&ray->hit_vec);
-		obj_color(sc, &sc->mlx.color, &ray->hit_vec, &ray->norm);
-	}
-	if (ray->dist < MAXFLOAT)
-		sc->mlx.color = 0xFF0000;
-	else
-		sc->mlx.color = 0x000000;
-		sc->mlx.color = 0x0000FF;
-}*/
-
 /*void	all_intersect(t_sc *sc, t_ray *ray)
 {
 	t_item	*obj;
@@ -132,15 +106,16 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 	while (obj)
 	{
 		obj->intersect(&obj->type, ray);
-		if (ray->hit.type == 2)
-			sp_get_norm(ray->hit.obj->sp, ray);
-		if (ray->dist < MAXFLOAT)
-		{
-			sc->mlx.color = 0x00FF00;
-			obj_color(sc, &ray->hit, &sc->mlx.color);
-		}
-		else
-			sc->mlx.color = 0x0000FF;
 		obj = obj->next;
 	}
+	if (ray->hit.type == 2)
+		sp_get_norm(ray->hit.obj->sp, ray);
+	if (ray->dist < MAXFLOAT)
+	{
+		sc->mlx.color = 0x00FF00;
+		obj_color(sc, &ray->hit, &sc->mlx.color);
+	}
+	else
+		sc->mlx.color = 0x0000FF;
+
 }
