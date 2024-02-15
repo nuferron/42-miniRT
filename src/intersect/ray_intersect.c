@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/12 21:55:32 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:07:29 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,18 @@ void	obj_color(t_sc *sc, int *color, t_point *hit, t_vec *norm)
 
 void	all_intersect(t_sc *sc, t_ray *ray)
 {
-	printf("hola \n");
 	t_sp	*sp0;
 
+	ft_dprintf(2, "all_intersect\n");
 	sph_intersect(&((t_sp *)sc->sp.obj)[0], ray);
 	sp0 = &((t_sp *)sc->sp.obj)[0];
 	sc->mlx.color = create_rgb(sp0->rgb[0], sp0->rgb[1], sp0->rgb[2]);
+	dprintf(2, "ray->hit x %f\ty %f\tz %f\n", ray->hit.x, ray->hit.y, ray->hit.z);
+	dprintf(2, "sp0->pos x %f\ty %f\tz %f\n", sp0->pos.x, sp0->pos.y, sp0->pos.z);
 	if (ray->dist < MAXFLOAT)
 	{
 		ray->hit_vec = substr_vec(&ray->hit, &sp0->pos);
+		exit(1);
 		norm_vector(&ray->hit_vec);
 		obj_color(sc, &sc->mlx.color, &ray->hit_vec, &ray->norm);
 	}
