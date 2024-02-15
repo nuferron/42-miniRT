@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mem_utils.c                                        :+:      :+:    :+:   */
+/*   translation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 20:47:10 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/14 23:35:01 by nzhuzhle         ###   ########.fr       */
+/*   Created: 2024/02/14 21:36:32 by nzhuzhle          #+#    #+#             */
+/*   Updated: 2024/02/14 21:41:45 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "input.h"
 
-/*It frees the structure pointers*/
-void	free_all(t_sc *sc)
+void	sph_translation(t_obj *obj, t_sc *sc)
 {
-	t_item	*temp;
-
-	while (sc->objs)
-	{
-		temp = sc->objs;
-		temp->obj_free(&temp->type);
-		sc->objs = temp->next;
-		free(temp);
-	}
+	translation(&sc->cam.pos, &obj->sp->pos);
 }
 
-void	sp_free(t_obj *obj)
+void	pl_translation(t_obj *obj, t_sc *sc)
 {
-	free(obj->sp);
+	translation(&sc->cam.pos, &obj->pl->pos);
 }
 
-void	pl_free(t_obj *obj)
+void	cy_translation(t_obj *obj, t_sc *sc)
 {
-	free(obj->pl);
-}
-
-void	cy_free(t_obj *obj)
-{
-	free(obj->cy);
+	translation(&sc->cam.pos, &obj->cy->pos);
 }

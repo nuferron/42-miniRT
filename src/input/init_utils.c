@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 21:10:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/07 17:02:12 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/14 23:23:05 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	set_rgb(int *rgb, char *line, int i)
 	return (1);
 }
 
-static void	translation(t_vec *new_origin, t_vec *p)
+void	translation(t_vec *new_origin, t_vec *p)
 {
 	p->x -= new_origin->x;
 	p->y -= new_origin->y;
@@ -102,23 +102,14 @@ static void	translation(t_vec *new_origin, t_vec *p)
 
 void	coord_transformation(t_sc *sc)
 {
-	int		i;
-	t_sp	*sp;
-	t_pl	*pl;
-	t_cy	*cy;
+	t_item	*obj;
 
 	translation(&sc->cam.pos, &sc->light.pos);
-	sp = sc->sp.obj;
-	pl = sc->pl.obj;
-	cy = sc->cy.obj;
-	i = -1;
-	while (++i < sc->sp.total)
-		translation(&sc->cam.pos, &sp->pos);
-	i = -1;
-	while (++i < sc->pl.total)
-		translation(&sc->cam.pos, &pl->pos);
-	i = -1;
-	while (++i < sc->cy.total)
-		translation(&sc->cam.pos, &cy->pos);
+	obj = sc->objs;
+	while (obj)
+	{
+		obj->trans(&(obj->type), sc);
+		obj = obj->next;
+	}
 	translation(&sc->cam.pos, &sc->cam.pos);
 }

@@ -1,42 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mem_utils.c                                        :+:      :+:    :+:   */
+/*   cylinder_intersect.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 20:47:10 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/14 23:35:01 by nzhuzhle         ###   ########.fr       */
+/*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
+/*   Updated: 2024/02/14 22:17:06 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-/*It frees the structure pointers*/
-void	free_all(t_sc *sc)
+void	cy_intersect(t_obj *obj, t_ray *ray)
 {
-	t_item	*temp;
-
-	while (sc->objs)
-	{
-		temp = sc->objs;
-		temp->obj_free(&temp->type);
-		sc->objs = temp->next;
-		free(temp);
-	}
-}
-
-void	sp_free(t_obj *obj)
-{
-	free(obj->sp);
-}
-
-void	pl_free(t_obj *obj)
-{
-	free(obj->pl);
-}
-
-void	cy_free(t_obj *obj)
-{
-	free(obj->cy);
+	printf("cylinder pointer %p, ray pointer %p\n", obj, ray);
 }

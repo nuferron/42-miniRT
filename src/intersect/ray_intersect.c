@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/15 11:23:53 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:26:02 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ void	obj_color(t_sc *sc, int *color, t_point *hit, t_vec *norm)
 /*
 void	all_intersect(t_sc *sc, t_ray *ray)
 {
-	t_sp	*sp0;
+	t_item	*obj;
 
+<<<<<<< HEAD
 	ft_dprintf(2, "all_intersect\n");
 	sph_intersect(&((t_sp *)sc->sp.obj)[0], ray);
 	sp0 = &((t_sp *)sc->sp.obj)[0];
