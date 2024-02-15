@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/15 11:26:17 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:00:51 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,12 +152,12 @@ typedef struct s_img
 
 typedef struct s_mlx
 {
-	t_img	img;
-	void	*init;
-	void	*win;
-	int		w;
-	int		h;
-	int		color;
+	t_img			img;
+	void			*init;
+	void			*win;
+	int				w;
+	int				h;
+	unsigned int	color;
 }	t_mlx;
 //	MLX AND IMAGE --------------------------------------------------/
 //  ----------------------------------------------------------------/
