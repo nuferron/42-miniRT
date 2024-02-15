@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/15 11:26:02 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:23:34 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ unsigned int	create_rgb(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-void	obj_color(t_sc *sc, int *color, t_point *hit, t_vec *norm)
+/*void	obj_color(t_sc *sc, int *color, t_point *hit, t_vec *norm)
 {
 	double	dot;
 	t_vec	hit_l;
@@ -56,6 +56,26 @@ void	obj_color(t_sc *sc, int *color, t_point *hit, t_vec *norm)
 	else
 		*color = *color + (sc->light.b * dot * sc->amb.ratio);
 }
+*/
+void	obj_color(t_sc *sc, t_hit *hit, unsigned int *color)
+{
+	double	dot;
+	t_vec	light_ray;
+
+	light_ray = substr_vec(&hit->p, &sc->light.pos);
+	dot = dot_prod(&light_ray, &hit->norm);
+	if (dot <= 0)
+	{
+		dprintf(1, "black: x %f\ty %f\tz %f\n", hit->p.x, hit->p.y, hit->p.z);
+		*color = 0x000000;
+	}
+	else
+	{
+		dprintf(1, "color: x %f\ty %f\tz %f\n", hit->p.x, hit->p.y, hit->p.z);
+		*color = *color + (sc->light.b * dot);
+	}
+}
+
 /*
 void	all_intersect(t_sc *sc, t_ray *ray)
 {
@@ -82,7 +102,7 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 		sc->mlx.color = 0x0000FF;
 }*/
 
-void	all_intersect(t_sc *sc, t_ray *ray)
+/*void	all_intersect(t_sc *sc, t_ray *ray)
 {
 	t_item	*obj;
 
@@ -96,11 +116,31 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 		sp_get_norm(ray->hit.obj->sp, ray);
 	if (ray->dist < MAXFLOAT)
 	{
-		ray->hit_vec = substr_vec(&ray->hit, &sp0->pos);
-		exit(1);
-		norm_vector(&ray->hit_vec);
-		obj_color(sc, &sc->mlx.color, &ray->hit_vec, &ray->norm);
+		//dprintf(2, "hit p: x %f\ty %f\tz %f\n", ray->hit.p.x, ray->hit.p.y, ray->hit.p.z);
+		int color = 0x00FF00;
+		obj_color(sc, &ray->hit, color);
 	}
 	else
 		sc->mlx.color = 0x0000FF;
+}*/
+
+void	all_intersect(t_sc *sc, t_ray *ray)
+{
+	t_item	*obj;
+
+	obj = sc->objs;
+	while (obj)
+	{
+		obj->intersect(&obj->type, ray);
+		if (ray->hit.type == 2)
+			sp_get_norm(ray->hit.obj->sp, ray);
+		if (ray->dist < MAXFLOAT)
+		{
+			sc->mlx.color = 0x00FF00;
+			obj_color(sc, &ray->hit, &sc->mlx.color);
+		}
+		else
+			sc->mlx.color = 0x0000FF;
+		obj = obj->next;
+	}
 }
