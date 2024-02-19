@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/02/14 23:06:07 by nzhuzhle         ###   ########.fr        #
+#    Updated: 2024/02/19 20:45:12 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ LIB = inc/libft/libft.a inc/ft_dprintf/libftprintf.a
 INC = inc/
 MLXFLAGS = -Linc/mlx -lmlx -framework OpenGL -framework AppKit
 COLUMNS = $(shell tput cols)
-TEST = test.rt
+TEST = tests/test.rt
 
 all: make_libs ${NAME}
 
