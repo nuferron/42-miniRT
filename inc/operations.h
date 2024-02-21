@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:27:20 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/21 21:27:24 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/21 21:43:31 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	unit_vector(t_vec *v, t_vec *n);	//normalizes vector v and saves it in n
 /* vector_utils2.c - vector operations: +/-  **************/
 t_vec	sum_vec(t_vec *a, t_vec *b);			// returns the sum of two vectors
 t_vec	substr_vec(t_vec *from, t_vec *what);	// returns the substruction of the vector "what" from the vector "from"
-t_vec	substr_new(t_vec *from, t_vec *what);
+void	substr_new(t_vec *from, t_vec *what);
 double	dist(t_point *point1, t_point *point2);	// returns a distance from the point1 to the point2
 void	norm_vector(t_vec *n); //normalizes vector n
 
