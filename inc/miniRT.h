@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/14 23:01:18 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:52:50 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include "structures.h"
 #include "operations.h"
 #include "intersections.h"
+#include "color.h"
 #include "mlx_rt.h"
 #include "libft/inc/libft.h"
 #include "ft_dprintf/inc/libftprintf.h"
