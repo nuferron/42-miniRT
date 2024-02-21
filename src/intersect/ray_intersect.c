@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/21 21:12:56 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/21 21:27:56 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,14 @@ unsigned int	phong_light(t_light *light, t_hit *hit)
 	float			s_fact;
 	unsigned int	specular;
 	t_vec			cam_hit;
-	if (dot_prod(&light->pos, &hit->norm) <= 0)
+	if (dot_prod(&light->pos, &hit->norm) < 0.2)
 		return (0);
 	reflex = mult_new(&hit->norm, 2 * dot_prod(&hit->norm, &light->pos));
 	reflex = substr_vec(&reflex, &light->pos);
 	unit_vector(&reflex, &reflex);
 	unit_vector(&hit->p, &cam_hit);
 	s_fact = pow(dot_prod(&reflex, &cam_hit), 100);
-	specular = 0;
-	if (s_fact > 0 && s_fact <= 1)
-		specular = color_x_fact(rgb_to_hex(light->rgb), s_fact);
+	specular = color_x_fact(rgb_to_hex(light->rgb), s_fact);
 	return (specular);
 }
 
@@ -83,6 +81,7 @@ void	obj_color(t_sc *sc, unsigned int *color, t_hit *hit)
 	color_x_fact(rgb_to_hex(sc->amb.rgb), sc->amb.ratio));
 	specular = phong_light(&l_cpy, hit);
 	*color = add_color(diffuse, specular);
+	//*color = diffuse;
 }
 
 void	all_intersect(t_sc *sc, t_ray *ray)
