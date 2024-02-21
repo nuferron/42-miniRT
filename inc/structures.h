@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/21 20:17:43 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/21 21:27:49 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_pl //PLANE
 
 typedef struct s_cy //CYLINDER
 {
-	t_point	pos;	//center point
+	t_point	pos;	//bottom point
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
 	float	r;		//radius
 	float	h;		//height

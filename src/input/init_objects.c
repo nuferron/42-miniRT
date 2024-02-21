@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/21 20:04:11 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/21 21:27:26 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ int	get_plane(char *line, int i, t_sc *sc)
   Returns 1 with fail and 0 with success*/
 int	get_cylinder(char *line, int i, t_sc *sc)
 {
-	t_cy	*cy;
 	t_item	*obj;
+	t_cy	*cy;
+	t_vec	temp;
 
 	obj = add_obj(sc->objs, sc);
 	cy = malloc(sizeof(t_cy));
@@ -94,6 +95,8 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 	skip_number(line, &i);
 	if (!set_rgb(cy->rgb, line, i))
 		return (1);
+	temp = mult_new(&cy->nov, cy->h / 2);
+	substr_new(&cy->pos, &temp);
 	obj->type.cy = cy;
 	obj->intersect = cy_intersect;
 	obj->trans = cy_translation;
