@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/21 21:05:53 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/21 21:12:56 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	ray_init(t_ray *ray)
 	ray->k1 = dot_prod(&ray->norm, &ray->norm);
 	ray->dist = MAXFLOAT;
 	ray->hit.obj = NULL;
-	ray->hit.type = 0;
-//	ray->hit.rec = false;
+	ray->hit.obst = false;
 }
 
 void	check_dist(t_point *p, t_ray *ray, t_item *obj, double dist)
@@ -30,7 +29,7 @@ void	check_dist(t_point *p, t_ray *ray, t_item *obj, double dist)
 	ray->dist = dist;
 	ray->hit.p = *p;
 	ray->hit.obj = obj;
-//	ray->hit.rec = true;
+	ray->hit.obst = true;
 }
 
 unsigned int	diffuse_light(t_light *light, t_hit *hit, unsigned int amb)
