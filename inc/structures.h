@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/19 19:17:05 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:26:23 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,19 @@ typedef struct s_hit
 	t_item	*obj;	// pointer to the winner object
 	int		*rgb;
 	int		type; 	// 0 - no obj, 1 - plane, 2 - sphere, 3 - cylinder, 4 - cone
-//	bool	rec; 	// 0 if not a record
+	bool	rec; 	// 0 if there is access to light
 }	t_hit;
 
 typedef struct s_ray
 {
+	t_hit	hit;	// info about the record hit
 	t_point	zero;	// the coordinates of the camera
 	t_vec	norm;	// the normalized ray vector
 	t_point	orig;	// point on the screen
+	t_point	p;		// variable - intersection point
+	double	t;		// variable - distance coefficient to the intersection point
 	double	k1;		// dot_prod(norm, norm)
 	double	dist;	// the minimal distance
-	t_hit	hit;
 }	t_ray;
 //	RAYS, HITS -----------------------------------------------------/
 //  ----------------------------------------------------------------/
@@ -73,6 +75,7 @@ typedef struct s_pl //PLANE
 {
 	t_point	pos;	//center point
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
+	float	prod;	// dot product of pos and nov
 	int		rgb[3];
 }	t_pl;
 

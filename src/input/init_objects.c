@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/19 18:56:26 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:58:51 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	get_plane(char *line, int i, t_sc *sc)
 	skip_space(line, &i);
 	if (!set_rgb(pl->rgb, line, i))
 		return (1);
+	pl->prod = dot_prod(&pl->pos, &pl->nov);
 	obj->type.pl = pl;
 	obj->intersect = pl_intersect;
 	obj->trans = pl_translation;
