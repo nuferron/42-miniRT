@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/21 15:25:47 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:38:48 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +33,16 @@ void	check_dist(t_point *p, t_ray *ray, t_item *obj, double dist)
 //	ray->hit.rec = true;
 }
 
-/*void	obj_color(t_sc *sc, t_hit *hit, unsigned int *color, int *tmp)
-{
-	t_vec	l_ray;
-	double	dot;
-	float	l_mod2;
-	float	col_bright;
-	
-	(void)tmp;
-	l_ray = substr_vec(&sc->light.pos, &hit->p);
-	unit_vector(&l_ray, &l_ray);
-	l_mod2 = l_ray.x * l_ray.x + l_ray.y * l_ray.y + l_ray.z * l_ray.z;
-	dot = dot_prod(&l_ray, &hit->norm);
-	if (dot <= 0)
-		col_bright = 0;
-	else
-		col_bright = (sc->light.b * dot * 500) / (4 * M_PI * l_mod2);
-	color_intensity(tmp, col_bright);
-	add_color(tmp, sc->amb.rgb);
-	multiply_color(tmp, sc->light.rgb);
-	*color = rgb_to_hex(tmp);
-}*/
-void	ambient_lightning(t_sc *sc, int *hit_rgb, int *final)
+/*void	ambient_lightning(t_sc *sc, int *hit_rgb, int *final)
 {
 	final[0] = sc->light.rgb[0];
 	final[1] = sc->light.rgb[1];
 	final[2] = sc->light.rgb[2];
 	color_intensity(final, sc->amb.ratio);
 	multiply_color(final, hit_rgb);
-}
+}*/
 
-void	diffuse_lightning(t_sc *sc, t_hit *hit, int *final)
+/*void	diffuse_lightning(t_sc *sc, t_hit *hit, int *final)
 {
 	float	k;
 	int		diffuse[3];
@@ -87,9 +66,24 @@ void	diffuse_lightning(t_sc *sc, t_hit *hit, int *final)
 	}
 	add_color(final, diffuse);
 	multiply_color(final, hit->rgb);
+}*/
+
+unsigned int	diffuse_light(t_light *light, t_hit *hit, unsigned int amb)
+{
+	float			d_fact;
+	unsigned int	d_color;
+
+	d_fact = dot_prod(&light->pos, &hit->norm);
+	if (d_fact > 0)
+	{
+		d_color = color_x_fact(rgb_to_hex(light->rgb), light->b * d_fact);
+	}
+	else
+		d_color = 0;
+	return (color_mult(rgb_to_hex(hit->rgb), add_color(amb, d_color)));
 }
 
-void	phong_lightning(t_sc *sc, t_hit *hit, int *final)
+/*void	phong_lightning(t_sc *sc, t_hit *hit, int *final)
 {
 	t_vec	reflected;
 	t_vec	l_ray;
@@ -107,16 +101,36 @@ void	phong_lightning(t_sc *sc, t_hit *hit, int *final)
 	specular[2] = sc->light.rgb[2];
 	color_intensity(specular, spec_fact);
 	add_color(final, specular);
-}
+}*/
 
-void	obj_color(t_sc *sc, unsigned int *color, t_hit *hit)
+/*void	obj_color(t_sc *sc, unsigned int *color, t_hit *hit)
 {
 	int	final_color[3];
 
+	light_hex = rgb_to_hex(sc->light.rgb);
 	ambient_lightning(sc, hit->rgb, final_color);
 	diffuse_lightning(sc, hit, final_color);
 	//phong_lightning();
 	*color = rgb_to_hex(final_color);
+}*/
+
+void	obj_color(t_sc *sc, unsigned int *color, t_hit *hit)
+{
+	unsigned int	ambient;
+	unsigned int	diffuse;
+	t_light			l_cpy;
+
+	l_cpy.pos = substr_vec(&sc->light.pos, &hit->p);
+	unit_vector(&l_cpy.pos, &l_cpy.pos);
+	l_cpy.b = sc->light.b;
+	l_cpy.rgb[0] = sc->light.rgb[0];
+	l_cpy.rgb[1] = sc->light.rgb[1];
+	l_cpy.rgb[2] = sc->light.rgb[2];
+	ambient = color_x_fact(color_mult(rgb_to_hex(sc->light.rgb), \
+			rgb_to_hex(hit->rgb)), sc->amb.ratio);
+	diffuse = diffuse_light(&l_cpy, hit,
+	color_x_fact(rgb_to_hex(sc->amb.rgb), sc->amb.ratio));
+	*color = diffuse;
 }
 
 void	all_intersect(t_sc *sc, t_ray *ray)
@@ -132,17 +146,8 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 	if (ray->dist < MAXFLOAT)
 	{
 		ray->hit.obj->get_norm(&ray->hit.obj->type, &ray->hit);
-		sc->mlx.color = 0x00FF00;
 		obj_color(sc, &sc->mlx.color, &ray->hit);
 	}
 	else
-	{
-		int	tmp[3];
-
-		tmp[0] = sc->amb.rgb[0];
-		tmp[1] = sc->amb.rgb[1];
-		tmp[2] = sc->amb.rgb[2];
-		color_intensity(tmp, sc->amb.ratio);
-		sc->mlx.color = rgb_to_hex(tmp);
-	}
+		sc->mlx.color = color_x_fact(rgb_to_hex(sc->amb.rgb), sc->amb.ratio);
 }
