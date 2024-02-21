@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/21 19:26:23 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:39:11 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_vars
 	t_vec	oc;		//	ray origin - sphere center
 	double	k2;		//	2 * dot product (oc, vo)
 	double	discr;	//	discriminant
-	double	t;
 }	t_vars;
 
 typedef struct s_item t_item;
