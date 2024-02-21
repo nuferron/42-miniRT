@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/15 12:27:46 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/20 22:02:40 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,64 +39,93 @@ void	memorize(t_obj *obj, t_ray *ray, int type)
 		ray->hit.rec = false;
 }
 
-unsigned int	create_rgb(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
-}
+	/*if (ray->hit.p.x >= -0.9 && ray->hit.p.x <= 0.1
+		&& ray->hit.p.y >= -0.9 && ray->hit.p.y <= 0.1
+		&& ray->hit.p.z >= 13.99 && ray->hit.p.z <= 14.01)
+		printf("hit x %f, y %f, z %f\n", ray->hit.p.x, ray->hit.p.y, ray->hit.p.z);*/
 
-/*void	obj_color(t_sc *sc, int *color, t_point *hit, t_vec *norm)
-{
-	double	dot;
-	t_vec	hit_l;
-
-	hit_l = substr_vec(hit, &sc->light.pos);
-	dot = dot_prod(&hit_l, norm);
-	if (dot <= 0)
-		*color = 0x000000;
-	else
-		*color = *color + (sc->light.b * dot * sc->amb.ratio);
-}
-*/
-void	obj_color(t_sc *sc, t_hit *hit, unsigned int *color)
+/*void	obj_color(t_sc *sc, t_hit *hit, unsigned int *color, int *tmp)
 {
 	double	dot;
 	t_vec	light_ray;
+	int		rgb[3];
 
-	light_ray = substr_vec(&hit->p, &sc->light.pos);
+	(void)tmp;
+	light_ray = substr_vec(&sc->light.pos, &hit->p);
+	unit_vector(&light_ray, &light_ray);
 	dot = dot_prod(&light_ray, &hit->norm);
+	//color_intensity(sc->amb.rgb, sc->amb.ratio);
 	if (dot <= 0)
 	{
-		dprintf(1, "black: x %f\ty %f\tz %f\n", hit->p.x, hit->p.y, hit->p.z);
-		*color = 0x000000;
+		rgb[0] = sc->amb.rgb[0];
+		rgb[1] = sc->amb.rgb[1];
+		rgb[2] = sc->amb.rgb[2];
+		// *color = rgb_to_hex(sc->amb.rgb[0], sc->amb.rgb[1], sc->amb.rgb[2]);
+		//printf("hit x %f, y %f, z %f\t", hit->p.x, hit->p.y, hit->p.z);
+		//printf("dot: %f\n", dot);
+		// *color = 0;
 	}
 	else
 	{
-		dprintf(1, "color: x %f\ty %f\tz %f\n", hit->p.x, hit->p.y, hit->p.z);
-		*color = *color + (sc->light.b * dot);
+		*color = 0x00ff00;
+		rgb[0] = tmp[0];
+		rgb[1] = tmp[1];
+		rgb[2] = tmp[2];
+		// *color = 0;
 	}
+	color_intensity(rgb, sc->light.b);
+	add_color(rgb, sc->amb.rgb);
+	multiply_color(rgb, sc->light.rgb);
+	*color = rgb_to_hex(rgb[0], rgb[1], rgb[2]);
+}*/
+
+/*void	obj_color(t_sc *sc, t_hit *hit, unsigned int *color, int *tmp)
+{
+	t_vec	l_ray;
+	double	dot;
+	float	l_mod2;
+	float	col_bright;
+	
+	(void)tmp;
+	l_ray = substr_vec(&sc->light.pos, &hit->p);
+	unit_vector(&l_ray, &l_ray);
+	l_mod2 = l_ray.x * l_ray.x + l_ray.y * l_ray.y + l_ray.z * l_ray.z;
+	dot = dot_prod(&l_ray, &hit->norm);
+	if (dot <= 0)
+		col_bright = 0;
+	else
+		col_bright = (sc->light.b * dot * 500) / (4 * M_PI * l_mod2);
+	color_intensity(tmp, col_bright);
+	add_color(tmp, sc->amb.rgb);
+	multiply_color(tmp, sc->light.rgb);
+	*color = rgb_to_hex(tmp);
+}*/
+void	ambient_lightning(t_sc *sc, int *tmp, unsigned int *color)
+{
+	int	rgb[3];
+
+	rgb[0] = sc->light.rgb[0];
+	rgb[1] = sc->light.rgb[1];
+	rgb[2] = sc->light.rgb[2];
+	color_intensity(rgb, sc->amb.ratio);
+	multiply_color(rgb, tmp);
+	*color = rgb_to_hex(rgb);
 }
 
-/*void	all_intersect(t_sc *sc, t_ray *ray)
+void	diffuse_lightning(t_sc *sc, t_hit *hit, int *tmp, unsigned int *color)
 {
-	t_item	*obj;
+	float	k;
+	t_vec	l_ray;
 
-	obj = sc->objs;
-	while (obj)
-	{
-		obj->intersect(&obj->type, ray);
-		obj = obj -> next;
-	}
-	if (ray->hit.type == 2)
-		sp_get_norm(ray->hit.obj->sp, ray);
-	if (ray->dist < MAXFLOAT)
-	{
-		//dprintf(2, "hit p: x %f\ty %f\tz %f\n", ray->hit.p.x, ray->hit.p.y, ray->hit.p.z);
-		int color = 0x00FF00;
-		obj_color(sc, &ray->hit, color);
-	}
-	else
-		sc->mlx.color = 0x0000FF;
-}*/
+	l_ray = substr_vec(&sc->light.pos, &hit->p);
+	unit_vector(&l_ray, &l_ray);
+	k = dot_prod(&l_ray, &hit_norm);
+}
+
+void	obj_color(t_sc *sc, unsigned int *color, int *tmp)
+{
+	ambient_lightning(sc, tmp, color);
+}
 
 void	all_intersect(t_sc *sc, t_ray *ray)
 {
@@ -108,12 +137,18 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 		obj->intersect(&obj->type, ray);
 		obj = obj->next;
 	}
-	if (ray->hit.type == 2)
+	if (ray->hit.type == 2){
 		sp_get_norm(ray->hit.obj->sp, ray);
+		//printf("x %f y %f z %f\n", ray->norm.x, ray->norm.y, ray->norm.z);
+	}
 	if (ray->dist < MAXFLOAT)
 	{
 		sc->mlx.color = 0x00FF00;
-		obj_color(sc, &ray->hit, &sc->mlx.color);
+		int tmp[3];
+		tmp[0] = 0;
+		tmp[1] = 255;
+		tmp[2] = 0;
+		obj_color(sc, &sc->mlx.color, tmp);
 	}
 	else
 		sc->mlx.color = 0x0000FF;
