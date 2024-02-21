@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:58:50 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/20 18:07:21 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:58:10 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	main(int argc, char **argv)
 	static t_sc	sc;
 
 	init_sc(&sc);
-	//printf("mlx %zu\ncam %zu\namb %zu\nli %zu\nit %zu\nscr %zu\n", sizeof(t_mlx), sizeof(t_cam), sizeof(t_amb), sizeof(t_light), sizeof(t_item), sizeof(t_screen));
 	if (check_input(argc, argv, &sc))
 		return (1);
 	coord_transformation(&sc);

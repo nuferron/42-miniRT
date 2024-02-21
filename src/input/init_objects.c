@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/14 23:21:18 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:56:26 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ int	get_sphere(char *line, int i, t_sc *sc)
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-
 	if (init_vec(&sp->pos, line, &i, 0))
 		return (1);
-
 	skip_space(line, &i);
 	if (!is_float(&line[i]) || line[i] == ',')
 		return (ft_dprintf(2, LINE, line), 1);
@@ -36,10 +34,10 @@ int	get_sphere(char *line, int i, t_sc *sc)
 	if (!set_rgb(sp->rgb, line, i))
 		return (1);
 	obj->type.sp = sp;
-//	exit(1);
 	obj->intersect = sph_intersect;
 	obj->trans = sph_translation;
 	obj->obj_free = sp_free;
+	obj->get_norm = sp_get_norm;
 	return (0);
 }
 
@@ -65,6 +63,7 @@ int	get_plane(char *line, int i, t_sc *sc)
 	obj->intersect = pl_intersect;
 	obj->trans = pl_translation;
 	obj->obj_free = pl_free;
+	obj->get_norm = pl_get_norm;
 	return (0);
 }
 
@@ -97,6 +96,7 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 	obj->intersect = cy_intersect;
 	obj->trans = cy_translation;
 	obj->obj_free = cy_free;
+	obj->get_norm = cy_get_norm;
 	return (0);
 }
 
