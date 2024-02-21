@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/21 12:46:40 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:25:47 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,25 @@ void	diffuse_lightning(t_sc *sc, t_hit *hit, int *final)
 	multiply_color(final, hit->rgb);
 }
 
-/*void	phong_lightning(t_sc *sc, t_hit *hit, int *final)
+void	phong_lightning(t_sc *sc, t_hit *hit, int *final)
 {
+	t_vec	reflected;
+	t_vec	l_ray;
+	int		specular[3];
+	float	spec_fact;
 
-}*/
+	l_ray = substr_vec(&sc->light.pos, &hit->p);
+	unit_vector(&l_ray, &l_ray);
+	reflected = mult_new(&hit->norm, 2 * dot_prod(&hit->norm, &l_ray));
+	reflected = mult_vec(&reflected, &l_ray);
+	unit_vector(&reflected, &reflected);
+	spec_fact = dot_prod(&reflected, &hit->norm);
+	specular[0] = sc->light.rgb[0];
+	specular[1] = sc->light.rgb[1];
+	specular[2] = sc->light.rgb[2];
+	color_intensity(specular, spec_fact);
+	add_color(final, specular);
+}
 
 void	obj_color(t_sc *sc, unsigned int *color, t_hit *hit)
 {
@@ -100,6 +115,7 @@ void	obj_color(t_sc *sc, unsigned int *color, t_hit *hit)
 
 	ambient_lightning(sc, hit->rgb, final_color);
 	diffuse_lightning(sc, hit, final_color);
+	//phong_lightning();
 	*color = rgb_to_hex(final_color);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:18:22 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/20 21:50:31 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:01:56 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,22 @@ void	multiply_color(int *color, int *mult)
 	color[1] = color[1] * mult[1] / 255;
 	color[2] = color[2] * mult[2] / 255;
 	rerange_rgb(color);
+}
+
+void	rerange_hex(unsigned int *hex)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = (*hex >> 16) & 0xff;
+	g = (*hex >> 8) & 0xff;
+	b = *hex & 0xff;
+	if (r > 0xff)
+		r = 0xff;
+	if (g > 0xff)
+		g = 0xff;
+	if (b > 0xff)
+		b = 0xff;
+	*hex = (r << 16) | (g << 8) | b;
 }
