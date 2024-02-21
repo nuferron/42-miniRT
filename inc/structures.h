@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/21 19:39:11 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/21 20:17:43 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ typedef struct s_hit
 	t_vec	norm;	// normalized vector of the hit
 	t_item	*obj;	// pointer to the winner object
 	int		*rgb;
-	int		type; 	// 0 - no obj, 1 - plane, 2 - sphere, 3 - cylinder, 4 - cone
-	bool	rec; 	// 0 if there is access to light
+	bool	obst; 	// obstices 0 if there is access to light
 }	t_hit;
 
 typedef struct s_ray

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/21 19:38:48 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/21 20:18:43 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	ray_init(t_ray *ray)
 	ray->k1 = dot_prod(&ray->norm, &ray->norm);
 	ray->dist = MAXFLOAT;
 	ray->hit.obj = NULL;
-	ray->hit.type = 0;
-//	ray->hit.rec = false;
+	ray->hit.obst = false;
 }
 
 void	check_dist(t_point *p, t_ray *ray, t_item *obj, double dist)
@@ -30,7 +29,7 @@ void	check_dist(t_point *p, t_ray *ray, t_item *obj, double dist)
 	ray->dist = dist;
 	ray->hit.p = *p;
 	ray->hit.obj = obj;
-//	ray->hit.rec = true;
+	ray->hit.obst = true;
 }
 
 /*void	ambient_lightning(t_sc *sc, int *hit_rgb, int *final)
@@ -149,5 +148,5 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 		obj_color(sc, &sc->mlx.color, &ray->hit);
 	}
 	else
-		sc->mlx.color = color_x_fact(rgb_to_hex(sc->amb.rgb), sc->amb.ratio);
+		sc->mlx.color = 0;
 }
