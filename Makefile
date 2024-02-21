@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/02/19 20:45:12 by nuferron         ###   ########.fr        #
+#    Updated: 2024/02/20 16:51:08 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS_UTILS = num_utils.c utils.c mem_utils.c math_utils.c
 SRCS_OPER = vector_utils.c vector_utils2.c vector_utils3.c
 SRCS_INTERSEC = plane_intersect.c sphere_intersect.c ray_intersect.c \
 cylinder_intersect.c
-SRCS_SCREEN = screen.c
+SRCS_SCREEN = screen.c color.c
 
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
 		$(addprefix utils/,$(SRCS_UTILS)) \
