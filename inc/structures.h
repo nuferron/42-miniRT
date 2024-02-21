@@ -156,12 +156,12 @@ typedef struct s_img
 
 typedef struct s_mlx
 {
-	t_img	img;
-	void	*init;
-	void	*win;
-	int		w;
-	int		h;
-	int		color;
+	t_img			img;
+	void			*init;
+	void			*win;
+	int				w;
+	int				h;
+	unsigned int	color;
 }	t_mlx;
 //	MLX AND IMAGE --------------------------------------------------/
 //  ----------------------------------------------------------------/
