@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/20 22:20:24 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:40:34 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item)
 {
 	t_vars	var;
-	t_point	p;
+//	t_point	p;
 	t_sp	*sp;
 //	t_point ex;
 
@@ -28,17 +28,17 @@ void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	if (var.discr < 0)
 		return ; // no intersections
 	var.discr = sqrt(var.discr);
-	var.t = (-var.k2 + var.discr) / (2 * ray->k1);
-	if (var.t > 0) // what do we do if the intrsection is in the zero point???
+	ray->t = (-var.k2 + var.discr) / (2 * ray->k1);
+	if (ray->t > 0) // what do we do if the intrsection is in the zero point???
 	{
-		p = mult_new(&ray->norm, var.t);
-		check_dist(&p, ray, item, dist(&p, &ray->zero));
+		ray->p = mult_new(&ray->norm, ray->t);
+		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
-	var.t = (-var.k2 - var.discr) / (2 * ray->k1);
-	if (var.discr && var.t > 0)
+	ray->t = (-var.k2 - var.discr) / (2 * ray->k1);
+	if (var.discr && ray->t > 0)
 	{
-		p = mult_new(&ray->norm, var.t);
-		check_dist(&p, ray, item, dist(&p, &ray->zero));
+		ray->p = mult_new(&ray->norm, ray->t);
+		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
 /*	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
