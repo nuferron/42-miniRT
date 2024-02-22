@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/21 21:27:49 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:29:28 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_hit
 	t_vec	norm;	// normalized vector of the hit
 	t_item	*obj;	// pointer to the winner object
 	int		*rgb;
-	bool	obst; 	// obstices 0 if there is access to light
+	bool	obst; 	// obsticals 0 if there is access to light
 }	t_hit;
 
 typedef struct s_ray
@@ -83,6 +83,7 @@ typedef struct s_cy //CYLINDER
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
 	float	r;		//radius
 	float	h;		//height
+	float	m[2];	//solution to count the normal
 	int		rgb[3];
 }	t_cy;
 
