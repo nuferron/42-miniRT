@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:27:20 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/21 21:43:31 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:22:35 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ t_vec	mult_vec(t_vec *v1, t_vec *v2);		// returns a the vector, that is a multip
 t_vec	div_new(t_vec *v, double *factor);	// returns a the vector v divided by the float "factor"
 void	div_fac(t_vec *v, double *factor);	// changes the vector v dividing it by a factor 
 /****************************************************/
+t_vec	opp_vec(t_vec *v);
 
 #endif
