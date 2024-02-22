@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:43:51 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/12 11:03:18 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:02:48 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,3 @@ void	throw_rays(t_sc *sc, t_screen *pic)
 	ray_init(&ray);
 	all_intersect(sc, &ray);
 }
-
-/*
-int main()
-{
-	t_sc sc;
-	t_vec	nx;
-	t_vec	ny;
-	
-	sc.screen.center.x = 0;
-	sc.screen.center.y = 0;
-	sc.screen.center.z = 150;
-	sc.screen.pix_rat = 0.5;
-	sc.screen.width = 5;
-	nx.x = 1;
-	nx.y = 0;
-	nx.z = 0;
-	ny.x = 0;
-	ny.y = 1;
-	ny.z = 0;
-	throw_rays(&sc, &nx, &ny);
-}*/
