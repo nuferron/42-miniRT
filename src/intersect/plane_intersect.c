@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:28:21 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/21 19:54:05 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:29:52 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	pl_get_norm(t_obj *pl, t_hit *hit)
 {
 	hit->norm = pl->pl->nov;
 	hit->rgb = pl->pl->rgb;
+	hit->type = pla;
 //	printf("plane pointer %p, ray pointer %p\n", pl, hit);
 }

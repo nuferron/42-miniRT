@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/21 19:40:34 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:08:02 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void	sp_get_norm(t_obj *sp, t_hit *hit)
 	hit->norm = substr_vec(&hit->p, &sp->sp->pos);
 	norm_vector(&hit->norm);
 	hit->rgb = sp->sp->rgb;
+	hit->type = sph;
 //	printf("r: %i, g: %i\n", hit->rgb[0], hit->rgb[1]);
 }
