@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/21 21:27:26 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:46:08 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	get_sphere(char *line, int i, t_sc *sc)
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&sp->pos, line, &i, 0))
+	if (init_vec(&sp->pos, line, &i))
 		return (1);
 	skip_space(line, &i);
 	if (!is_float(&line[i]) || line[i] == ',')
@@ -53,8 +53,8 @@ int	get_plane(char *line, int i, t_sc *sc)
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&pl->pos, line, &i, 0)
-		|| init_vec(&pl->nov, line, &i, 0))
+	if (init_vec(&pl->pos, line, &i)
+		|| init_vec(&pl->nov, line, &i))
 		return (1);
 	skip_space(line, &i);
 	if (!set_rgb(pl->rgb, line, i))
@@ -82,8 +82,8 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&cy->pos, line, &i, 0)
-		|| init_vec(&cy->nov, line, &i, 0))
+	if (init_vec(&cy->pos, line, &i)
+		|| init_vec(&cy->nov, line, &i))
 		return (1);
 	skip_space(line, &i);
 	cy->r = check_range(line, 0, i) / 2;
@@ -113,15 +113,10 @@ t_item	*add_obj(t_item *item, t_sc *sc)
 	ret = ft_calloc(1, sizeof(t_item));
 	if (!ret)
 		exit(ft_dprintf(2, MEM));
-//	printf("[ADD OBJ] new item pointer: %p\n", ret);
 	ret->next = NULL;
 	if (!item)
 		sc->objs = ret;
 	else
 		item_lstlast(item)->next = ret;
-	/*ft_memmove(ret, item->obj, (item->total * item->size));
-	free(item->obj);
-	item->obj = ret;
-	item->total++;*/
 	return (ret);
 }

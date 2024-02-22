@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:04:16 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/14 23:03:56 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:45:51 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_item	*add_obj(t_item *item, t_sc *sc);
 
 /* init_utils.c - INITIALIZE STRUCTS VARIABLES */
 float	check_range(char *line, char type, int i);
-int		init_vec(t_vec *vec, char *line, int *i, char t);
+int		init_vec(t_vec *vec, char *line, int *i);
 int		set_rgb(int *rgb, char *line, int i);
 void	translation(t_vec *new_origin, t_vec *p);
 // void	coord_transformation(t_sc *sc); - is in this file

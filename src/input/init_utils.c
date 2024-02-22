@@ -6,31 +6,35 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 21:10:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/19 19:29:52 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:47:30 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
 /*It initializes a variable of type t_vec*/
-int	init_vec(t_vec *vec, char *line, int *i, char t)
+int	init_vec(t_vec *vec, char *line, int *i)
 {
 	skip_space(line, i);
-	vec->x = check_range(line, t, *i);
-	if (vec->x == -2)
-		return (1);
+	if (!line[*i])
+		return (ft_dprintf(2, PARAM, line), -2);
+	if (!is_float(&line[*i]) || line[*i] == ',')
+		return (ft_dprintf(2, LINE, line), -2);
+	vec->x = ft_atof(&line[*i]);
 	while (line[*i] && line[*i] != ',')
 		(*i)++;
-	(*i)++;
-	vec->y = check_range(line, t, *i);
-	if (vec->y == -2)
-		return (1);
+	if (!line[(*i)++])
+		return (ft_dprintf(2, PARAM, line), -2);
+	if (!is_float(&line[*i]) || line[*i] == ',')
+		return (ft_dprintf(2, LINE, line), -2);
+	vec->y = ft_atof(&line[*i]);
 	while (line[*i] && line[*i] != ',')
 		(*i)++;
-	(*i)++;
-	vec->z = check_range(line, t, *i);
-	if (vec->z == -2)
-		return (1);
+	if (!line[(*i)++])
+		return (ft_dprintf(2, PARAM, line), -2);
+	if (!is_float(&line[*i]) || line[*i] == ',')
+		return (ft_dprintf(2, LINE, line), -2);
+	vec->z = ft_atof(&line[*i]);
 	while (line[*i] && !is_whitespace(line[*i]))
 		(*i)++;
 	if (!line[*i])
@@ -40,7 +44,7 @@ int	init_vec(t_vec *vec, char *line, int *i, char t)
 
 /*it checks if the range is correct. If it is, it returns the value,
   otherwise, it returns -2.
-  a=amb.ratio / f=cam.fov / c=*rgb / n=*nov */
+  a=amb.ratio / f=cam.fov / c=rgb */
 float	check_range(char *line, char type, int i)
 {
 	float	rg[2];
@@ -52,9 +56,7 @@ float	check_range(char *line, char type, int i)
 		return (ft_dprintf(2, LINE, line), -2);
 	rg[0] = 0.0;
 	rg[1] = 1.0;
-	if (type == 'n')
-		rg[0] = -1.0;
-	else if (type == 'f')
+	if (type == 'f')
 		rg[1] = 180;
 	else if (type == 'c')
 		rg[1] = 255;
