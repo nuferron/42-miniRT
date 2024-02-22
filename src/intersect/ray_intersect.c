@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/21 21:27:56 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:57:03 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,10 @@ void	check_dist(t_point *p, t_ray *ray, t_item *obj, double dist)
 	ray->hit.obst = true;
 }
 
-unsigned int	diffuse_light(t_light *light, t_hit *hit, unsigned int amb)
+unsigned int	diffuse_light(t_light *light, t_hit *hit, unsigned int amb, float d_fact)
 {
-	float			d_fact;
 	unsigned int	d_color;
 
-	d_fact = dot_prod(&light->pos, &hit->norm);
 	if (d_fact > 0)
 		d_color = color_x_fact(rgb_to_hex(light->rgb), light->b * d_fact);
 	else
@@ -45,43 +43,46 @@ unsigned int	diffuse_light(t_light *light, t_hit *hit, unsigned int amb)
 	return (color_mult(rgb_to_hex(hit->rgb), add_color(amb, d_color)));
 }
 
-unsigned int	phong_light(t_light *light, t_hit *hit)
+unsigned int	phong_light(t_light *light, t_hit *hit, float dot)
 {
 	t_vec			reflex;
 	float			s_fact;
 	unsigned int	specular;
 	t_vec			cam_hit;
-	if (dot_prod(&light->pos, &hit->norm) < 0.2)
-		return (0);
-	reflex = mult_new(&hit->norm, 2 * dot_prod(&hit->norm, &light->pos));
+
+	reflex = mult_new(&hit->norm, 2 * dot);
 	reflex = substr_vec(&reflex, &light->pos);
 	unit_vector(&reflex, &reflex);
 	unit_vector(&hit->p, &cam_hit);
-	s_fact = pow(dot_prod(&reflex, &cam_hit), 100);
+	s_fact = pow(dot_prod(&reflex, &cam_hit), 500);
 	specular = color_x_fact(rgb_to_hex(light->rgb), s_fact);
 	return (specular);
 }
 
-void	obj_color(t_sc *sc, unsigned int *color, t_hit *hit)
+void	obj_color(t_amb *amb, t_light light, unsigned int *color, t_hit *hit)
 {
 	unsigned int	ambient;
 	unsigned int	diffuse;
-	unsigned int	specular;
-	t_light			l_cpy;
+	float			dot;
 
-	l_cpy.pos = substr_vec(&sc->light.pos, &hit->p);
-	unit_vector(&l_cpy.pos, &l_cpy.pos);
-	l_cpy.b = sc->light.b;
-	l_cpy.rgb[0] = sc->light.rgb[0];
-	l_cpy.rgb[1] = sc->light.rgb[1];
-	l_cpy.rgb[2] = sc->light.rgb[2];
-	ambient = color_x_fact(color_mult(rgb_to_hex(sc->light.rgb), \
-			rgb_to_hex(hit->rgb)), sc->amb.ratio);
-	diffuse = diffuse_light(&l_cpy, hit,
-	color_x_fact(rgb_to_hex(sc->amb.rgb), sc->amb.ratio));
-	specular = phong_light(&l_cpy, hit);
-	*color = add_color(diffuse, specular);
-	//*color = diffuse;
+	light.pos = substr_vec(&light.pos, &hit->p);
+	unit_vector(&light.pos, &light.pos);
+	dot = dot_prod(&light.pos, &hit->norm);
+	if (hit->type == pla && dot < 0)
+	{
+		hit->norm = opp_vec(&hit->norm);
+		dot = -dot;
+	}
+	ambient = color_x_fact(color_mult(rgb_to_hex(light.rgb), \
+			rgb_to_hex(hit->rgb)), amb->ratio);
+	diffuse = diffuse_light(&light, hit, 
+			color_x_fact(rgb_to_hex(amb->rgb), amb->ratio), dot);
+	if (dot_prod(&light.pos, &hit->norm) > 0.2)
+	{
+		*color = add_color(diffuse, phong_light(&light, hit, dot));
+	}
+	else
+		*color = diffuse;
 }
 
 void	all_intersect(t_sc *sc, t_ray *ray)
@@ -97,7 +98,7 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 	if (ray->dist < MAXFLOAT)
 	{
 		ray->hit.obj->get_norm(&ray->hit.obj->type, &ray->hit);
-		obj_color(sc, &sc->mlx.color, &ray->hit);
+		obj_color(&sc->amb, sc->light, &sc->mlx.color, &ray->hit);
 	}
 	else
 		sc->mlx.color = 0;
