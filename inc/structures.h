@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/21 21:27:49 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:06:40 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define STRUCTURES_H
 
 #include "mlx_rt.h"
+
+enum	e_type
+{
+	sph = 0,
+	pla = 1,
+	cyl = 2
+};
 
 /* Structure for coordinates ("absolute" or normalized) */
 typedef struct s_vec
@@ -39,11 +46,12 @@ typedef struct s_vars
 typedef struct s_item t_item;
 typedef struct s_hit
 {
-	t_point	p;		// the minimal point of intersection
-	t_vec	norm;	// normalized vector of the hit
-	t_item	*obj;	// pointer to the winner object
-	int		*rgb;
-	bool	obst; 	// obstices 0 if there is access to light
+	t_point		p;		// the minimal point of intersection
+	t_vec		norm;	// normalized vector of the hit
+	t_item		*obj;	// pointer to the winner object
+	int			*rgb;
+	bool		obst; 	// obstices 0 if there is access to light
+	enum e_type	type;
 }	t_hit;
 
 typedef struct s_ray
