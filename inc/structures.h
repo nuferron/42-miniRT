@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/22 19:06:40 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:00:05 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_cy //CYLINDER
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
 	float	r;		//radius
 	float	h;		//height
+	float	m[2];	//solution to count the normal
 	int		rgb[3];
 }	t_cy;
 

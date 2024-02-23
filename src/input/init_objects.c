@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/22 21:46:08 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:59:24 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	get_sphere(char *line, int i, t_sc *sc)
 
 	obj = add_obj(sc->objs, sc);
 	sp = malloc(sizeof(t_sp));
+	if (!sp)
+		exit(ft_dprintf(2, MEM));
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
@@ -50,6 +52,8 @@ int	get_plane(char *line, int i, t_sc *sc)
 
 	obj = add_obj(sc->objs, sc);
 	pl = malloc(sizeof(t_pl));
+	if (!pl)
+		exit(ft_dprintf(2, MEM));
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
@@ -79,6 +83,8 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 
 	obj = add_obj(sc->objs, sc);
 	cy = malloc(sizeof(t_cy));
+	if (!cy)
+		exit(ft_dprintf(2, MEM));
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
@@ -95,8 +101,11 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 	skip_number(line, &i);
 	if (!set_rgb(cy->rgb, line, i))
 		return (1);
+	norm_vector(&cy->nov);
 	temp = mult_new(&cy->nov, cy->h / 2);
-	substr_new(&cy->pos, &temp);
+	//printf("coord cyl before: %f, %f, %f\n", cy->pos.x, cy->pos.y, cy->pos.z);
+	cy->pos = substr_vec(&cy->pos, &temp);
+	//printf("coord cyl after: %f, %f, %f\n", cy->pos.x, cy->pos.y, cy->pos.z);
 	obj->type.cy = cy;
 	obj->intersect = cy_intersect;
 	obj->trans = cy_translation;
