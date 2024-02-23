@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:57:27 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/16 17:25:01 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/14 22:03:12 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,13 @@ void	skip_number(char *line, int *i)
 		if (line[*i] == '.')
 			(*i)++;
 	}
+}
+
+t_item	*item_lstlast(t_item *lst)
+{
+	if (!lst)
+		return (lst);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
 }

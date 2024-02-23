@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/11 21:04:49 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:52:50 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include "structures.h"
 #include "operations.h"
 #include "intersections.h"
+#include "color.h"
 #include "mlx_rt.h"
 #include "libft/inc/libft.h"
 #include "ft_dprintf/inc/libftprintf.h"
@@ -35,12 +36,16 @@ void	coord_transformation(t_sc *sc);
 
 /* MEMORY UTILS */
 void	free_all(t_sc *sc);
-void	add_obj(t_item *item);
+void	sp_free(t_obj *obj);
+void	pl_free(t_obj *obj);
+void	cy_free(t_obj *obj);
 
 /* UTILS */
-int		is_float(char *str);
+int		is_float(char *str); //not in utils
 void	skip_space(char *line, int *i);
 void	skip_number(char *line, int *i);
+t_item	*item_lstlast(t_item *lst);
+
 
 /* MATH UTILS */
 double	exp_n(double b, int n);

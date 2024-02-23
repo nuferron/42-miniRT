@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/02 00:55:18 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/09 22:07:51 by nuferron         ###   ########.fr       */
+/*   Created: 2024/02/21 10:51:08 by nuferron          #+#    #+#             */
+/*   Updated: 2024/02/22 18:58:54 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef COLOR_H
+# define COLOR_H
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
-{
-	t_list	*aux;
-	t_list	*tmp;
+unsigned int	rgb_to_hex(int *rgb);
+unsigned int	add_color(unsigned int c1, unsigned int c2);
+unsigned int	color_mult(unsigned int c1, unsigned int c2);
+unsigned int	color_x_fact(unsigned int c, float n);
 
-	if (!lst)
-		return ;
-	aux = *lst;
-	while (aux)
-	{
-		del(aux->content);
-		tmp = aux->next;
-		free(aux);
-		aux = tmp;
-	}
-	*lst = NULL;
-}
+#endif

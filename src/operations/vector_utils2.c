@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 21:44:54 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/12 11:53:26 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:52:41 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ t_vec	substr_vec(t_vec *from, t_vec *what)
 	return (res);
 }
 
+/* from - is the vector from which you are substructing
+what - is a vector which you are substructing 
+returns a resulting vector*/
+void	substr_new(t_vec *from, t_vec *what)
+{
+	from->x = from->x - what->x;
+	from->y = from->y - what->y;
+	from->z = from->z - what->z;
+}
+
 /* returns the distance from point p1 to point p2*/
 double	dist(t_point *p1, t_point *p2)
 {
@@ -43,4 +53,14 @@ double	dist(t_point *p1, t_point *p2)
 
 	temp = substr_vec(p1, p2);
 	return (vec_mod(&temp));
+}
+
+void	norm_vector(t_vec *n)
+{
+	double	mod;
+
+	mod = vec_mod(n);
+	n->x = n->x / mod;
+	n->y = n->y / mod;
+	n->z = n->z / mod;
 }

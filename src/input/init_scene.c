@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:37:09 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/12 11:08:06 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:45:25 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	get_camera(char *line, int i, t_cam *cam)
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&cam->pos, line, &i, 0)
-		|| init_vec(&cam->nov, line, &i, 'n'))
+	if (init_vec(&cam->pos, line, &i)
+		|| init_vec(&cam->nov, line, &i))
 		return (1);
 	skip_space(line, &i);
 	cam->fov = check_range(line, 'f', i);
@@ -60,7 +60,7 @@ int	get_light(char *line, int i, t_light *light)
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&light->pos, line, &i, 0))
+	if (init_vec(&light->pos, line, &i))
 		return (1);
 	skip_space(line, &i);
 	light->b = check_range(line, 'b', i);

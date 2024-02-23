@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/12 11:09:21 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:16:37 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ static int	check_content(t_sc *sc, char *line)
 	else if (!ft_strncmp(element, "L", 2))
 		return (get_light(line, ++i, &sc->light));
 	else if (!ft_strncmp(element, "sp", 3))
-		return (get_sphere(line, i + 2, &sc->sp));
+		return (get_sphere(line, i + 2, sc));
 	else if (!ft_strncmp(element, "pl", 3))
-		return (get_plane(line, i + 2, &sc->pl));
+		return (get_plane(line, i + 2, sc));
 	else if (!ft_strncmp(element, "cy", 3))
-		return (get_cylinder(line, i + 2, &sc->cy));
+		return (get_cylinder(line, i + 2, sc));
 	else
 		return (ft_dprintf(2, ELEM, element), 1);
 	return (0);
