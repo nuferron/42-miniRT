@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/23 15:37:01 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:05:23 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ typedef struct s_light
 	t_point	pos;	//center point
 	float	b;		//light brightness ratio [0.0 - 1.0]
 	int		rgb[3];	//(bonus)
+	struct s_light	*next;
 }	t_light;
 //	SCENE SET UP ---------------------------------------------------/
 //  ----------------------------------------------------------------/
