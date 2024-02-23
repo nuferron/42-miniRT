@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:37:09 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/22 21:45:25 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:24:59 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,14 @@ int	get_light(char *line, int i, t_light *light)
 		return (1);
 	while (line[i] && !is_whitespace(line[i]) && line[i] != ',')
 		i++;
-	if (!set_rgb(light->rgb, line, i))
+	skip_space(line, &i);
+	if (!line[i])
+	{
+		light->rgb[0] = LIGHT[0];
+		light->rgb[1] = LIGHT[1];
+		light->rgb[2] = LIGHT[2];
+	}
+	else if (!set_rgb(light->rgb, line, i))
 		return (1);
 	return (0);
 }

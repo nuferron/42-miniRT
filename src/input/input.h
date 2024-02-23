@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:04:16 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/22 20:45:51 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:01:14 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define INPUT_H
 
 # include "miniRT.h"
+
+#define LIGHT (int[3]){128,0,128}
 
 /* CHECKING INPUT + INITIALIZING STRUCTS */
 /* init_scene.c */
