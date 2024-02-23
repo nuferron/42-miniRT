@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:51:08 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/23 18:28:01 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/23 20:13:32 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ unsigned int	rgb_to_hex(int *rgb);
 unsigned int	add_color(unsigned int c1, unsigned int c2);
 unsigned int	color_mult(unsigned int c1, unsigned int c2);
 unsigned int	color_x_fact(unsigned int c, float n);
+unsigned int	color_mean(unsigned int c1, unsigned int c2);
 
 #endif

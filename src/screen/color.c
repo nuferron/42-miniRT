@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:18:22 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/23 18:32:04 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/23 20:13:42 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	obj_color(t_amb *amb, t_light light, unsigned int *color, t_hit *hit)
 		hit->norm = opp_vec(&hit->norm);
 		dot = -dot;
 	}
-	ambient = color_x_fact(color_mult(rgb_to_hex(light.rgb), \
+	ambient = color_x_fact(color_mult(rgb_to_hex(light.rgb),
 			rgb_to_hex(hit->rgb)), amb->ratio);
 	diffuse = diffuse_light(&light, hit,
 			color_x_fact(rgb_to_hex(amb->rgb), amb->ratio), dot);
-		*color = diffuse;
+	*color = color_mean(diffuse, ambient);
 }
