@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/23 18:31:18 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/23 20:48:08 by nuferron         ###   ########.fr       */
 /*   Updated: 2024/02/12 21:55:32 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -47,7 +47,7 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 	if (ray->dist < MAXFLOAT)
 	{
 		ray->hit.obj->get_norm(&ray->hit.obj->type, &ray->hit);
-		obj_color(&sc->amb, sc->light, &sc->mlx.color, &ray->hit);
+		obj_color(&sc->amb, &sc->light, &sc->mlx.color, &ray->hit);
 	}
 	else
 		sc->mlx.color = 0;
