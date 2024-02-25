@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:37:09 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/12 11:08:06 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/23 20:58:37 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	get_camera(char *line, int i, t_cam *cam)
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&cam->pos, line, &i, 0)
-		|| init_vec(&cam->nov, line, &i, 'n'))
+	if (init_vec(&cam->pos, line, &i)
+		|| init_vec(&cam->nov, line, &i))
 		return (1);
 	skip_space(line, &i);
 	cam->fov = check_range(line, 'f', i);
@@ -53,14 +53,14 @@ int	get_camera(char *line, int i, t_cam *cam)
 }
 
 /*It sets all t_ligth variables. Returns 1 with fail and 0 with success*/
-int	get_light(char *line, int i, t_light *light)
+/*int	get_light(char *line, int i, t_light *light)
 {
 	if (light->b != -1)
 		return (ft_dprintf(2, REPE, "L"), 1);
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&light->pos, line, &i, 0))
+	if (init_vec(&light->pos, line, &i))
 		return (1);
 	skip_space(line, &i);
 	light->b = check_range(line, 'b', i);
@@ -68,7 +68,53 @@ int	get_light(char *line, int i, t_light *light)
 		return (1);
 	while (line[i] && !is_whitespace(line[i]) && line[i] != ',')
 		i++;
-	if (!set_rgb(light->rgb, line, i))
+	skip_space(line, &i);
+	if (!line[i])
+	{
+		light->rgb[0] = LIGHT[0];
+		light->rgb[1] = LIGHT[1];
+		light->rgb[2] = LIGHT[2];
+	}
+	else if (!set_rgb(light->rgb, line, i))
+		return (1);
+	return (0);
+}*/
+
+static t_light	*add_light(t_light *first)
+{
+	t_light	*last;
+	t_light	*new;
+
+	last = first;
+	new = ft_calloc(1, sizeof(t_light));
+	if (!new)
+		exit(ft_dprintf(2, MEM));
+	while (last->next)
+		last = last->next;
+	last->next = new;
+	return (new);
+}
+
+int	get_light(char *line, int i, t_light *light)
+{
+	t_light	*last;
+
+	if (light->b != -1)
+		last = add_light(light);
+	else
+		last = light;
+	skip_space(line, &i);
+	if (!line[i])
+		return (ft_dprintf(2, LINE, line), 1);
+	if (init_vec(&last->pos, line, &i))
+		return (1);
+	skip_space(line, &i);
+	last->b = check_range(line, 'b', i);
+	if (last->b == -2)
+		return (1);
+	while (line[i] && !is_whitespace(line[i]) && line[i] != ',')
+		i++;
+	if (!set_rgb(last->rgb, line, i))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/02/20 16:51:08 by nuferron         ###   ########.fr        #
+#    Updated: 2024/02/23 18:27:00 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS_UTILS = num_utils.c utils.c mem_utils.c math_utils.c
 SRCS_OPER = vector_utils.c vector_utils2.c vector_utils3.c
 SRCS_INTERSEC = plane_intersect.c sphere_intersect.c ray_intersect.c \
 cylinder_intersect.c
-SRCS_SCREEN = screen.c color.c
+SRCS_SCREEN = screen.c color.c color_utils.c
 
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
 		$(addprefix utils/,$(SRCS_UTILS)) \
@@ -51,7 +51,7 @@ all: make_libs ${NAME}
 make_libs:
 	make -C inc/libft bonus --no-print-directory
 	make -C inc/ft_dprintf --no-print-directory
-	@make -s -C inc/mlx --no-print-directory
+	@make -s -C inc/mlx --no-print-directory 2> /dev/null
 
 ${NAME}: ${OBJS} ${LIB}
 	cc ${CFLAGS} ${LIB} ${OBJS} ${MLXFLAGS} -o ${NAME}

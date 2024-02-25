@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/20 20:16:37 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:50:28 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,12 @@ int	check_input(int argc, char **argv, t_sc *sc)
 	sc->screen.pix_rat = sc->screen.width / WIDTH;
 	sc->screen.height = sc->screen.pix_rat * HEIGHT;
 	sc->screen.center = mult_new(&sc->cam.nov, FOCAL);
-	get_screen_vec(&sc->cam.nov, &sc->screen.w_vec, &sc->screen.h_vec);
-	sc->screen.start.x = sc->screen.center.x + sc->screen.w_vec.x \
-		* sc->screen.width / 2 + sc->screen.h_vec.x * sc->screen.height / 2;
-	sc->screen.start.y = sc->screen.center.y + sc->screen.w_vec.y \
-		* sc->screen.width / 2 + sc->screen.h_vec.y * sc->screen.height / 2;
-	sc->screen.start.z = sc->screen.center.z + sc->screen.w_vec.z \
-		* sc->screen.width / 2 + sc->screen.h_vec.z * sc->screen.height / 2;
+	get_screen_vec(&sc->cam.nov, &sc->screen.x_ax, &sc->screen.y_ax);
+	sc->screen.start.x = sc->screen.center.x + sc->screen.x_ax.x \
+		* sc->screen.width / 2 + sc->screen.y_ax.x * sc->screen.height / 2;
+	sc->screen.start.y = sc->screen.center.y + sc->screen.x_ax.y \
+		* sc->screen.width / 2 + sc->screen.y_ax.y * sc->screen.height / 2;
+	sc->screen.start.z = sc->screen.center.z + sc->screen.x_ax.z \
+		* sc->screen.width / 2 + sc->screen.y_ax.z * sc->screen.height / 2;
 	return (0);
 }
