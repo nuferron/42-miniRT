@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/22 22:02:30 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:21:24 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	ray->k1 = 1 - dn * dn;
 	posn = dot_prod(&cy->nov, &var.oc);
 	var.k2 = 2 * (dot_prod(&ray->norm, &var.oc) - dn * posn);
-	k3 = 1 - posn * posn - cy->r * cy->r;
+	k3 = dot_prod(&cy->pos, &cy->pos) - posn * posn - cy->r * cy->r;
 	var.discr = var.k2 * var.k2 - 4 * ray->k1 * k3;
 	if (var.discr < 0)
 		return ; // no intersections
@@ -44,6 +44,13 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	{
 		ray->p = mult_new(&ray->norm, ray->t);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
+	}
+	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
+	{
+	//	ex = vec_new(0, 0, 10);
+		printf("[CYLINDER]: cylinder point: x: %f, y: %f, z: %f,    ", ray->p.x, ray->p.y, ray->p.z); //erase
+		printf("[CYLINDER]: winning point: x: %f, y: %f, z: %f,    ", ray->hit.p.x, ray->hit.p.y, ray->hit.p.z); //erase
+		printf("distance to cylinder point: %f\n", dist(&ray->p, &ray->zero)); //erase
 	}
 //	printf("cylinder pointer %p, ray pointer %p, item pointer %p\n", obj, ray, item);
 }

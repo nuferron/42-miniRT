@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/22 19:08:02 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/25 17:57:11 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item)
 		ray->p = mult_new(&ray->norm, ray->t);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
-/*	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
+	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
-		ex = vec_new(0, 0, 10);
-		printf("center x: %f, y: %f, z: %f\n", ray->hit.p.x, ray->hit.p.y, ray->hit.p.z); //erase
-		printf("distance from center: %f, t: %f, right dist: %f \n", dist(&p, &sp->pos), var.t, dist(&ex, &sp->pos)); //erase
-	}*/
+	//	ex = vec_new(0, 0, 10);
+		printf("[SPHERE]: winning point: x: %f, y: %f, z: %f,    ", ray->hit.p.x, ray->hit.p.y, ray->hit.p.z); //erase
+		printf("distance to this point: %f\n", dist(&ray->p, &ray->zero)); //erase
+	}
 }
 
 void	sp_get_norm(t_obj *sp, t_hit *hit)
