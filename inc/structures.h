@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/22 21:29:28 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:05:23 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define STRUCTURES_H
 
 #include "mlx_rt.h"
+
+enum	e_type
+{
+	sph = 0,
+	pla = 1,
+	cyl = 2
+};
 
 /* Structure for coordinates ("absolute" or normalized) */
 typedef struct s_vec
@@ -39,11 +46,12 @@ typedef struct s_vars
 typedef struct s_item t_item;
 typedef struct s_hit
 {
-	t_point	p;		// the minimal point of intersection
-	t_vec	norm;	// normalized vector of the hit
-	t_item	*obj;	// pointer to the winner object
-	int		*rgb;
-	bool	obst; 	// obsticals 0 if there is access to light
+	t_point		p;		// the minimal point of intersection
+	t_vec		norm;	// normalized vector of the hit
+	t_item		*obj;	// pointer to the winner object
+	int			*rgb;
+	bool		obst; 	// obstices 0 if there is access to light
+	enum e_type	type;
 }	t_hit;
 
 typedef struct s_ray
@@ -126,6 +134,7 @@ typedef struct s_light
 	t_point	pos;	//center point
 	float	b;		//light brightness ratio [0.0 - 1.0]
 	int		rgb[3];	//(bonus)
+	struct s_light	*next;
 }	t_light;
 //	SCENE SET UP ---------------------------------------------------/
 //  ----------------------------------------------------------------/
@@ -134,8 +143,8 @@ typedef struct s_light
 typedef struct s_screen
 {
 	t_point	center;
-	t_vec	w_vec;
-	t_vec	h_vec;
+	t_vec	x_ax;
+	t_vec	y_ax;
 	t_point	start;
 	float	width;
 	float	height;
