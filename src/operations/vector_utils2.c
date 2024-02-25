@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 21:44:54 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/12 21:47:02 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:29:18 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ t_vec	substr_vec(t_vec *from, t_vec *what)
 	res.y = from->y - what->y;
 	res.z = from->z - what->z;
 	return (res);
+}
+
+/* from - is the vector from which you are substructing
+what - is a vector which you are substructing 
+returns a resulting vector*/
+void	substr_new(t_vec *from, t_vec *what)
+{
+	from->x = from->x - what->x;
+	from->y = from->y - what->y;
+	from->z = from->z - what->z;
 }
 
 /* returns the distance from point p1 to point p2*/
