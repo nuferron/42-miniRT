@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/25 19:39:25 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/26 20:36:20 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 	while (obj)
 	{
 		obj->intersect(&obj->type, ray, obj);
+		exit(1);
 		obj = obj -> next;
+
 	}
 	/*if (ray->dist < MAXFLOAT)
 	{

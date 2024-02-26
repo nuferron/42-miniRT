@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/26 17:59:36 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/26 20:34:28 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item)
 //	t_point ex;
 
 	sp = obj->sp;
+//	printf("[SPHERE]: entered\n");
 //	ray->hit.rec = false;
 	var.oc = substr_vec(&ray->zero, &sp->pos);
 	var.k2 = 2 * dot_prod(&var.oc, &ray->norm);
@@ -41,12 +42,13 @@ void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item)
 		ray->p = mult_new(&ray->norm, ray->t[1]);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
-	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
+//	printf("[SPHERE]: leaving\n");
+	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
 	//	ex = vec_new(0, 0, 10);
 		printf("[SPHERE]: winning point: x: %f, y: %f, z: %f,    ", ray->hit.p.x, ray->hit.p.y, ray->hit.p.z); //erase
 		printf("distance to this point: %f\n", dist(&ray->p, &ray->zero)); //erase
-	}
+	}*/
 }
 
 void	sp_get_norm(t_obj *sp, t_hit *hit)
@@ -58,18 +60,27 @@ void	sp_get_norm(t_obj *sp, t_hit *hit)
 //	printf("r: %i, g: %i\n", hit->rgb[0], hit->rgb[1]);
 }
 
-bool	count_t(t_ray *ray, t_vars *var)
+int	count_t(t_ray *ray, t_vars *var)
 {
 	var->discr = var->k2 * var->k2 - 4 * ray->k1 * var->k3;
+	
+	printf("discr: %f\n", var->discr);
 	if (var->discr < 0)
-		return (false); // no intersections
+	{
+		printf("discr: %f\n", var->discr);
+		return (0); // no intersections
+	}
+	exit(1);
 	var->discr = sqrt(var->discr);
+	
 	ray->t[0] = (-var->k2 + var->discr) / (2 * ray->k1);
+	
 	if (var->discr)
 		ray->t[1] = (-var->k2 - var->discr) / (2 * ray->k1);
 	else
 		ray->t[1] = ray->t[0];
+	
 	if (ray->t[0] > 0 || ray->t[1] > 0)
-		return (true);
-	return (false);
+		return (1);
+	return (0);
 }
