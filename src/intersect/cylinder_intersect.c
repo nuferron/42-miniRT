@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/25 19:21:24 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/26 20:38:49 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	var.discr = sqrt(var.discr);
 	ray->t = (-var.k2 + var.discr) / (2 * ray->k1);
 	cy->m[0] = (ray->t * dn + posn);
-	if (ray->t > 0 && cy->m[0] < cy->h) // what do we do if the intrsection is in the zero point???
+	if (ray->t > 0 && cy->m[0] < cy->h && cy->m[0] > 0) // what do we do if the intrsection is in the zero point???
 	{
 		ray->p = mult_new(&ray->norm, ray->t);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
 	ray->t = (-var.k2 - var.discr) / (2 * ray->k1);
 	cy->m[1] = (ray->t * dn + posn);
-	if (var.discr && ray->t > 0 && cy->m[1] < cy->h)
+	if (var.discr && ray->t > 0 && cy->m[1] < cy->h && cy->m[1] > 0)
 	{
 		ray->p = mult_new(&ray->norm, ray->t);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
