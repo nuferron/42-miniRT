@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/23 18:05:23 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:54:07 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ typedef struct s_vec t_rgb;
 /* A variable structure for sphere intersection */
 typedef struct s_vars
 {
-	t_vec	oc;		//	ray origin - sphere center
+	t_vec	oc;		//	ray origin - shape center
 	double	k2;		//	2 * dot product (oc, vo)
+	double	k3;
 	double	discr;	//	discriminant
 }	t_vars;
 
@@ -60,8 +61,8 @@ typedef struct s_ray
 	t_point	zero;	// the coordinates of the camera
 	t_vec	norm;	// the normalized ray vector
 	t_point	orig;	// point on the screen
-	t_point	p;		// variable - intersection point
-	double	t;		// variable - distance coefficient to the intersection point
+	t_point	p;	// variable - intersection point
+	double	t[2];	// variable - distance coefficient to the intersection point
 	double	k1;		// dot_prod(norm, norm)
 	double	dist;	// the minimal distance
 }	t_ray;

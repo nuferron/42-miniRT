@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/26 17:06:58 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:30:27 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	t_cy	*cy;
 	float	dn;
 	float	posn;
-	double	k3;
 
 	cy = obj->cy;
 	var.oc = substr_vec(&ray->zero, &cy->pos);
@@ -26,25 +25,13 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	ray->k1 = 1 - dn * dn;
 	posn = dot_prod(&cy->nov, &var.oc);
 	var.k2 = 2 * (dot_prod(&ray->norm, &var.oc) - dn * posn);
-	k3 = dot_prod(&cy->pos, &cy->pos) - posn * posn - cy->r * cy->r;
-	var.discr = var.k2 * var.k2 - 4 * ray->k1 * k3;
-	if (var.discr < 0)
-		return ; // no intersections
-	var.discr = sqrt(var.discr);
-	ray->t = (-var.k2 + var.discr) / (2 * ray->k1);
-	cy->m[0] = (ray->t * dn + posn);
-	if (ray->t > 0 && cy->m[0] < cy->h && cy->m[0] > 0) // what do we do if the intrsection is in the zero point???
-	{
-		ray->p = mult_new(&ray->norm, ray->t);
-		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
-	}
-	ray->t = (-var.k2 - var.discr) / (2 * ray->k1);
-	cy->m[1] = (ray->t * dn + posn);
-	if (var.discr && ray->t > 0 && cy->m[1] < cy->h  && cy->m[1] > 0)
-	{
-		ray->p = mult_new(&ray->norm, ray->t);
-		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
-	}
+	var.k3 = dot_prod(&cy->pos, &cy->pos) - posn * posn - cy->r * cy->r;
+	if (!count_t(ray, &var))
+		return ;
+	cy->m[0] = (ray->t[0] * dn + posn);
+	cy->m[1] = (ray->t[1] * dn + posn);
+	if (cy_check_body(ray, item, cy) < 2 && cy_count_disk(ray, cy, &var))
+		cy_check_disk(ray, item, cy);
 	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
 	//	ex = vec_new(0, 0, 10);
@@ -54,6 +41,35 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	}
 //	printf("cylinder pointer %p, ray pointer %p, item pointer %p\n", obj, ray, item);
 }
+
+int	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
+{
+	int	res;
+
+	res = 0;
+	if (ray->t[0] > 0 && cy->m[0] < cy->h && cy->m[0] > 0) // what do we do if the intrsection is in the zero point???
+	{
+		res++;
+		ray->p = mult_new(&ray->norm, ray->t[0]);
+		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
+	}
+	if (ray->t[0] == ray->t[1])
+		return (res);
+	else if (ray->t[1] > 0 && cy->m[1] < cy->h  && cy->m[1] > 0)
+	{
+		res++;
+		ray->p = mult_new(&ray->norm, ray->t[1]);
+		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
+	}
+	return (res);
+}
+
+bool	cy_count_disk(t_ray *ray, t_cy *cy, t_vars *var)
+{
+	ray->hit.obst = false;
+	disk_create_check(ray, cy, 0);
+}
+
 
 void	cy_get_norm(t_obj *cy, t_hit *hit)
 {

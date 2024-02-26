@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/25 17:57:11 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:59:36 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,21 @@ void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item)
 //	ray->hit.rec = false;
 	var.oc = substr_vec(&ray->zero, &sp->pos);
 	var.k2 = 2 * dot_prod(&var.oc, &ray->norm);
-	var.discr = var.k2 * var.k2 - 4 * ray->k1 * (dot_prod(&var.oc, &var.oc) - sp->r * sp->r);
+	var.k3 = dot_prod(&var.oc, &var.oc) - sp->r * sp->r;
+	var.discr = var.k2 * var.k2 - 4 * ray->k1 * var.k3;
 	if (var.discr < 0)
 		return ; // no intersections
 	var.discr = sqrt(var.discr);
-	ray->t = (-var.k2 + var.discr) / (2 * ray->k1);
-	if (ray->t > 0) // what do we do if the intrsection is in the zero point???
+	ray->t[0] = (-var.k2 + var.discr) / (2 * ray->k1);
+	if (ray->t[0] > 0) // what do we do if the intrsection is in the zero point???
 	{
-		ray->p = mult_new(&ray->norm, ray->t);
+		ray->p = mult_new(&ray->norm, ray->t[0]);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
-	ray->t = (-var.k2 - var.discr) / (2 * ray->k1);
-	if (var.discr && ray->t > 0)
+	ray->t[1] = (-var.k2 - var.discr) / (2 * ray->k1);
+	if (var.discr && ray->t[1] > 0)
 	{
-		ray->p = mult_new(&ray->norm, ray->t);
+		ray->p = mult_new(&ray->norm, ray->t[1]);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
 	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
@@ -55,4 +56,20 @@ void	sp_get_norm(t_obj *sp, t_hit *hit)
 	hit->rgb = sp->sp->rgb;
 	hit->type = sph;
 //	printf("r: %i, g: %i\n", hit->rgb[0], hit->rgb[1]);
+}
+
+bool	count_t(t_ray *ray, t_vars *var)
+{
+	var->discr = var->k2 * var->k2 - 4 * ray->k1 * var->k3;
+	if (var->discr < 0)
+		return (false); // no intersections
+	var->discr = sqrt(var->discr);
+	ray->t[0] = (-var->k2 + var->discr) / (2 * ray->k1);
+	if (var->discr)
+		ray->t[1] = (-var->k2 - var->discr) / (2 * ray->k1);
+	else
+		ray->t[1] = ray->t[0];
+	if (ray->t[0] > 0 || ray->t[1] > 0)
+		return (true);
+	return (false);
 }
