@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/23 16:50:28 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:26:40 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 /*It gets the first 5 (non-space like) characters and returns them*/
 static char	*get_element(char *line, int i)
 {
-	char	tmp[5];
+	char	tmp[3];
 	int		j;
 
 	j = 0;
-	while (j < 5 && line[i] && !is_whitespace(line[i]))
+	while (j < 3 && line[i] && !is_whitespace(line[i]))
 		tmp[j++] = line[i++];
 	if (!line[i])
 		return (&line[i]);
@@ -42,7 +42,7 @@ static int	check_file_type(char *file)
 /*It reads the first part of the line and calls the correspondig
  function. If no coincidence is found, it throws an error message and
  returns 1*/
-static int	check_content(t_sc *sc, char *line)
+int	check_content(t_sc *sc, char *line)
 {
 	int		i;
 	char	*element;
@@ -64,6 +64,8 @@ static int	check_content(t_sc *sc, char *line)
 		return (get_plane(line, i + 2, sc));
 	else if (!ft_strncmp(element, "cy", 3))
 		return (get_cylinder(line, i + 2, sc));
+	//else if (!ft_strncmp(element, "cn", 3))
+	//	return (get_cone(line, i + 2, sc));
 	else
 		return (ft_dprintf(2, ELEM, element), 1);
 	return (0);
