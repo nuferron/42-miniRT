@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/26 20:35:52 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:54:48 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,17 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	var.k2 = 2 * (dot_prod(&ray->norm, &var.oc) - dn * posn);
 	var.k3 = dot_prod(&cy->pos, &cy->pos) - posn * posn - cy->r * cy->r;
 	count_t(ray, &var);
-	printf("discr: %f\n", var.discr);
+//	printf("discr: %f\n", var.discr);
 	if (var.discr < 0)
 		return ;
-	exit(1);
+//	exit(1);
 	cy->m[0] = (ray->t[0] * dn + posn);
 	cy->m[1] = (ray->t[1] * dn + posn);
-	cy_check_body(ray, item, cy);
+//	cy_check_body(ray, item, cy);
 //	printf("[CYLINDER]: LEAVING\n");
-/*	if (cy_check_body(ray, item, cy) < 2 && cy_count_disk(ray, cy, &var))
-		cy_check_disk(ray, item, cy);*/
+	if (cy_check_body(ray, item, cy) < 2)
+		cy_check_disk(ray, cy, item, &dn);
+//		cy_check_disk(ray, item, cy);
 	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
 	//	ex = vec_new(0, 0, 10);
@@ -70,11 +71,21 @@ int	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 	return (res);
 }
 
-/*bool	cy_count_disk(t_ray *ray, t_cy *cy, t_vars *var)
+bool	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 {
+	double	d;
+
 	ray->hit.obst = false;
+	ray->t[0] = cy->prod[0] / *dn;
+	ray->t[1] = cy->prod[1] / *dn;
+	if (ray->t[0] > 0 && fabs(*dn) > 0.00001)
+		ray->p = mult_new(&ray->norm, ray->t[0]);
+	d = dist(&cy->pos, &ray->p);
+	if (d <= cy->r)
+		check_dist(&ray->p, ray, item, d);
+	
 	disk_create_check(ray, cy, 0);
-}*/
+}
 
 
 void	cy_get_norm(t_obj *cy, t_hit *hit)

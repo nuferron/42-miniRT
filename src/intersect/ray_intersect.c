@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/26 20:36:20 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:13:40 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,16 @@ void	check_dist(t_point *p, t_ray *ray, t_item *obj, double dist)
 void	all_intersect(t_sc *sc, t_ray *ray)
 {
 	t_item	*obj;
+//	int i = 0;
 
 	obj = sc->objs;
 	while (obj)
 	{
 		obj->intersect(&obj->type, ray, obj);
-		exit(1);
+		//if (i++ > 1)
+		//	exit(1);
 		obj = obj -> next;
+		
 
 	}
 	/*if (ray->dist < MAXFLOAT)

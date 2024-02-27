@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/26 17:54:07 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:31:19 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,13 @@ typedef struct s_cy //CYLINDER
 {
 	t_point	pos;	//bottom point
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
+	t_point	lim;	//upper point
+	float	prod[2];	// dot products of pos and nov for the planes
+	float	m[2];	//solution to count the normal	
 	float	r;		//radius
 	float	h;		//height
-	float	m[2];	//solution to count the normal
 	int		rgb[3];
+	int		flag;	//0 - winner point is on the body, 1 - winner point is on a plane
 }	t_cy;
 
 /* Union that can contain a t_sp, a t_pl or a t_cy pointer -  obj.sp/pl/cy */
