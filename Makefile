@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/02/23 18:27:00 by nuferron         ###   ########.fr        #
+#    Updated: 2024/02/27 20:17:31 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,9 @@ RESET = \033[0m
 SRCS_MLX = mlx.c draw.c
 SRCS_INPUT = check_input.c init_scene.c init_utils.c init_objects.c \
 translation.c
-SRCS_UTILS = num_utils.c utils.c mem_utils.c math_utils.c
+SRCS_UTILS = num_utils.c utils.c mem_utils.c
 SRCS_OPER = vector_utils.c vector_utils2.c vector_utils3.c
-SRCS_INTERSEC = plane_intersect.c sphere_intersect.c ray_intersect.c \
-cylinder_intersect.c
+SRCS_INTERSEC = plane_intersect.c sphere_intersect.c ray_intersect.c
 SRCS_SCREEN = screen.c color.c color_utils.c
 
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
@@ -51,7 +50,12 @@ all: make_libs ${NAME}
 make_libs:
 	make -C inc/libft bonus --no-print-directory
 	make -C inc/ft_dprintf --no-print-directory
+	printf "${WHITE}MLX: ${CYAN}Compiling... ${RESET}"
 	@make -s -C inc/mlx --no-print-directory 2> /dev/null
+	@printf "\r%-${COLUMNS}s\r"
+	if [ ! -e ${NAME} ] ; then \
+		echo "${WHITE}MLX: ${GREEN}Compiled!"; \
+	fi
 
 ${NAME}: ${OBJS} ${LIB}
 	cc ${CFLAGS} ${LIB} ${OBJS} ${MLXFLAGS} -o ${NAME}
@@ -79,7 +83,7 @@ ${OBJDIR}%.o: ${SRCDIR}%.c ${HEADER} Makefile
 
 clean:
 	if [ -d ${OBJDIR} ] ; then \
-		rm -rf ${OBJDIR} ${OBJDIR_BNS} combination; \
+		rm -rf ${OBJDIR} ${OBJDIR_BNS}; \
 		printf "${WHITE}${NAME}: ${RED}Objects have been deleted${RESET}\n"; \
 	fi
 	make -C inc/libft clean --no-print-directory
