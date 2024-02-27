@@ -6,23 +6,39 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:43:51 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/23 17:34:51 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:23:43 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+void	getting_new_axis(t_vec *cam, t_vec *h, t_vec *v, t_vec *ax)
+{
+	h->x = cam->y * ax->z - cam->z * ax->y;
+	h->y = cam->z * ax->x - cam->x * ax->y;
+	h->z = cam->x * ax->y - cam->y * ax->x;
+	v->x = cam->y * h->z - cam->z * h->y;
+	v->y = cam->z * h->x - cam->x * h->z;
+	v->z = cam->x * h->y - cam->y * h->x;
+}
+
 void	get_screen_vec(t_vec *cam, t_vec *x_ax, t_vec *y_ax)
 {
 	t_vec	axis;
-
-	axis = vec_new(0, -1, 0);
-	x_ax->x = cam->y * axis.z - cam->z * axis.y;
-	x_ax->y = cam->z * axis.x - cam->x * axis.z;
-	x_ax->z = cam->x * axis.y - cam->y * axis.x;
-	y_ax->x = cam->y * x_ax->z - cam->z * x_ax->y;
-	y_ax->y = cam->z * x_ax->x - cam->x * x_ax->z;
-	y_ax->z = cam->x * x_ax->y - cam->y * x_ax->x;
+	
+	if (!cam->x && cam->y == 1 && !cam->z)
+	{
+		axis = vec_new(0,0,1);
+		getting_new_axis(cam, x_ax, y_ax, &axis);
+		opp_vec(x_ax);
+		opp_vec(y_ax);
+	}
+	else
+	{
+		axis = vec_new(0,1,0);
+		getting_new_axis(cam, x_ax, y_ax, &axis);
+		opp_vec(y_ax);
+	}
 }
 
 /*void	throw_rays(t_sc *sc, t_screen *pic)
