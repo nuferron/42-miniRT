@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:46:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/22 18:22:58 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:18:49 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,21 @@ double	vec_mod(t_vec *v)
 }
 
 /* saves in the t_vec n the normalized t_vec v */
-void	unit_vector(t_vec *v, t_vec *n)
+t_vec	unit_vector(t_vec *v)
 {
 	double	mod;
+	t_vec	n;
 
 	mod = vec_mod(v);
-	n->x = v->x / mod;
-	n->y = v->y / mod;
-	n->z = v->z / mod;
+	n.x = v->x / mod;
+	n.y = v->y / mod;
+	n.z = v->z / mod;
+	return (n);
 }
 
-t_vec	opp_vec(t_vec *v)
+void	opp_vec(t_vec *v)
 {
-	t_vec	o;
-
-	o.x = -v->x;
-	o.y = -v->y;
-	o.z = -v->z;
-	return (o);
+	v->x = -v->x;
+	v->y = -v->y;
+	v->z = -v->z;
 }
