@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/23 18:05:23 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:37:05 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ enum	e_type
 {
 	sph = 0,
 	pla = 1,
-	cyl = 2
+	cyl = 2,
+	disk = 3
 };
 
 /* Structure for coordinates ("absolute" or normalized) */
