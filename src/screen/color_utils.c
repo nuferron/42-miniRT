@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:57:16 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/23 20:12:56 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:59:49 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,3 @@ unsigned int	color_mean(unsigned int c1, unsigned int c2)
 	b = ((c1 & 0xff) + (c2 & 0xff)) / 2;
 	return (r << 16 | g << 8 | b);
 }
-
