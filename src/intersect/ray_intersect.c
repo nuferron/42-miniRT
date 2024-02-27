@@ -6,10 +6,10 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/27 15:00:43 by nuferron         ###   ########.fr       */
-/*   Updated: 2024/02/12 21:55:32 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:38:45 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "miniRT.h"
 
@@ -37,13 +37,25 @@ void	check_dist(t_point *p, t_ray *ray, t_item *obj, double dist)
 void	all_intersect(t_sc *sc, t_ray *ray)
 {
 	t_item	*obj;
+//	int i = 0;
 
 	obj = sc->objs;
 	while (obj)
 	{
 		obj->intersect(&obj->type, ray, obj);
+		//if (i++ > 1)
+		//	exit(1);
 		obj = obj -> next;
+		
+
 	}
+	/*if (ray->dist < MAXFLOAT)
+	{
+		ray->hit.obj->get_norm(&ray->hit.obj->type, &ray->hit);
+		sc->mlx.color = rgb_to_hex(ray->hit.rgb);
+	}
+	else
+		sc->mlx.color = 0;*/
 	if (ray->dist < MAXFLOAT)
 	{
 		sc->mlx.color = 0;
