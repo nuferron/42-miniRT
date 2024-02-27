@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:36:32 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/27 17:34:36 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:07:24 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void	cy_translation(t_obj *obj, t_sc *sc)
 	obj->cy->pos = substr_vec(&obj->cy->pos, &temp);
 	obj->cy->prod[0] = dot_prod(&obj->cy->pos, &obj->cy->nov);
 	obj->cy->prod[1] = dot_prod(&obj->cy->lim, &obj->cy->nov);
-//	printf("[CYLINDER TRANSLATION] final point  x: %f, y: %f, z: %f\n", obj->cy->pos.x, obj->cy->pos.y, obj->cy->pos.z); //erase
+	printf("[CYLINDER TRANSLATION] position point  x: %f, y: %f, z: %f\n", obj->cy->pos.x, obj->cy->pos.y, obj->cy->pos.z); //erase
+	printf("[CYLINDER TRANSLATION] lim point  x: %f, y: %f, z: %f\n", obj->cy->lim.x, obj->cy->lim.y, obj->cy->lim.z); //erase
 }

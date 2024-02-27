@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:28:21 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/27 17:40:11 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:16:21 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,3 @@ void	pl_get_norm(t_obj *pl, t_hit *hit)
 //	printf("plane pointer %p, ray pointer %p\n", pl, hit);
 }
 
-/* 	flag = 0 - the initial position of the cylinder 
-	flag = 1 - the top position of the cylinder */
-void	disk_create_check(t_ray *ray, t_cy *cy, int flag)
-{
-	t_pl	pl;
-	t_vec	vec;
-	float	d;
-
-	if (!flag)
-		pl.pos = cy->pos;
-	else
-		pl.pos = cy->lim;
-//	pl.nov = cy->nov;
-	d = dot_prod(&ray->norm, &cy->nov);
-	ray->t[0] = cy->prod[0] / d;
-	ray->t[1] = cy->prod[1] / d;
-
-//	pl.rgb = cy->rgb;
-}

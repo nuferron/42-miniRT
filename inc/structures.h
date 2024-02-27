@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/27 17:31:19 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:14:12 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ enum	e_type
 {
 	sph = 0,
 	pla = 1,
-	cyl = 2
+	cyl = 2,
+	disk = 3
 };
 
 /* Structure for coordinates ("absolute" or normalized) */
@@ -96,7 +97,7 @@ typedef struct s_cy //CYLINDER
 	float	r;		//radius
 	float	h;		//height
 	int		rgb[3];
-	int		flag;	//0 - winner point is on the body, 1 - winner point is on a plane
+//	int		flag;	//0 - winner point is on the body, 1 - winner point is on a plane
 }	t_cy;
 
 /* Union that can contain a t_sp, a t_pl or a t_cy pointer -  obj.sp/pl/cy */

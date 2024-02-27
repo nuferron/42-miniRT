@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:01:29 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/26 20:32:22 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:17:36 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ void	pl_get_norm(t_obj *obj, t_hit *hit);
 /* sphere_intersect.c - intersection with sphere equations  **************/
 void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item);
 void	sp_get_norm(t_obj *sp, t_hit *hit);
-int	count_t(t_ray *ray, t_vars *var);
+int		count_t(t_ray *ray, t_vars *var);
 
 /* cylinder_intersect.c - intersection with cylinder equations  **************/
 void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item);
-int	cy_check_body(t_ray *ray, t_item *item, t_cy *cy);
+int		cy_check_body(t_ray *ray, t_item *item, t_cy *cy);
+void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn);
 void	cy_get_norm(t_obj *obj, t_hit *hit);
 
 /* ray_intersect.c - dealing with ray variables  **************/

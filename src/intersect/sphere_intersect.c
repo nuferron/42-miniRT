@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/27 17:14:36 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:29:29 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,23 +63,15 @@ void	sp_get_norm(t_obj *sp, t_hit *hit)
 int	count_t(t_ray *ray, t_vars *var)
 {
 	var->discr = var->k2 * var->k2 - 4 * ray->k1 * var->k3;
-	
-//	printf("discr: %f\n", var->discr);
+	//	printf("discr: %f\n", var->discr);
 	if (var->discr < 0)
-	{
-//		printf("discr: %f\n", var->discr);
 		return (0); // no intersections
-	}
-//	exit(1);
 	var->discr = sqrt(var->discr);
-	
 	ray->t[0] = (-var->k2 + var->discr) / (2 * ray->k1);
-	
 	if (var->discr)
 		ray->t[1] = (-var->k2 - var->discr) / (2 * ray->k1);
 	else
 		ray->t[1] = ray->t[0];
-	
 	if (ray->t[0] > 0 || ray->t[1] > 0)
 		return (1);
 	return (0);
