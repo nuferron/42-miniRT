@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:36:32 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/27 19:07:24 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/27 22:51:11 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	sph_translation(t_obj *obj, t_sc *sc)
 {
 //	printf("[SPH TRANSLATION] initial point  x: %f, y: %f, z: %f\n", obj->sp->pos.x, obj->sp->pos.y, obj->sp->pos.z); //erase
 	translation(&sc->cam.pos, &obj->sp->pos);
-//	printf("[SPH TRANSLATION] final point  x: %f, y: %f, z: %f\n", obj->sp->pos.x, obj->sp->pos.y, obj->sp->pos.z); //erase
+	printf("[SPH TRANSLATION] final point  x: %f, y: %f, z: %f, radius: %f\n", obj->sp->pos.x, obj->sp->pos.y, obj->sp->pos.z, obj->sp->r); //erase
 }
 
 void	pl_translation(t_obj *obj, t_sc *sc)

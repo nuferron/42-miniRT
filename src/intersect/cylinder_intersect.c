@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/27 22:43:00 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/27 22:49:16 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ int	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 
 void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 {
-//	double	d;
-	t_vec	oc;
-	t_vec	to;
+	double	d;
+//	t_vec	oc;
+//	t_vec	to;
 
 	ray->hit.obst = false;
-	oc = substr_vec(&cy->pos, &ray->zero);
+	/*oc = substr_vec(&cy->pos, &ray->zero);
 //	cy->prod[0] = 
 	ray->t[0] = dot_prod(&oc, &cy->nov) / *dn;
 	oc = substr_vec(&cy->lim, &ray->zero);
@@ -108,23 +108,23 @@ void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 		to = substr_vec(&ray->p, &cy->lim);
 		if (dot_prod(&to, &to) <= cy->r * cy->r)
 			check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
-	}
-	/*ray->t[0] = cy->prod[0] / *dn;
+	}*/
+	ray->t[0] = cy->prod[0] / *dn;
 	ray->t[1] = cy->prod[1] / *dn;
 	if (ray->t[0] > 0)
 	{
 		ray->p = mult_new(&ray->norm, ray->t[0]);
 		d = dist(&cy->pos, &ray->p);
 		if (d <= cy->r)
-			check_dist(&ray->p, ray, item, d);
+			check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
 	if (ray->t[1] > 0)
 	{
 		ray->p = mult_new(&ray->norm, ray->t[1]);
 		d = dist(&cy->lim, &ray->p);
 		if (d <= cy->r)
-			check_dist(&ray->p, ray, item, d);
-	}*/
+			check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
+	}
 	if (ray->hit.obst == true)
 		ray->hit.type = disk;
 /*	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
