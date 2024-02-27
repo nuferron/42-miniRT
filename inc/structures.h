@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/27 18:38:57 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/27 20:03:42 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_ray
 	t_point	zero;	// the coordinates of the camera
 	t_vec	norm;	// the normalized ray vector
 	t_point	orig;	// point on the screen
-	t_point	p;	// variable - intersection point
+	t_point	p;		// variable - intersection point
 	double	t[2];	// variable - distance coefficient to the intersection point
 	double	k1;		// dot_prod(norm, norm)
 	double	dist;	// the minimal distance
@@ -100,12 +100,22 @@ typedef struct s_cy //CYLINDER
 	int		flag;	//0 - winner point is on the body, 1 - winner point is on a plane
 }	t_cy;
 
+typedef struct	s_cn //CONE
+{
+	t_point	pos;	//center position
+	t_vec	nov;	//3D normalized orientation vector [-1.0 - 1.0]
+	float	r;		//radius
+	float	h;		//height
+	int	rgb[3];
+}	t_cn;
+
 /* Union that can contain a t_sp, a t_pl or a t_cy pointer -  obj.sp/pl/cy */
 typedef union u_obj
 {
 	t_sp	*sp;
 	t_pl	*pl;
 	t_cy	*cy;
+	t_cn	*cn;
 }	t_obj;
 
 typedef struct s_item
