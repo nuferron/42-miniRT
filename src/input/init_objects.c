@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/27 20:09:48 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:18:26 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	get_sphere(char *line, int i, t_sc *sc)
 	if (!is_float(&line[i]) || line[i] == ',')
 		return (ft_dprintf(2, LINE, line), 1);
 	sp->r = ft_atof(&line[i]) / 2;
+//	printf("SP radius: %f\n", sp->r);
 	skip_number(line, &i);
 	if (!set_rgb(sp->rgb, line, i))
 		return (1);
@@ -93,7 +94,6 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 {
 	t_item	*obj;
 	t_cy	*cy;
-
 
 	obj = add_obj(sc->objs, sc);
 	cy = malloc(sizeof(t_cy));

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:27:20 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/27 18:20:09 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:19:54 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_vec	mult_vec(t_vec *v1, t_vec *v2);
 t_vec	div_new(t_vec *v, double *factor);
 // changes the vector v dividing it by a factor
 void	div_fac(t_vec *v, double *factor);
-
 
 void	opp_vec(t_vec *v);
 
