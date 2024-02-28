@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/28 16:54:50 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:02:40 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item)
 		ray->p = mult_new(&ray->norm, ray->t[1]);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
-	if (ray->hit.obst == true)
-		ray->hit.type = sph;
+//	if (ray->hit.obst == true)
+//		ray->hit.type = sph;
 //	printf("[SPHERE]: leaving\n");
 	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
