@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:28:21 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/25 18:22:05 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:58:50 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	pl_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	float	d;
 
 	pl = obj->pl;
-	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2)
-		printf("[PLANE] POSITION is x: %f, y: %f, z: %f\n", pl->pos.x, pl->pos.y, pl->pos.z); //erase
+//	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2)
+//		printf("[PLANE] POSITION is x: %f, y: %f, z: %f\n", pl->pos.x, pl->pos.y, pl->pos.z); //erase
 	d = dot_prod(&ray->norm, &pl->nov);
 	ray->t = pl->prod / d;
 	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2)
