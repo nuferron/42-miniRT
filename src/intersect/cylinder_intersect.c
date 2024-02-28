@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/28 20:10:23 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:30:03 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 		
 	}*/
 }
-
 
 void	cy_get_norm(t_obj *cy, t_hit *hit)
 {
