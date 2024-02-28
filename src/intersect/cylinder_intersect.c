@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/28 15:25:16 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:47:54 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	float	posn;
 
 	cy = obj->cy;
-//	printf("[CYLINDER]: entered\n");
 	var.oc = substr_vec(&ray->zero, &cy->pos);
 	dn = dot_prod(&cy->nov, &ray->norm);
-	ray->k1 = 1 - dn * dn;
+	var.k1 = 1 - dn * dn;
 	posn = dot_prod(&cy->nov, &var.oc);
 	var.k2 = 2 * (dot_prod(&ray->norm, &var.oc) - dn * posn);
 	var.k3 = dot_prod(&cy->pos, &cy->pos) - posn * posn - cy->r * cy->r;
@@ -31,13 +30,13 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	if (!count_t(ray, &var))
 		return ;
 //	printf("discr: %f\n", var.discr);
-	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
+	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
 		printf("discr: %f\n", var.discr);
 		printf("[CYLINDER]: cylinder point: x: %f, y: %f, z: %f,    ", ray->p.x, ray->p.y, ray->p.z); //erase
 		printf("[CYLINDER]: winning point: x: %f, y: %f, z: %f,    ", ray->hit.p.x, ray->hit.p.y, ray->hit.p.z); //erase
 		printf("distance to cylinder point: %f\n", dist(&ray->p, &ray->zero)); //erase
-	}
+	}*/
 //	exit(1);
 	cy->m[0] = (ray->t[0] * dn + posn);
 	cy->m[1] = (ray->t[1] * dn + posn);
@@ -61,11 +60,13 @@ int	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 	if (ray->t[0] > 0 && cy->m[0] < cy->h && cy->m[0] > 0) // what do we do if the intrsection is in the zero point???
 	{
 		ray->p = mult_new(&ray->norm, ray->t[0]);
+		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
 	if (ray->t[1] > 0 && cy->m[1] < cy->h  && cy->m[1] > 0)
 	{
 		ray->p = mult_new(&ray->norm, ray->t[1]);
+		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
 	if (ray->hit.obst == true)
@@ -80,34 +81,14 @@ int	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 {
 	double	d;
-//	t_vec	oc;
-//	t_vec	to;
 
 	ray->hit.obst = false;
-	/*oc = substr_vec(&cy->pos, &ray->zero);
-//	cy->prod[0] = 
-	ray->t[0] = dot_prod(&oc, &cy->nov) / *dn;
-	oc = substr_vec(&cy->lim, &ray->zero);
-	ray->t[1] = dot_prod(&oc, &cy->nov) / *dn;
-	if (ray->t[0] > 0 && fabs(*dn) > 0.00000000001)
-	{
-		ray->p = mult_new(&ray->norm, ray->t[0]);
-		to = substr_vec(&ray->p, &cy->pos);
-		if (dot_prod(&to, &to) <= cy->r * cy->r)
-			check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
-	}
-	if (ray->t[1] > 0 && fabs(*dn) > 0.00000000001)
-	{
-		ray->p = mult_new(&ray->norm, ray->t[1]);
-		to = substr_vec(&ray->p, &cy->lim);
-		if (dot_prod(&to, &to) <= cy->r * cy->r)
-			check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
-	}*/
 	ray->t[0] = cy->prod[0] / *dn;
 	ray->t[1] = cy->prod[1] / *dn;
 	if (ray->t[0] > 0)
 	{
 		ray->p = mult_new(&ray->norm, ray->t[0]);
+		ray->p = sum_vec(&ray->zero, &ray->p);
 		d = dist(&cy->pos, &ray->p);
 		if (d <= cy->r)
 			check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
@@ -115,6 +96,7 @@ void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 	if (ray->t[1] > 0)
 	{
 		ray->p = mult_new(&ray->norm, ray->t[1]);
+		ray->p = sum_vec(&ray->zero, &ray->p);
 		d = dist(&cy->lim, &ray->p);
 		if (d <= cy->r)
 			check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
@@ -139,6 +121,7 @@ void	cy_get_norm(t_obj *cy, t_hit *hit)
 	hit->rgb = cy->cy->rgb;
 	if (hit->type == disk)
 	{
+//		hit->norm = cy->cy->nov;
 		hit->norm = mult_new(&cy->cy->nov, -1);
 		return ;
 	}

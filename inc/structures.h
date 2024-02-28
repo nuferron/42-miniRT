@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/27 18:14:12 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:06:38 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_vec t_rgb;
 typedef struct s_vars
 {
 	t_vec	oc;		//	ray origin - shape center
+	double	k1;
 	double	k2;		//	2 * dot product (oc, vo)
 	double	k3;
 	double	discr;	//	discriminant
@@ -64,7 +65,7 @@ typedef struct s_ray
 	t_point	orig;	// point on the screen
 	t_point	p;	// variable - intersection point
 	double	t[2];	// variable - distance coefficient to the intersection point
-	double	k1;		// dot_prod(norm, norm)
+//	double	k1;		// dot_prod(norm, norm)
 	double	dist;	// the minimal distance
 }	t_ray;
 //	RAYS, HITS -----------------------------------------------------/

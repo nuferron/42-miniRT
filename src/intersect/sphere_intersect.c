@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/28 15:25:49 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:54:50 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,30 @@ void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	sp = obj->sp;
 //	printf("[SPHERE]: entered\n");
 //	ray->hit.rec = false;
-//	ray->hit.obst = false;
+	ray->hit.obst = false;
 	var.oc = substr_vec(&ray->zero, &sp->pos);
-	ray->k1 = 1;
+	var.k1 = 1;
 	var.k2 = 2 * dot_prod(&var.oc, &ray->norm);
 	var.k3 = dot_prod(&var.oc, &var.oc) - sp->r * sp->r;
-	var.discr = var.k2 * var.k2 - 4 * ray->k1 * var.k3;
-	if (var.discr < 0)
+//	var.discr = var.k2 * var.k2 - 4 * var.k1 * var.k3;
+	if (!count_t(ray, &var))
 		return ; // no intersections
-	var.discr = sqrt(var.discr);
-	ray->t[0] = (-var.k2 + var.discr) / (2 * ray->k1);
+//	var.discr = sqrt(var.discr);
+//	ray->t[0] = (-var.k2 + var.discr) / (2 * var.k1);
 	if (ray->t[0] > 0) // what do we do if the intrsection is in the zero point???
 	{
 		ray->p = mult_new(&ray->norm, ray->t[0]);
+		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
-	ray->t[1] = (-var.k2 - var.discr) / (2 * ray->k1);
+//	ray->t[1] = (-var.k2 - var.discr) / (2 * var.k1);
 	if (var.discr && ray->t[1] > 0)
 	{
 		ray->p = mult_new(&ray->norm, ray->t[1]);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
-	/*if (ray->hit.obst == true)
-		ray->hit.type = sph;*/
+	if (ray->hit.obst == true)
+		ray->hit.type = sph;
 //	printf("[SPHERE]: leaving\n");
 	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
@@ -66,14 +67,14 @@ void	sp_get_norm(t_obj *sp, t_hit *hit)
 
 int	count_t(t_ray *ray, t_vars *var)
 {
-	var->discr = var->k2 * var->k2 - 4 * ray->k1 * var->k3;
+	var->discr = var->k2 * var->k2 - 4 * var->k1 * var->k3;
 	//	printf("discr: %f\n", var->discr);
 	if (var->discr < 0)
 		return (0); // no intersections
 	var->discr = sqrt(var->discr);
-	ray->t[0] = (-var->k2 + var->discr) / (2 * ray->k1);
+	ray->t[0] = (-var->k2 + var->discr) / (2 * var->k1);
 	if (var->discr)
-		ray->t[1] = (-var->k2 - var->discr) / (2 * ray->k1);
+		ray->t[1] = (-var->k2 - var->discr) / (2 * var->k1);
 	else
 		ray->t[1] = ray->t[0];
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 16:02:48 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:10:59 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 		return (1);
 	skip_space(line, &i);
 	cy->r = check_range(line, 0, i) / 2;
-	printf("CYL radius: %f\n", cy->r);
+//	printf("CYL radius: %f\n", cy->r);
 	skip_number(line, &i);
 	skip_space(line, &i);
 	cy->h = check_range(line, 0, i);

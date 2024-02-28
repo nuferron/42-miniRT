@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:01:29 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/27 18:17:36 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:48:19 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	cy_get_norm(t_obj *obj, t_hit *hit);
 void	ray_init(t_ray *ray);
 void	check_dist(t_point *p, t_ray *ray, t_item *item, double dist);
 void	all_intersect(t_sc *sc, t_ray *ray);
+void	init_light_ray(t_ray *light, t_sc *sc, t_ray *ray);
 //void	memorize(t_obj *obj, t_ray *ray, int type);
 
 #endif

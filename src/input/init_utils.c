@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 21:10:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/25 18:02:05 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:28:47 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	set_rgb(int *rgb, char *line, int i)
 	int	j;
 
 	j = 0;
+//	printf("[SET RGB] ALL string is: %s\n", &line[i]); //erase
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, PARAM, line), 0);
@@ -88,8 +89,10 @@ int	set_rgb(int *rgb, char *line, int i)
 		while (ft_isdigit(line[i]))
 			i++;
 		i++;
+//		printf("[SET RGB] rest of string is: %s\n", &line[i]); //erase
 	}
 	skip_space(line, &i);
+
 	if (line[i])
 		return (ft_dprintf(2, PARAM, line), 0);
 	return (1);
