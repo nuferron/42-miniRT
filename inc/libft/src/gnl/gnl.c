@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42barcel>       +#+  +:+       +#+        */
+/*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:14:52 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/10 16:54:05 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:28:15 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ char	*extract_line(char *storage)
 		return (NULL);
 	while (storage[enter] != '\n' && storage[enter] != '\0')
 		enter++;
-	if (storage[enter] == '\n')
-		enter++;
+//	if (storage[enter] == '\n')
+	enter++;
 	line = (char *)malloc(sizeof(char) * (enter + 1));
 	if (!line)
 		return (NULL);

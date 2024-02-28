@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/22 19:06:40 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:06:38 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ enum	e_type
 {
 	sph = 0,
 	pla = 1,
-	cyl = 2
+	cyl = 2,
+	disk = 3
 };
 
 /* Structure for coordinates ("absolute" or normalized) */
@@ -38,8 +39,10 @@ typedef struct s_vec t_rgb;
 /* A variable structure for sphere intersection */
 typedef struct s_vars
 {
-	t_vec	oc;		//	ray origin - sphere center
+	t_vec	oc;		//	ray origin - shape center
+	double	k1;
 	double	k2;		//	2 * dot product (oc, vo)
+	double	k3;
 	double	discr;	//	discriminant
 }	t_vars;
 
@@ -60,9 +63,9 @@ typedef struct s_ray
 	t_point	zero;	// the coordinates of the camera
 	t_vec	norm;	// the normalized ray vector
 	t_point	orig;	// point on the screen
-	t_point	p;		// variable - intersection point
-	double	t;		// variable - distance coefficient to the intersection point
-	double	k1;		// dot_prod(norm, norm)
+	t_point	p;	// variable - intersection point
+	double	t[2];	// variable - distance coefficient to the intersection point
+//	double	k1;		// dot_prod(norm, norm)
 	double	dist;	// the minimal distance
 }	t_ray;
 //	RAYS, HITS -----------------------------------------------------/
@@ -89,9 +92,13 @@ typedef struct s_cy //CYLINDER
 {
 	t_point	pos;	//bottom point
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
+	t_point	lim;	//upper point
+	float	prod[2];	// dot products of pos and nov for the planes
+	float	m[2];	//solution to count the normal	
 	float	r;		//radius
 	float	h;		//height
 	int		rgb[3];
+//	int		flag;	//0 - winner point is on the body, 1 - winner point is on a plane
 }	t_cy;
 
 /* Union that can contain a t_sp, a t_pl or a t_cy pointer -  obj.sp/pl/cy */
@@ -133,6 +140,7 @@ typedef struct s_light
 	t_point	pos;	//center point
 	float	b;		//light brightness ratio [0.0 - 1.0]
 	int		rgb[3];	//(bonus)
+	struct s_light	*next;
 }	t_light;
 //	SCENE SET UP ---------------------------------------------------/
 //  ----------------------------------------------------------------/
@@ -141,8 +149,8 @@ typedef struct s_light
 typedef struct s_screen
 {
 	t_point	center;
-	t_vec	w_vec;
-	t_vec	h_vec;
+	t_vec	x_ax;
+	t_vec	y_ax;
 	t_point	start;
 	float	width;
 	float	height;
