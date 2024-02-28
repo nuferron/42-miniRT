@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 16:06:38 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 19:01:14 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ enum	e_type
 	sph = 0,
 	pla = 1,
 	cyl = 2,
-	disk = 3
+	disk = 3,
+	cone = 4
 };
 
 /* Structure for coordinates ("absolute" or normalized) */
@@ -32,7 +33,6 @@ typedef struct s_vec
 }	t_vec;
 
 typedef struct s_vec t_point;
-typedef struct s_vec t_rgb;
 
 //  ----------------------------------------------------------------/
 //	RAYS, HITS -----------------------------------------------------/
@@ -53,7 +53,7 @@ typedef struct s_hit
 	t_vec		norm;	// normalized vector of the hit
 	t_item		*obj;	// pointer to the winner object
 	int			*rgb;
-	bool		obst; 	// obstices 0 if there is access to light
+	bool		obst; 	// obst = 0 if there is access to light
 	enum e_type	type;
 }	t_hit;
 
@@ -65,7 +65,6 @@ typedef struct s_ray
 	t_point	orig;	// point on the screen
 	t_point	p;	// variable - intersection point
 	double	t[2];	// variable - distance coefficient to the intersection point
-//	double	k1;		// dot_prod(norm, norm)
 	double	dist;	// the minimal distance
 }	t_ray;
 //	RAYS, HITS -----------------------------------------------------/
@@ -98,8 +97,20 @@ typedef struct s_cy //CYLINDER
 	float	r;		//radius
 	float	h;		//height
 	int		rgb[3];
-//	int		flag;	//0 - winner point is on the body, 1 - winner point is on a plane
 }	t_cy;
+
+typedef struct s_co //CONO
+{
+	t_point	pos;	//top point
+	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
+	t_point	lim;	//bottom point
+	float	prod;	// dot product of pos and nov for the plane
+	float	m[2];	//solution to count the normal	
+	float	r;		//radius
+	float	h;		//height
+	float	tg;		//tangent of the half angle
+	int		rgb[3];
+}	t_co;
 
 /* Union that can contain a t_sp, a t_pl or a t_cy pointer -  obj.sp/pl/cy */
 typedef union u_obj
@@ -107,6 +118,7 @@ typedef union u_obj
 	t_sp	*sp;
 	t_pl	*pl;
 	t_cy	*cy;
+	t_co	*co;
 }	t_obj;
 
 typedef struct s_item

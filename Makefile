@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/02/23 18:27:00 by nuferron         ###   ########.fr        #
+#    Updated: 2024/02/28 18:51:48 by nzhuzhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ translation.c
 SRCS_UTILS = num_utils.c utils.c mem_utils.c math_utils.c
 SRCS_OPER = vector_utils.c vector_utils2.c vector_utils3.c
 SRCS_INTERSEC = plane_intersect.c sphere_intersect.c ray_intersect.c \
-cylinder_intersect.c
+cylinder_intersect.c cone_intersect.c
 SRCS_SCREEN = screen.c color.c color_utils.c
 
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \

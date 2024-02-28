@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 16:10:59 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:50:26 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,45 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 	obj->trans = cy_translation;
 	obj->obj_free = cy_free;
 	obj->get_norm = cy_get_norm;
+	return (0);
+}
+
+/*It adds a t_cy and sets its variables.
+  Returns 1 with fail and 0 with success*/
+int	get_cone(char *line, int i, t_sc *sc)
+{
+	t_item	*obj;
+	t_co	*co;
+
+	obj = add_obj(sc->objs, sc);
+	co = malloc(sizeof(t_co));
+	if (!co)
+		exit(ft_dprintf(2, MEM));
+	skip_space(line, &i);
+	if (!line[i])
+		return (ft_dprintf(2, LINE, line), 1);
+	if (init_vec(&co->pos, line, &i)
+		|| init_vec(&co->nov, line, &i))
+		return (1);
+	skip_space(line, &i);
+	co->r = check_range(line, 0, i) / 2;
+//	printf("CYL radius: %f\n", cy->r);
+	skip_number(line, &i);
+	skip_space(line, &i);
+	co->h = check_range(line, 0, i);
+	if (co->r == -2 || co->h == -2)
+		return (1);
+	skip_number(line, &i);
+	if (!set_rgb(co->rgb, line, i))
+		return (1);
+	norm_vector(&co->nov);
+	//printf("coord cyl before: %f, %f, %f\n", cy->pos.x, cy->pos.y, cy->pos.z);
+	//printf("coord cyl after: %f, %f, %f\n", cy->pos.x, cy->pos.y, cy->pos.z);
+	obj->type.co = co;
+	obj->intersect = cone_intersect;
+	obj->trans = cone_translation;
+	obj->obj_free = cone_free;
+	obj->get_norm = cone_get_norm;
 	return (0);
 }
 

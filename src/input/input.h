@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:04:16 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/23 19:01:14 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:46:28 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		get_light(char *line, int i, t_light *light);
 int		get_sphere(char *line, int i, t_sc *sc);
 int		get_plane(char *line, int i, t_sc *sc);
 int		get_cylinder(char *line, int i, t_sc *sc);
+int		get_cone(char *line, int i, t_sc *sc);
 t_item	*add_obj(t_item *item, t_sc *sc);
 
 /* init_utils.c - INITIALIZE STRUCTS VARIABLES */
@@ -40,5 +41,6 @@ void	translation(t_vec *new_origin, t_vec *p);
 void	sph_translation(t_obj *obj, t_sc *sc);
 void	pl_translation(t_obj *obj, t_sc *sc);
 void	cy_translation(t_obj *obj, t_sc *sc);
+void	cone_translation(t_obj *obj, t_sc *sc);
 
 #endif
