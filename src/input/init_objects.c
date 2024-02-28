@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 20:18:26 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:23:25 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,11 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 	if (!set_rgb(cy->rgb, line, i))
 		return (1);
 	norm_vector(&cy->nov);
-	/*obj->type.cy = cy;
+	obj->type.cy = cy;
 	obj->intersect = cy_intersect;
 	obj->trans = cy_translation;
 	obj->obj_free = cy_free;
-	obj->get_norm = cy_get_norm;*/
+	obj->get_norm = cy_get_norm;
 	return (0);
 }
 /*
