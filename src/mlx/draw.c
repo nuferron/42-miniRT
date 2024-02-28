@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:58:21 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/23 17:35:01 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/28 22:18:51 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	draw_scene(t_sc *sc)
 	while (sc->mlx.w < WIDTH)
 	{
 		sc->mlx.h = 0;
+		sc->mlx.color = 0;
 		while (sc->mlx.h < HEIGHT)
 		{
 			//throw_rays(sc, &sc->screen);
