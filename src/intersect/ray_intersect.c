@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/28 16:59:01 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:32:22 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,17 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 		obj = obj -> next;
 	}
 	init_light_ray(&light, sc, ray);
+	ray->hit.obst = false;
 	d = dist(&light.zero, &light.orig);
 	obj = sc->objs;
 	while (obj)
 	{
 		obj->intersect(&obj->type, &light, obj);
 		if (light.hit.obst && light.dist < d)
+		{
+			ray->hit.obst = true;
 			break ;
+		}
 		obj = obj -> next;
 	}
 	/*if (ray->dist < MAXFLOAT)

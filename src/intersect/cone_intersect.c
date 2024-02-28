@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:28:24 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/28 19:23:13 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:32:32 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	cone_get_norm(t_obj *co, t_hit *hit)
 		hit->norm = mult_new(&co->co->nov, -1);
 		return ;
 	}
-	mvec = substr_vec(&hit->)
+	mvec = substr_vec(&hit->);
 //	a = sum_vec(&co->co->pos, &mvec);
 	a = co->co->m[0] * co->co->tg * co->co->tg;
 	hit->norm = substr_vec(&hit->p, &a);
