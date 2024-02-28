@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/27 22:49:16 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:25:16 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 
 	cy = obj->cy;
 //	printf("[CYLINDER]: entered\n");
-	
 	var.oc = substr_vec(&ray->zero, &cy->pos);
 	dn = dot_prod(&cy->nov, &ray->norm);
 	ray->k1 = 1 - dn * dn;
@@ -29,13 +28,8 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	var.k2 = 2 * (dot_prod(&ray->norm, &var.oc) - dn * posn);
 	var.k3 = dot_prod(&cy->pos, &cy->pos) - posn * posn - cy->r * cy->r;
 	cy_check_disk(ray, cy, item, &dn);
-	count_t(ray, &var);
-	if (var.discr < 0)
-	{
-	//	printf("discr: %f\n", var.discr);
-		
+	if (!count_t(ray, &var))
 		return ;
-	}
 //	printf("discr: %f\n", var.discr);
 	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
