@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:01:29 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/28 16:48:19 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:07:24 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		count_t(t_ray *ray, t_vars *var);
 
 /* cylinder_intersect.c - intersection with cylinder equations  **************/
 void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item);
-int		cy_check_body(t_ray *ray, t_item *item, t_cy *cy);
+void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy);
 void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn);
 void	cy_get_norm(t_obj *obj, t_hit *hit);
 
