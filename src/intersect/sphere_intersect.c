@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/28 17:06:35 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/28 22:03:40 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	t_sp	*sp;
 
 	sp = obj->sp;
-//	printf("[SPHERE]: entered\n");
 	ray->hit.obst = false;
 	var.oc = substr_vec(&ray->zero, &sp->pos);
 	var.k1 = 1;
@@ -55,13 +54,11 @@ void	sp_get_norm(t_obj *sp, t_hit *hit)
 	norm_vector(&hit->norm);
 	hit->rgb = sp->sp->rgb;
 	hit->type = sph;
-//	printf("r: %i, g: %i\n", hit->rgb[0], hit->rgb[1]);
 }
 
 int	count_t(t_ray *ray, t_vars *var)
 {
 	var->discr = var->k2 * var->k2 - 4 * var->k1 * var->k3;
-	//	printf("discr: %f\n", var->discr);
 	if (var->discr < 0)
 		return (0); // no intersections
 	var->discr = sqrt(var->discr);
