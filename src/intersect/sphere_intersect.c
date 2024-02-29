@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/28 22:03:40 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/29 21:36:33 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	if (var.discr && ray->t[1] > 0)
 	{
 		ray->p = mult_new(&ray->norm, ray->t[1]);
+		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
 //	if (ray->hit.obst == true)
