@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/28 17:05:43 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/29 21:54:02 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	var.k1 = 1 - dn * dn;
 	posn = dot_prod(&cy->nov, &var.oc);
 	var.k2 = 2 * (dot_prod(&ray->norm, &var.oc) - dn * posn);
-	var.k3 = dot_prod(&cy->pos, &cy->pos) - posn * posn - cy->r * cy->r;
+	var.k3 = dot_prod(&var.oc, &var.oc) - posn * posn - cy->r * cy->r;
 	cy_check_disk(ray, cy, item, &dn);
 	if (!count_t(ray, &var))
 		return ;
@@ -60,7 +60,7 @@ void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 	}
 	if (ray->t[0] == ray->t[1])
 		return ;
-	if (ray->t[1] > 0 && cy->m[1] < cy->h  && cy->m[1] > 0)
+	if (ray->t[1] > 0 && cy->m[1] < cy->h  && cy->m[1] > 0 && ray->t[0] != ray->t[1])
 	{
 		ray->p = mult_new(&ray->norm, ray->t[1]);
 		ray->p = sum_vec(&ray->zero, &ray->p);

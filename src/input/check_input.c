@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 18:51:01 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/29 21:51:35 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	check_content(t_sc *sc, char *line)
 		return (get_plane(line, i + 2, sc));
 	else if (!ft_strncmp(element, "cy", 3))
 		return (get_cylinder(line, i + 2, sc));
-	else if (!ft_strncmp(element, "co", 3))
+	else if (!ft_strncmp(element, "cn", 3))
 		return (get_cone(line, i + 2, sc));
 	else
 		return (ft_dprintf(2, ELEM, element), 1);

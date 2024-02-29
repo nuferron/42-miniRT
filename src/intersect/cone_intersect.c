@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:28:24 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/28 20:32:32 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/29 21:55:51 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	cone_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	var.k1 = 1 - (1 + co->tg * co->tg) * dn * dn;
 	posn = dot_prod(&co->nov, &var.oc);
 	var.k2 = 2 * (dot_prod(&ray->norm, &var.oc) - (1 + co->tg * co->tg) * dn * posn);
-	var.k3 = dot_prod(&co->pos, &co->pos) - (1 + co->tg * co->tg) * posn * posn;
+	var.k3 = dot_prod(&var.oc, &var.oc) - (1 + co->tg * co->tg) * posn * posn;
 	cone_check_disk(ray, co, item, &dn);
 	if (!count_t(ray, &var))
 		return ;
@@ -60,7 +60,7 @@ void	cone_check_body(t_ray *ray, t_item *item, t_co *co)
 	}
 	if (ray->t[0] == ray->t[1])
 		return ;
-	if (ray->t[1] > 0 && co->m[1] < co->h  && co->m[1] > 0)
+	if (ray->t[1] > 0 && co->m[1] < co->h  && co->m[1] > 0 && ray->t[0] != ray->t[1])
 	{
 		ray->p = mult_new(&ray->norm, ray->t[1]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
