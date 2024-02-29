@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:18:22 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/29 20:40:41 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/29 20:41:54 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	obj_color(t_amb *amb, t_light *light, unsigned int *color, t_hit *hit)
 	diffuse = diffuse_light(light, hit, color_x_fact(rgb_to_hex(amb->rgb),
 				amb->ratio), dot);
 	*color = add_color(color_mean(ambient, diffuse), *color);
-	if (dot_prod(&l_ray, &hit->norm) > 0.15)
+	if (dot_prod(&l_ray, &hit->norm) > 0.1)
 		*color = add_color(*color, phong_light(light, hit, dot, &l_ray));
 }
 
