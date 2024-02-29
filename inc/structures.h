@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 20:19:04 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:57:24 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_hit
 	t_item		*obj;	// pointer to the winner object
 	int			*rgb;
 	bool		obst; 	// obstices 0 if there is access to light
+//	bool		shadow;	// false if there is access to light
 	enum e_type	type;
 }	t_hit;
 

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:18:22 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 23:50:02 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/29 20:01:34 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,14 @@ unsigned int	get_color(t_amb *amb, t_light *light, t_item *obj, t_hit *hit)
 		tmp = obj;
 		while (tmp)
 		{
-			tmp->intersect(&tmp->type, &ray, tmp);
-			if (ray.dist < d && ray.dist > 0.01)
+			if (tmp != hit->obj)
 			{
-				hit->obst = true;
-				break ;
+				tmp->intersect(&tmp->type, &ray, tmp);
+				if (ray.dist < d)
+				{
+					hit->obst = true;
+					break ;
+				}
 			}
 			tmp = tmp->next;
 		}

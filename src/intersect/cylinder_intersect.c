@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/29 18:39:40 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/29 20:01:54 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	var.k1 = 1 - dn * dn;
 	posn = dot_prod(&cy->nov, &var.oc);
 	var.k2 = 2 * (dot_prod(&ray->norm, &var.oc) - dn * posn);
-	var.k3 = dot_prod(&cy->pos, &cy->pos) - posn * posn - cy->r * cy->r;
+	var.k3 = dot_prod(&var.oc, &var.oc) - posn * posn - cy->r * cy->r;
 	cy_check_disk(ray, cy, item, &dn);
 	if (!count_t(ray, &var))
 		return ;
@@ -51,23 +51,28 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 
 void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 {
+//	bool	temp;
+
+//	temp = ray->hit.obst;
 	ray->hit.obst = false;
 	if (ray->t[0] > 0 && cy->m[0] < cy->h && cy->m[0] > 0) // what do we do if the intrsection is in the zero point???
 	{
+	//	ray->hit.shadow = true;
 		ray->p = mult_new(&ray->norm, ray->t[0]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
-	if (ray->t[0] == ray->t[1])
-		return ;
 	if (ray->t[1] > 0 && cy->m[1] < cy->h  && cy->m[1] > 0)
 	{
+	//	ray->hit.shadow = true;
 		ray->p = mult_new(&ray->norm, ray->t[1]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
 	if (ray->hit.obst == true)
 		ray->hit.type = cyl;
+//	else if (temp == true)
+//		ray->hit.obst = true;
 	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
 		printf("res: %i\n", res);
@@ -83,6 +88,7 @@ void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 	ray->t[1] = cy->prod[1] / *dn;
 	if (ray->t[0] > 0)
 	{
+	//	ray->hit.shadow = true;
 		ray->p = mult_new(&ray->norm, ray->t[0]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		d = dist(&cy->pos, &ray->p);
@@ -91,6 +97,7 @@ void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 	}
 	if (ray->t[1] > 0)
 	{
+	//	ray->hit.shadow = true;
 		ray->p = mult_new(&ray->norm, ray->t[1]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		d = dist(&cy->lim, &ray->p);
