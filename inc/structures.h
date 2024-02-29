@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 19:01:14 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/29 22:23:21 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_ray
 	t_point	zero;	// the coordinates of the camera
 	t_vec	norm;	// the normalized ray vector
 	t_point	orig;	// point on the screen
-	t_point	p;	// variable - intersection point
+	t_point	p;		// variable - intersection point
 	double	t[2];	// variable - distance coefficient to the intersection point
 	double	dist;	// the minimal distance
 }	t_ray;

@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:07:57 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/18 18:01:40 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:57:18 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@
 	ERROR "Element not found: %s\n" RESET
 #define MUST \
 	ERROR "There must be ONE \"A\", ONE \"C\" and ONE \"L\" element\n" RESET
+#define NEG \
+	ERROR "Negative number when expecting positive number: %s\n" RESET
 
 #endif

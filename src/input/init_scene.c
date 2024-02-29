@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:37:09 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/23 20:58:37 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:27:32 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,33 +53,6 @@ int	get_camera(char *line, int i, t_cam *cam)
 }
 
 /*It sets all t_ligth variables. Returns 1 with fail and 0 with success*/
-/*int	get_light(char *line, int i, t_light *light)
-{
-	if (light->b != -1)
-		return (ft_dprintf(2, REPE, "L"), 1);
-	skip_space(line, &i);
-	if (!line[i])
-		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&light->pos, line, &i))
-		return (1);
-	skip_space(line, &i);
-	light->b = check_range(line, 'b', i);
-	if (light->b == -2)
-		return (1);
-	while (line[i] && !is_whitespace(line[i]) && line[i] != ',')
-		i++;
-	skip_space(line, &i);
-	if (!line[i])
-	{
-		light->rgb[0] = LIGHT[0];
-		light->rgb[1] = LIGHT[1];
-		light->rgb[2] = LIGHT[2];
-	}
-	else if (!set_rgb(light->rgb, line, i))
-		return (1);
-	return (0);
-}*/
-
 static t_light	*add_light(t_light *first)
 {
 	t_light	*last;
@@ -95,6 +68,7 @@ static t_light	*add_light(t_light *first)
 	return (new);
 }
 
+/*Initializes the light in a bonus way*/
 int	get_light(char *line, int i, t_light *light)
 {
 	t_light	*last;
