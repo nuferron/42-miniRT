@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/29 22:27:44 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/29 23:15:22 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 
 void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 {
+	bool	temp;
+
+	temp = ray->hit.obst;
 	ray->hit.obst = false;
 	if (ray->t[0] > 0 && cy->m[0] < cy->h && cy->m[0] > 0) // what do we do if the intrsection is in the zero point???
 	{
@@ -68,6 +71,8 @@ void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 	}
 	if (ray->hit.obst == true)
 		ray->hit.type = cyl;
+	else if (temp == true)
+		ray->hit.obst = true;
 	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
 		printf("res: %i\n", res);
