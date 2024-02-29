@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:28:24 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/29 21:55:51 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/29 22:13:30 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,15 +112,15 @@ void	cone_get_norm(t_obj *co, t_hit *hit)
 		hit->norm = mult_new(&co->co->nov, -1);
 		return ;
 	}
-	mvec = substr_vec(&hit->);
-//	a = sum_vec(&co->co->pos, &mvec);
-	a = co->co->m[0] * co->co->tg * co->co->tg;
-	hit->norm = substr_vec(&hit->p, &a);
+	mvec = substr_vec(&hit->p, &co->co->pos);
+	a = (1 + co->co->tg * co->co->tg) * co->co->m[0];
+	hit->norm = mult_new(&co->co->nov, a);
+	hit->norm = substr_vec(&mvec, &hit->norm);
 	if (dot_prod(&hit->norm, &mvec) != 0)
 	{
-		mvec = mult_new(&co->co->nov, co->co->m[1]);
-		a = sum_vec(&co->co->pos, &mvec);
-		hit->norm = substr_vec(&hit->p, &a);
+		a = (1 + co->co->tg * co->co->tg) * co->co->m[1];
+		hit->norm = mult_new(&co->co->nov, a);
+		hit->norm = substr_vec(&mvec, &hit->norm);
 	}
 	norm_vector(&hit->norm);
 //	printf("cylinder pointer %p, ray pointer %p\n", cy, hit);
