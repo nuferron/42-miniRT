@@ -6,14 +6,14 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/29 22:26:41 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/02/29 22:30:22 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
 /*It does a realloc of size 1 (kind of) of t_item structures*/
-static t_item	*add_obj(t_item *item, t_sc *sc)
+t_item	*add_obj(t_item *item, t_sc *sc)
 {
 	t_item	*ret;
 
@@ -162,18 +162,4 @@ int	get_cone(char *line, int i, t_sc *sc)
 	return (0);
 }
 
-/*It does a realloc of size 1 (kind of) of t_item structures*/
-t_item	*add_obj(t_item *item, t_sc *sc)
-{
-	t_item	*ret;
 
-	ret = ft_calloc(1, sizeof(t_item));
-	if (!ret)
-		exit(ft_dprintf(2, MEM));
-	ret->next = NULL;
-	if (!item)
-		sc->objs = ret;
-	else
-		item_lstlast(item)->next = ret;
-	return (ret);
-}
