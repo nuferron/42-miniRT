@@ -57,14 +57,14 @@ void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 	ray->hit.obst = false;
 	if (ray->t[0] > 0 && cy->m[0] < cy->h && cy->m[0] > 0) // what do we do if the intrsection is in the zero point???
 	{
+	//	ray->hit.shadow = true;
 		ray->p = mult_new(&ray->norm, ray->t[0]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
-	if (ray->t[0] == ray->t[1])
-		return ;
 	if (ray->t[1] > 0 && cy->m[1] < cy->h  && cy->m[1] > 0 && ray->t[0] != ray->t[1])
 	{
+	//	ray->hit.shadow = true;
 		ray->p = mult_new(&ray->norm, ray->t[1]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
@@ -88,6 +88,7 @@ void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 	ray->t[1] = cy->prod[1] / *dn;
 	if (ray->t[0] > 0)
 	{
+	//	ray->hit.shadow = true;
 		ray->p = mult_new(&ray->norm, ray->t[0]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		d = dist(&cy->pos, &ray->p);
@@ -96,6 +97,7 @@ void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 	}
 	if (ray->t[1] > 0)
 	{
+	//	ray->hit.shadow = true;
 		ray->p = mult_new(&ray->norm, ray->t[1]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		d = dist(&cy->lim, &ray->p);

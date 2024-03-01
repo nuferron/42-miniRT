@@ -28,12 +28,14 @@ void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item)
 		return ; // no intersections
 	if (ray->t[0] > 0)
 	{
+	//	ray->hit.shadow = true;
 		ray->p = mult_new(&ray->norm, ray->t[0]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
 	if (var.discr && ray->t[1] > 0)
 	{
+	//	ray->hit.shadow = true;
 		ray->p = mult_new(&ray->norm, ray->t[1]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
