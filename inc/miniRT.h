@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/23 17:34:28 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:50:32 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	free_all(t_sc *sc);
 void	sp_free(t_obj *obj);
 void	pl_free(t_obj *obj);
 void	cy_free(t_obj *obj);
+void	cone_free(t_obj *obj);
 
 /* UTILS */
 int		is_float(char *str); //not in utils

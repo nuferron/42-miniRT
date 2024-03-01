@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:04:16 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/27 20:05:01 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/29 22:21:43 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		get_sphere(char *line, int i, t_sc *sc);
 int		get_plane(char *line, int i, t_sc *sc);
 int		get_cylinder(char *line, int i, t_sc *sc);
 int		get_cone(char *line, int i, t_sc *sc);
+t_item	*add_obj(t_item *item, t_sc *sc);
+
 
 /* init_utils.c - INITIALIZE STRUCTS VARIABLES */
 float	check_range(char *line, char type, int i);
@@ -44,7 +46,7 @@ int		check_content(t_sc *sc, char *line);
 void	sph_translation(t_obj *obj, t_sc *sc);
 void	pl_translation(t_obj *obj, t_sc *sc);
 void	cy_translation(t_obj *obj, t_sc *sc);
-void	cn_translation(t_obj *obj, t_sc *sc);
+void	cone_translation(t_obj *obj, t_sc *sc);
 
 /* check_input.c - parsing + initalization*/
 int		check_input(int argc, char **argv, t_sc *sc);

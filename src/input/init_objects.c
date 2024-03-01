@@ -6,14 +6,14 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 21:23:25 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/02/29 22:30:22 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
 /*It does a realloc of size 1 (kind of) of t_item structures*/
-static t_item	*add_obj(t_item *item, t_sc *sc)
+t_item	*add_obj(t_item *item, t_sc *sc)
 {
 	t_item	*ret;
 
@@ -122,33 +122,44 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 	obj->get_norm = cy_get_norm;
 	return (0);
 }
-/*
-// pos nov r h rgb
+
+/*It adds a t_cy and sets its variables.
+  Returns 1 with fail and 0 with success*/
 int	get_cone(char *line, int i, t_sc *sc)
 {
 	t_item	*obj;
-	t_cn	*cn;
+	t_co	*co;
 
 	obj = add_obj(sc->objs, sc);
-	cn = malloc(sizeof(t_cn));
-	if (!cn)
+	co = malloc(sizeof(t_co));
+	if (!co)
 		exit(ft_dprintf(2, MEM));
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&cn->pos, line, &i) || init_vec(&cn->nov, line, &i))
+	if (init_vec(&co->pos, line, &i)
+		|| init_vec(&co->nov, line, &i))
 		return (1);
 	skip_space(line, &i);
-	cn->r = check_range(line, 'p', i) / 2;
+	co->r = check_range(line, 0, i) / 2;
+//	printf("CYL radius: %f\n", cy->r);
 	skip_number(line, &i);
 	skip_space(line, &i);
-	cn->h = check_range(line, 'p', i);
-	if (cn->r == -2 || cn->h == -2)
+	co->h = check_range(line, 0, i);
+	if (co->r == -2 || co->h == -2)
 		return (1);
 	skip_number(line, &i);
-	if (!set_rgb(cn->rgb, line, i))
+	if (!set_rgb(co->rgb, line, i))
 		return (1);
-	norm_vector(&cn->nov);
-	obj->type = cn;
+	norm_vector(&co->nov);
+	//printf("coord cyl before: %f, %f, %f\n", cy->pos.x, cy->pos.y, cy->pos.z);
+	//printf("coord cyl after: %f, %f, %f\n", cy->pos.x, cy->pos.y, cy->pos.z);
+	obj->type.co = co;
+	obj->intersect = cone_intersect;
+	obj->trans = cone_translation;
+	obj->obj_free = cone_free;
+	obj->get_norm = cone_get_norm;
 	return (0);
-}*/
+}
+
+
