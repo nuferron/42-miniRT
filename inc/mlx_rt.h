@@ -6,15 +6,15 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:38:35 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/02 17:23:41 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/01 19:27:49 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLX_RT_H
 # define MLX_RT_H
 
-# define WIDTH 1900
-# define HEIGHT 1000
+# define WIDTH 1200
+# define HEIGHT 800
 # define FOCAL	150
 # define ESC 53
 
