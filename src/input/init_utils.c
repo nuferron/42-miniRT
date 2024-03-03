@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 21:10:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 20:17:39 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/03 14:43:07 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ float	check_range(char *line, char type, int i)
 	if (input < 0 && type == 'p')
 		return (ft_dprintf(2, NEG, line), -2);
 	if (type && type != 'p' && (input < rg[0] || input > rg[1]))
-		return (ft_dprintf(2, RANGE, &line[i], (int)rg[0], (int)rg[1]), -2);
+		return (ft_dprintf(2, RANGE, line, (int)rg[0], (int)rg[1]), -2);
 	return (input);
 }
 
@@ -75,7 +75,6 @@ int	set_rgb(int *rgb, char *line, int i)
 	int	j;
 
 	j = 0;
-//	printf("[SET RGB] ALL string is: %s\n", &line[i]); //erase
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, PARAM, line), 0);
@@ -91,7 +90,6 @@ int	set_rgb(int *rgb, char *line, int i)
 		while (ft_isdigit(line[i]))
 			i++;
 		i++;
-//		printf("[SET RGB] rest of string is: %s\n", &line[i]); //erase
 	}
 	skip_space(line, &i);
 
@@ -100,18 +98,17 @@ int	set_rgb(int *rgb, char *line, int i)
 	return (1);
 }
 
-void	translation(t_vec *new_origin, t_vec *p)
-{
-	p->x -= new_origin->x;
-	p->y -= new_origin->y;
-	p->z -= new_origin->z;
-}
-
 void	coord_transformation(t_sc *sc)
 {
 	t_item	*obj;
+	t_light	*light;
 
-	translation(&sc->cam.pos, &sc->light.pos);
+	light = sc->light;
+	while (light)
+	{
+		translation(&sc->cam.pos, &light->pos);
+		light = light->next;
+	}
 	obj = sc->objs;
 	while (obj)
 	{
