@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:04:16 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/27 20:05:01 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/03 15:03:04 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 /* init_scene.c */
 int		get_ambient(char *line, int i, t_amb *amb);
 int		get_camera(char *line, int i, t_cam *cam);
-int		get_light(char *line, int i, t_light *light);
+int		get_light(char *line, int i, t_light **light);
 
 /* init_objects.c */
 int		get_sphere(char *line, int i, t_sc *sc);
@@ -44,7 +44,7 @@ int		check_content(t_sc *sc, char *line);
 void	sph_translation(t_obj *obj, t_sc *sc);
 void	pl_translation(t_obj *obj, t_sc *sc);
 void	cy_translation(t_obj *obj, t_sc *sc);
-void	cn_translation(t_obj *obj, t_sc *sc);
+void	cone_translation(t_obj *obj, t_sc *sc);
 
 /* check_input.c - parsing + initalization*/
 int		check_input(int argc, char **argv, t_sc *sc);
