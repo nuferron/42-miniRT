@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 21:23:25 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/03 15:08:48 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ int	get_sphere(char *line, int i, t_sc *sc)
 	skip_space(line, &i);
 	if (!is_float(&line[i]) || line[i] == ',')
 		return (ft_dprintf(2, LINE, line), 1);
-	sp->r = ft_atof(&line[i]) / 2;
-//	printf("SP radius: %f\n", sp->r);
+	sp->r = check_range(line, 'p', i) / 2;
+	if (sp->r == -1)
+		return (1);
 	skip_number(line, &i);
 	if (!set_rgb(sp->rgb, line, i))
 		return (1);
@@ -76,6 +77,8 @@ int	get_plane(char *line, int i, t_sc *sc)
 		return (ft_dprintf(2, LINE, line), 1);
 	if (init_vec(&pl->pos, line, &i) || init_vec(&pl->nov, line, &i))
 		return (1);
+	if (vec_mod(&pl->nov) != 1)
+		ft_dprintf(2, NORM, line);
 	skip_space(line, &i);
 	if (!set_rgb(pl->rgb, line, i))
 		return (1);
@@ -104,12 +107,14 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 		return (ft_dprintf(2, LINE, line), 1);
 	if (init_vec(&cy->pos, line, &i) || init_vec(&cy->nov, line, &i))
 		return (1);
+	if (vec_mod(&cy->nov) != 1)
+		ft_dprintf(2, NORM, line);
 	skip_space(line, &i);
 	cy->r = check_range(line, 'p', i) / 2;
 	skip_number(line, &i);
 	skip_space(line, &i);
 	cy->h = check_range(line, 'p', i);
-	if (cy->r == -2 || cy->h == -2)
+	if (cy->r == -1 || cy->h == -2)
 		return (1);
 	skip_number(line, &i);
 	if (!set_rgb(cy->rgb, line, i))
@@ -122,33 +127,40 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 	obj->get_norm = cy_get_norm;
 	return (0);
 }
-/*
-// pos nov r h rgb
+
+/*It adds a t_cy and sets its variables.
+  Returns 1 with fail and 0 with success*/
 int	get_cone(char *line, int i, t_sc *sc)
 {
 	t_item	*obj;
-	t_cn	*cn;
+	t_co	*co;
 
 	obj = add_obj(sc->objs, sc);
-	cn = malloc(sizeof(t_cn));
-	if (!cn)
+	co = malloc(sizeof(t_co));
+	if (!co)
 		exit(ft_dprintf(2, MEM));
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&cn->pos, line, &i) || init_vec(&cn->nov, line, &i))
+	if (init_vec(&co->pos, line, &i) || init_vec(&co->nov, line, &i))
 		return (1);
+	if (vec_mod(&co->nov) != 1)
+		ft_dprintf(2, NORM, line);
 	skip_space(line, &i);
-	cn->r = check_range(line, 'p', i) / 2;
+	co->r = check_range(line, 'p', i) / 2;
 	skip_number(line, &i);
 	skip_space(line, &i);
-	cn->h = check_range(line, 'p', i);
-	if (cn->r == -2 || cn->h == -2)
+	co->h = check_range(line, 'p', i);
+	if (co->r == -1 || co->h == -2)
 		return (1);
 	skip_number(line, &i);
-	if (!set_rgb(cn->rgb, line, i))
+	if (!set_rgb(co->rgb, line, i))
 		return (1);
-	norm_vector(&cn->nov);
-	obj->type = cn;
+	norm_vector(&co->nov);
+	obj->type.co = co;
+	obj->intersect = cone_intersect;
+	obj->trans = cone_translation;
+	obj->obj_free = cone_free;
+	obj->get_norm = cone_get_norm;
 	return (0);
-}*/
+}
