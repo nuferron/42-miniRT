@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 20:47:10 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/19 19:35:10 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/03 15:03:42 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,9 @@ void	pl_free(t_obj *obj)
 void	cy_free(t_obj *obj)
 {
 	free(obj->cy);
+}
+
+void	cone_free(t_obj *obj)
+{
+	free(obj->co);
 }

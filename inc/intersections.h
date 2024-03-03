@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:01:29 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/29 19:01:25 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/03 15:02:18 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item);
 void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy);
 void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn);
 void	cy_get_norm(t_obj *obj, t_hit *hit);
+
+/* cone_intersect.c - intersection with cone equations  **************/
+void	cone_intersect(t_obj *obj, t_ray *ray, t_item *item);
+void	cone_check_body(t_ray *ray, t_item *item, t_co *co);
+void	cone_check_disk(t_ray *ray, t_co *co, t_item *item, float *dn);
+void	cone_get_norm(t_obj *obj, t_hit *hit);
 
 /* ray_intersect.c - dealing with ray variables  **************/
 void	ray_init(t_ray *ray);
