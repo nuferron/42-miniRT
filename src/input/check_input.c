@@ -6,26 +6,21 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 21:24:36 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/03 15:05:54 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
 /*It gets the first 5 (non-space like) characters and returns them*/
-static char	*get_element(char *line, int i)
+static void get_element(char *line, int i, char *tmp)
 {
-	char	tmp[3];
 	int		j;
 
 	j = 0;
-	while (j < 3 && line[i] && !is_whitespace(line[i]))
+	while (j < 2 && line[i] && !is_whitespace(line[i]))
 		tmp[j++] = line[i++];
-	if (!line[i])
-		return (&line[i]);
 	tmp[j] = '\0';
-	line = tmp;
-	return (line);
 }
 
 /*It checks that the file name ends with ".rt"*/
@@ -45,13 +40,13 @@ static int	check_file_type(char *file)
 int	check_content(t_sc *sc, char *line)
 {
 	int		i;
-	char	*element;
+	char	element[3];
 
 	i = 0;
 	skip_space(line, &i);
 	if (!line[i])
 		return (0);
-	element = get_element(line, i);
+	get_element(line, i, element);
 	if (!ft_strncmp(element, "A", 2))
 		return (get_ambient(line, ++i, &sc->amb));
 	else if (!ft_strncmp(element, "C", 2))
@@ -64,8 +59,8 @@ int	check_content(t_sc *sc, char *line)
 		return (get_plane(line, i + 2, sc));
 	else if (!ft_strncmp(element, "cy", 3))
 		return (get_cylinder(line, i + 2, sc));
-	/*else if (!ft_strncmp(element, "cn", 3))
-		return (get_cone(line, i + 2, sc));*/
+	else if (!ft_strncmp(element, "co", 3))
+		return (get_cone(line, i + 2, sc));
 	else
 		return (ft_dprintf(2, ELEM, element), 1);
 	return (0);
@@ -81,7 +76,7 @@ static int	check_file(int fd, t_sc *sc)
 		return (ft_dprintf(2, EMPTY), 1);
 	while (line)
 	{
-//		line[ft_strlen(line) - 1] = '\0';
+		line[ft_strlen(line) - 1] = '\0';
 		if (check_content(sc, line))
 			exit(1);
 		free(line);
@@ -105,7 +100,7 @@ int	check_input(int argc, char **argv, t_sc *sc)
 		return (ft_dprintf(2, FNF, argv[1]), 1);
 	if (check_file(fd, sc))
 		return (1);
-	if (sc->amb.ratio == -1 || sc->cam.fov == -1 || sc->light.b == -1)
+	if (sc->amb.ratio == -1 || sc->cam.fov == -1 || sc->light->b == -1)
 		return (ft_dprintf(2, MUST), 1);
 	sc->screen.width = sin(sc->cam.fov / 2) * 2 * FOCAL;
 	sc->screen.pix_rat = sc->screen.width / WIDTH;
