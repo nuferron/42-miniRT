@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/02/28 20:54:17 by nuferron         ###   ########.fr        #
+#    Updated: 2024/03/03 15:01:24 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ translation.c
 SRCS_UTILS = num_utils.c utils.c mem_utils.c
 SRCS_OPER = vector_utils.c vector_utils2.c vector_utils3.c
 SRCS_INTERSEC = plane_intersect.c sphere_intersect.c ray_intersect.c \
-cylinder_intersect.c
+cylinder_intersect.c cone_intersect.c
 SRCS_SCREEN = screen.c color.c color_utils.c
 
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
@@ -45,6 +45,9 @@ INC = inc/
 MLXFLAGS = -Linc/mlx -lmlx -framework OpenGL -framework AppKit
 COLUMNS = $(shell tput cols)
 TEST = test
+HEADERS =	color.h errors.h input.h intersections.h miniRT.h mlx_rt.h \
+			operations.h structures.h
+ALL_HEADERS = $(addprefix inc/,$(HEADERS))
 
 all: make_libs ${NAME}
 
@@ -76,7 +79,7 @@ leaks: ${NAME}
 run: ${NAME}
 	./${NAME} tests/${TEST}.rt
 
-${OBJDIR}%.o: ${SRCDIR}%.c ${HEADER} Makefile
+${OBJDIR}%.o: ${SRCDIR}%.c ${ALL_HEADERS} Makefile
 	@printf "${WHITE}${NAME}: ${CYAN}Compiling files: ${WHITE}$(notdir $<)...${RESET}\r"
 	@mkdir -p $(dir $@)
 	@cc ${CFLAGS} -I ${INC} -c $< -o $@
