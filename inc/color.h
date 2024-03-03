@@ -6,14 +6,14 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:51:08 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/01 22:58:53 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/03 17:13:54 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOR_H
 # define COLOR_H
 
-void			obj_color(t_amb *amb, t_light *l, unsigned int *c, t_hit *h);
+//void			obj_color(t_amb *amb, t_light *l, unsigned int *c, t_hit *h);
 //unsigned int	get_color(t_amb *amb, t_light *l, t_item *objs, t_hit *h);
 unsigned int	get_color(t_amb *amb, t_sc *sc, t_item *objs, t_hit *h);
 
