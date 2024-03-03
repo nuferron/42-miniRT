@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:37:09 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/27 18:27:32 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/03 14:50:45 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ int	get_camera(char *line, int i, t_cam *cam)
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
-	if (init_vec(&cam->pos, line, &i)
-		|| init_vec(&cam->nov, line, &i))
+	if (init_vec(&cam->pos, line, &i) || init_vec(&cam->nov, line, &i))
 		return (1);
+	if (vec_mod(&cam->nov) != 1)
+		ft_dprintf(2, NORM, line);
 	skip_space(line, &i);
 	cam->fov = check_range(line, 'f', i);
 	if (cam->fov == -2)
@@ -53,15 +54,21 @@ int	get_camera(char *line, int i, t_cam *cam)
 }
 
 /*It sets all t_ligth variables. Returns 1 with fail and 0 with success*/
-static t_light	*add_light(t_light *first)
+static t_light	*add_light(t_light **first)
 {
 	t_light	*last;
 	t_light	*new;
 
-	last = first;
+	last = *first;
 	new = ft_calloc(1, sizeof(t_light));
 	if (!new)
 		exit(ft_dprintf(2, MEM));
+	new->next = NULL;
+	if (!last)
+	{
+		*first = new;
+		return (new);
+	}
 	while (last->next)
 		last = last->next;
 	last->next = new;
@@ -69,14 +76,11 @@ static t_light	*add_light(t_light *first)
 }
 
 /*Initializes the light in a bonus way*/
-int	get_light(char *line, int i, t_light *light)
+int	get_light(char *line, int i, t_light **light)
 {
 	t_light	*last;
 
-	if (light->b != -1)
-		last = add_light(light);
-	else
-		last = light;
+	last = add_light(light);
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, LINE, line), 1);
@@ -90,5 +94,6 @@ int	get_light(char *line, int i, t_light *light)
 		i++;
 	if (!set_rgb(last->rgb, line, i))
 		return (1);
+	printf("init x %f y %f z %f\n", last->pos.x, last->pos.y, last->pos.z );
 	return (0);
 }
