@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/29 18:57:40 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/02 20:50:32 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void	check_dist(t_point *p, t_ray *ray, t_item *obj, double dist)
 void	all_intersect(t_sc *sc, t_ray *ray)
 {
 	t_item	*obj;
-	//t_ray	light;
-	//double	d;
 
 	obj = sc->objs;
 	while (obj)
@@ -79,38 +77,19 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 		obj->intersect(&obj->type, ray, obj);
 		obj = obj -> next;
 	}
-	/*init_light_ray(&light, sc, ray);
-	ray->hit.obst = false;
-	d = dist(&light.zero, &light.orig);
-	obj = sc->objs;
-	while (obj)
-	{
-		obj->intersect(&obj->type, &light, obj);
-		if (light.hit.obst && light.dist < d)
-		{
-			ray->hit.obst = true;
-			break ;
-		}
-		obj = obj -> next;
-	}*/
 	if (ray->dist < MAXFLOAT)
 	{
 		ray->hit.obj->get_norm(&ray->hit.obj->type, &ray->hit);
-		sc->mlx.color = get_color(&sc->amb, &sc->light, sc->objs, &ray->hit);
+		if (ray->hit.type == pla)
+		{
+			if (dot_prod(&ray->norm, &ray->hit.norm) > 0)
+				ray->hit.norm = mult_new(&ray->hit.norm, -1);
+		}
+		sc->mlx.color = get_color(&sc->amb, sc, sc->objs, &ray->hit);
 		//obj_color(&sc->amb, &sc->light, &sc->mlx.color, &ray->hit);
 	}
 }
-/*
-void	init_light_ray(t_ray *light, t_sc *sc, t_ray *ray)
-{
-	light->orig = sc->light.pos;
-	light->zero = ray->hit.p;
-	light->norm = substr_vec(&light->orig, &light->zero);
-	norm_vector(&light->norm);
-	light->dist = MAXFLOAT;
-	light->hit.obst = false;
-}
-*/
+
 void	init_light_ray(t_ray *ray, t_light *light, t_hit *hit)
 {
 	ray->orig = light->pos;
