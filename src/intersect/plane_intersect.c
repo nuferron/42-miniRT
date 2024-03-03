@@ -6,12 +6,13 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:28:21 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/29 19:57:50 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/02 21:16:20 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+//planes are intersecting even though they are parallel
 void	pl_intersect(t_obj *obj, t_ray *ray, t_item *item)
 {
 	t_pl	*pl;
@@ -45,4 +46,3 @@ void	pl_get_norm(t_obj *pl, t_hit *hit)
 	hit->type = pla;
 //	printf("plane pointer %p, ray pointer %p\n", pl, hit);
 }
-
