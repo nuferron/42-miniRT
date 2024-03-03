@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:18:22 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/02 21:03:45 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/03 19:25:32 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ unsigned int	phong_light(t_light *light, t_hit *hit, float dot,
 	reflex = substr_vec(&reflex, lray);
 	reflex = unit_vector(&reflex);
 	s_fact = dot_prod(&reflex, &cam_hit);
-	s_fact = pow(s_fact, 1000);
+	if (s_fact >= 0)
+		return (0);
+	s_fact = pow(s_fact, 400);
 	if (s_fact < 0)
 		s_fact = 0;
-	specular = color_x_fact(rgb_to_hex(light->rgb), s_fact);
+	specular = color_x_fact(rgb_to_hex(light->rgb), s_fact * light->b);
 	return (specular);
 }
 
@@ -37,16 +39,14 @@ unsigned int	phong_light(t_light *light, t_hit *hit, float dot,
 	
 }*/
 
-unsigned int	diffuse_light(t_light *light, t_hit *hit, 
-		unsigned int amb, float d_fact)
+unsigned int	diffuse_light(t_light *light, t_hit *hit, float d_fact)
 {
 	unsigned int	d_color;
 
-	if (d_fact > 0)
-		d_color = color_x_fact(rgb_to_hex(light->rgb), light->b * d_fact);
-	else
-		d_color = 0;
-	return (color_mult(rgb_to_hex(hit->rgb), add_color(amb, d_color)));
+	if (d_fact < 0)
+		d_fact = 0;
+	d_color = color_x_fact(rgb_to_hex(light->rgb), light->b * d_fact);
+	return (color_mult(rgb_to_hex(hit->rgb), d_color));
 }
 
 /*void	obj_color(t_amb *amb, t_light *light, unsigned int *color, t_hit *hit)
@@ -56,49 +56,40 @@ unsigned int	diffuse_light(t_light *light, t_hit *hit,
 	float			dot;
 	t_vec			l_ray;
 
-	//while (light)
-	//{
-		l_ray = substr_vec(&light->pos, &hit->p);
-		l_ray = unit_vector(&l_ray);
-		dot = dot_prod(&l_ray, &hit->norm);
-		if ((hit->type == pla || hit->type == disk) && dot < 0)
-		{
-			opp_vec(&hit->norm);
-			dot = -dot;
-		}
-		ambient = color_x_fact(color_mult(rgb_to_hex(light->rgb),
-					rgb_to_hex(hit->rgb)), amb->ratio);
-		diffuse = diffuse_light(light, hit, color_x_fact(rgb_to_hex(amb->rgb),
-					amb->ratio), dot);
-		*color = add_color(color_mean(ambient, diffuse), *color);
-		if (dot_prod(&l_ray, &hit->norm) > 0.2)
-			*color = add_color(*color, phong_light(light, hit, dot, &l_ray));
-		//light = light->next;
-	//}
-}*/
-
-void	obj_color(t_amb *amb, t_light *light, unsigned int *color, t_hit *hit)
-{
-	unsigned int	ambient;
-	unsigned int	diffuse;
-	float			dot;
-	t_vec			l_ray;
-
 	l_ray = substr_vec(&light->pos, &hit->p);
 	l_ray = unit_vector(&l_ray);
 	dot = dot_prod(&hit->norm, &l_ray);
-	ambient = color_x_fact(color_mult(rgb_to_hex(light->rgb),
-				rgb_to_hex(hit->rgb)), amb->ratio);
+	//ambient = color_x_fact(color_mult(rgb_to_hex(light->rgb),
+	//			rgb_to_hex(hit->rgb)), amb->ratio);
+	ambient = color_x_fact(rgb_to_hex(amb->rgb), amb->ratio);
+	ambient = color_mult(ambient, rgb_to_hex(hit->rgb));
 	if (hit->obst)
 	{
-		*color = color_mean(*color, ambient);
+		*color = ambient; // it shouldn't be like this
+		//color_mean(*color, ambient);
 		return ;
 	}
-	diffuse = diffuse_light(light, hit, color_x_fact(rgb_to_hex(amb->rgb),
-				amb->ratio), dot);
-	*color = color_mean(color_mean(ambient, diffuse), *color);
+	diffuse = diffuse_light(light, hit, dot);
+//	*color = color_mean(diffuse, ambient);
+	*color = add_color(diffuse, ambient);
+//	*color = add_color(color_mean(ambient, diffuse), *color);
 	if (dot_prod(&l_ray, &hit->norm) > 0.1)
 		*color = add_color(*color, phong_light(light, hit, dot, &l_ray));
+}*/
+
+void	obj_color(t_light *light, t_hit *hit, unsigned int *color)
+{
+	unsigned int	diffuse;
+	float			dot;
+	t_vec			lray;
+
+	lray = substr_vec(&light->pos, &hit->p);
+	lray = unit_vector(&lray);
+	dot = dot_prod(&hit->norm, &lray);
+	diffuse = diffuse_light(light, hit, dot);
+	*color = add_color(diffuse, *color);
+	if (dot_prod(&lray, &hit->norm) > 0)
+		*color = add_color(*color, phong_light(light, hit, dot, &lray));
 }
 
 unsigned int	get_color(t_amb *amb, t_sc *sc, t_item *obj, t_hit *hit)
@@ -107,12 +98,18 @@ unsigned int	get_color(t_amb *amb, t_sc *sc, t_item *obj, t_hit *hit)
 	t_item	*tmp;
 	double	d;
 	t_light	*light;
-	unsigned int	color;
 
-	color = 0;
+	(void)amb;
 	light = sc->light;
+	sc->mlx.color = color_mult(color_x_fact(rgb_to_hex(sc->amb.rgb),
+				sc->amb.ratio), rgb_to_hex(hit->rgb));
 	while (light)
 	{
+		if (!light->b)
+		{
+			light = light->next;
+			continue ;
+		}
 		init_light_ray(&ray, light, hit);
 		hit->obst = false;
 		d = dist(&ray.zero, &ray.orig);
@@ -129,15 +126,17 @@ unsigned int	get_color(t_amb *amb, t_sc *sc, t_item *obj, t_hit *hit)
 				tmp->intersect(&tmp->type, &ray, tmp);
 				if (ray.dist < d)
 				{
-					printf("d %f\tray.dist %f\n", d, ray.dist);
+					//printf("d %f\tray.dist %f\n", d, ray.dist);
 					hit->obst = true;
 					break ;
 				}
 			}
 			tmp = tmp->next;
 		}
-		obj_color(amb, light, &color, hit);
+		if (!hit->obst)
+			obj_color(light, hit, &sc->mlx.color);
 		light = light->next;
 	}
-	return (color);
+	return (sc->mlx.color);
+	//return (add_color(sc->mlx.color, ambient));
 }
