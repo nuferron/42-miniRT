@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:50:51 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/02 19:32:24 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:08:42 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 int	init_mlx(t_sc *sc)
 {
 	t_img	img;
-//	t_mlx	mlx;
 
-//	sc->mlx = mlx; 
 	sc->mlx.init = NULL;
 	sc->mlx.win = NULL;
 	sc->mlx.init = mlx_init();
@@ -59,7 +57,6 @@ flag = 0 - only mlx.init is allocated
 flag = 1 - we should destroy the display */
 int	ft_error_mlx(t_sc *sc, int flag)
 {
-	//free_all(sc);
 	if (flag > 0)
 		mlx_destroy_window(sc->mlx.init, sc->mlx.win);
 	else if (flag < 0)
@@ -69,7 +66,6 @@ int	ft_error_mlx(t_sc *sc, int flag)
 
 int	ft_exit_mlx(t_sc *sc)
 {
-	//free_all(sc);
 	if (sc->mlx.win)
 		mlx_destroy_window(sc->mlx.init, sc->mlx.win);
 	exit (0);
