@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:37:09 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/03 14:50:45 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:06:57 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,5 @@ int	get_light(char *line, int i, t_light **light)
 		i++;
 	if (!set_rgb(last->rgb, line, i))
 		return (1);
-	printf("init x %f y %f z %f\n", last->pos.x, last->pos.y, last->pos.z );
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 21:10:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/03 14:43:07 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:07:32 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int	set_rgb(int *rgb, char *line, int i)
 		i++;
 	}
 	skip_space(line, &i);
-
 	if (line[i])
 		return (ft_dprintf(2, PARAM, line), 0);
 	return (1);

@@ -6,16 +6,16 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/03 15:05:54 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:06:35 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
 /*It gets the first 5 (non-space like) characters and returns them*/
-static void get_element(char *line, int i, char *tmp)
+static void	get_element(char *line, int i, char *tmp)
 {
-	int		j;
+	int	j;
 
 	j = 0;
 	while (j < 2 && line[i] && !is_whitespace(line[i]))
