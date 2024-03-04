@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:04:16 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/03 15:03:04 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 14:49:35 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ void	translation(t_vec *new_origin, t_vec *p);
 // void	coord_transformation(t_sc *sc); - is in this file
 
 /*mand_check.c - MANDATORY - calls parsing ft for each element*/
-/*bonus/input.c - BONUS - calls parsing ft for each element*/
-int		check_content(t_sc *sc, char *line);
+//int		check_content(t_sc *sc, char *line);
 
 /* translation.c - coord translation for different types of unions */
 void	sph_translation(t_obj *obj, t_sc *sc);

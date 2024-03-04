@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 13:06:35 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 14:49:01 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	check_file_type(char *file)
 /*It reads the first part of the line and calls the correspondig
  function. If no coincidence is found, it throws an error message and
  returns 1*/
-int	check_content(t_sc *sc, char *line)
+static int	check_content(t_sc *sc, char *line)
 {
 	int		i;
 	char	element[3];
@@ -59,7 +59,7 @@ int	check_content(t_sc *sc, char *line)
 		return (get_plane(line, i + 2, sc));
 	else if (!ft_strncmp(element, "cy", 3))
 		return (get_cylinder(line, i + 2, sc));
-	else if (!ft_strncmp(element, "co", 3))
+	else if (!ft_strncmp(element, "cn", 3))
 		return (get_cone(line, i + 2, sc));
 	else
 		return (ft_dprintf(2, ELEM, element), 1);
