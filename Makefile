@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/03/03 15:01:24 by nuferron         ###   ########.fr        #
+#    Updated: 2024/03/04 17:12:11 by nuferron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,11 @@ RESET = \033[0m
 
 SRCS_MLX = mlx.c draw.c
 SRCS_INPUT = check_input.c init_scene.c init_utils.c init_objects.c \
-translation.c
+				translation.c init_obj_utils.c
 SRCS_UTILS = num_utils.c utils.c mem_utils.c
 SRCS_OPER = vector_utils.c vector_utils2.c vector_utils3.c
 SRCS_INTERSEC = plane_intersect.c sphere_intersect.c ray_intersect.c \
-cylinder_intersect.c cone_intersect.c
+				cylinder_intersect.c cone_intersect.c
 SRCS_SCREEN = screen.c color.c color_utils.c
 
 SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
@@ -46,7 +46,7 @@ MLXFLAGS = -Linc/mlx -lmlx -framework OpenGL -framework AppKit
 COLUMNS = $(shell tput cols)
 TEST = test
 HEADERS =	color.h errors.h input.h intersections.h miniRT.h mlx_rt.h \
-			operations.h structures.h
+			operations.h items.h
 ALL_HEADERS = $(addprefix inc/,$(HEADERS))
 
 all: make_libs ${NAME}

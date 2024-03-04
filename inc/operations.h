@@ -6,14 +6,21 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:27:20 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/04 13:24:00 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:38:08 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPERATIONS_H
 # define OPERATIONS_H
 
-typedef struct s_vec t_vec;
+/* Structure for coordinates ("absolute" or normalized) */
+typedef struct s_vec
+{
+	float	x;
+	float	y;
+	float	z;
+}	t_vec;
+
 typedef struct s_vec t_point;
 
 /****** VECTOR UTILS: creation, normalization & dot & cros prod ***********/
