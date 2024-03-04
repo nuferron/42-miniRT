@@ -6,13 +6,14 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:18:22 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/03 19:25:32 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:50:30 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "color.h"
 
-unsigned int	phong_light(t_light *light, t_hit *hit, float dot,
+static unsigned int	phong_light(t_light *light, t_hit *hit, float dot,
 		t_vec *lray)
 {
 	t_vec			reflex;
@@ -34,12 +35,7 @@ unsigned int	phong_light(t_light *light, t_hit *hit, float dot,
 	return (specular);
 }
 
-/*unsigned int	planes_phong(t_light *light, t_hit *hit, float dot, t_vec *lray)
-{
-	
-}*/
-
-unsigned int	diffuse_light(t_light *light, t_hit *hit, float d_fact)
+static unsigned int	diffuse_light(t_light *light, t_hit *hit, float d_fact)
 {
 	unsigned int	d_color;
 
@@ -49,35 +45,7 @@ unsigned int	diffuse_light(t_light *light, t_hit *hit, float d_fact)
 	return (color_mult(rgb_to_hex(hit->rgb), d_color));
 }
 
-/*void	obj_color(t_amb *amb, t_light *light, unsigned int *color, t_hit *hit)
-{
-	unsigned int	ambient;
-	unsigned int	diffuse;
-	float			dot;
-	t_vec			l_ray;
-
-	l_ray = substr_vec(&light->pos, &hit->p);
-	l_ray = unit_vector(&l_ray);
-	dot = dot_prod(&hit->norm, &l_ray);
-	//ambient = color_x_fact(color_mult(rgb_to_hex(light->rgb),
-	//			rgb_to_hex(hit->rgb)), amb->ratio);
-	ambient = color_x_fact(rgb_to_hex(amb->rgb), amb->ratio);
-	ambient = color_mult(ambient, rgb_to_hex(hit->rgb));
-	if (hit->obst)
-	{
-		*color = ambient; // it shouldn't be like this
-		//color_mean(*color, ambient);
-		return ;
-	}
-	diffuse = diffuse_light(light, hit, dot);
-//	*color = color_mean(diffuse, ambient);
-	*color = add_color(diffuse, ambient);
-//	*color = add_color(color_mean(ambient, diffuse), *color);
-	if (dot_prod(&l_ray, &hit->norm) > 0.1)
-		*color = add_color(*color, phong_light(light, hit, dot, &l_ray));
-}*/
-
-void	obj_color(t_light *light, t_hit *hit, unsigned int *color)
+static void	obj_color(t_light *light, t_hit *hit, unsigned int *color)
 {
 	unsigned int	diffuse;
 	float			dot;
@@ -92,14 +60,39 @@ void	obj_color(t_light *light, t_hit *hit, unsigned int *color)
 		*color = add_color(*color, phong_light(light, hit, dot, &lray));
 }
 
-unsigned int	get_color(t_amb *amb, t_sc *sc, t_item *obj, t_hit *hit)
+static void	get_shadows(t_ray *lray, t_hit *hit, t_item *obj, double dot)
 {
-	t_ray	ray;
-	t_item	*tmp;
 	double	d;
+	t_item	*tmp;
+
+	d = dist(&lray->zero, &lray->orig);
+	tmp = obj;
+	while (tmp)
+	{
+		if (tmp != hit->obj)
+		{
+			if (dot < 0)
+			{
+				hit->obst = true;
+				break ;
+			}
+			tmp->intersect(&tmp->type, lray, tmp);
+			if (lray->dist < d)
+			{
+				//printf("d %f\tray.dist %f\n", d, ray.dist);
+				hit->obst = true;
+				break ;
+			}
+		}
+		tmp = tmp->next;
+	}
+}
+
+unsigned int	get_color(t_sc *sc, t_item *obj, t_hit *hit)
+{
+	t_ray	lray;
 	t_light	*light;
 
-	(void)amb;
 	light = sc->light;
 	sc->mlx.color = color_mult(color_x_fact(rgb_to_hex(sc->amb.rgb),
 				sc->amb.ratio), rgb_to_hex(hit->rgb));
@@ -110,33 +103,12 @@ unsigned int	get_color(t_amb *amb, t_sc *sc, t_item *obj, t_hit *hit)
 			light = light->next;
 			continue ;
 		}
-		init_light_ray(&ray, light, hit);
 		hit->obst = false;
-		d = dist(&ray.zero, &ray.orig);
-		tmp = obj;
-		while (tmp)
-		{
-			if (tmp != hit->obj)
-			{
-				if (dot_prod(&hit->norm, &ray.norm) < 0)
-				{
-					hit->obst = true;
-					break ;
-				}
-				tmp->intersect(&tmp->type, &ray, tmp);
-				if (ray.dist < d)
-				{
-					//printf("d %f\tray.dist %f\n", d, ray.dist);
-					hit->obst = true;
-					break ;
-				}
-			}
-			tmp = tmp->next;
-		}
+		init_light_ray(&lray, light, hit);
+		get_shadows(&lray, hit, obj, dot_prod(&hit->norm, &lray.norm));
 		if (!hit->obst)
 			obj_color(light, hit, &sc->mlx.color);
 		light = light->next;
 	}
 	return (sc->mlx.color);
-	//return (add_color(sc->mlx.color, ambient));
 }
