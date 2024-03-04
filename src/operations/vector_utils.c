@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:46:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/27 18:18:49 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:09:18 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,4 @@ t_vec	unit_vector(t_vec *v)
 	n.y = v->y / mod;
 	n.z = v->z / mod;
 	return (n);
-}
-
-void	opp_vec(t_vec *v)
-{
-	v->x = -v->x;
-	v->y = -v->y;
-	v->z = -v->z;
 }

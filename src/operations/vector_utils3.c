@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:12:15 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/11 20:39:20 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:23:31 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ t_vec	mult_new(t_vec *v, double factor)
 }
 
 /* multiplies the same vector v by a number "factor" */
-void	mult_fac(t_vec *v, double *factor)
+void	mult_fac(t_vec *v, float factor)
 {
-	v->x *= *factor;
-	v->y *= *factor;
-	v->z *= *factor;
+	v->x *= factor;
+	v->y *= factor;
+	v->z *= factor;
 }
 
 /* returns a vector which is the product of the vector v1 and 

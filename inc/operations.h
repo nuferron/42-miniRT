@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:27:20 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/28 20:19:54 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:24:00 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,12 @@ void	norm_vector(t_vec *n);
 // returns a the vector v multiplied by the float "factor"
 t_vec	mult_new(t_vec *v, double factor);
 // changes the vector v multiplying it by a factor
-void	mult_fac(t_vec *v, double *factor);
+void	mult_fac(t_vec *v, float factor);
 // returns a the vector, that is a multiplication of v1 and v2
 t_vec	mult_vec(t_vec *v1, t_vec *v2);
 // returns a the vector v divided by the float "factor"
 t_vec	div_new(t_vec *v, double *factor);
 // changes the vector v dividing it by a factor
 void	div_fac(t_vec *v, double *factor);
-
-void	opp_vec(t_vec *v);
 
 #endif
