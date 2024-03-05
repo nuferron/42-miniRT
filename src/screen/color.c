@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:18:22 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 20:11:13 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:04:58 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@ static unsigned int	phong_light(t_light *light, t_hit *hit, float dot,
 	unsigned int	specular;
 	t_vec			cam_hit;
 
+	cam_hit = unit_vector(&hit->p);
 	reflex = mult_new(&hit->norm, 2 * dot);
 	reflex = substr_vec(&reflex, lray);
 	reflex = unit_vector(&reflex);
-	cam_hit = unit_vector(&hit->p);
-	s_fact = pow(dot_prod(&reflex, &cam_hit), 1000);
+	s_fact = dot_prod(&reflex, &cam_hit);
+	s_fact = pow(s_fact, 1000);
+	if (s_fact < 0)
+		s_fact = 0;
 	specular = color_x_fact(rgb_to_hex(light->rgb), s_fact);
 	return (specular);
 }
@@ -78,8 +81,8 @@ void	obj_color(t_amb *amb, t_light *light, unsigned int *color, t_hit *hit)
 
 	l_ray = substr_vec(&light->pos, &hit->p);
 	l_ray = unit_vector(&l_ray);
-	dot = dot_prod(&l_ray, &hit->norm);
-	if ((hit->type == pla) && dot < 0)
+	dot = dot_prod(&hit->norm, &l_ray);
+	if (hit->type == pla && dot < 0)
 	{
 		opp_vec(&hit->norm);
 		dot = -dot;
@@ -88,13 +91,13 @@ void	obj_color(t_amb *amb, t_light *light, unsigned int *color, t_hit *hit)
 				rgb_to_hex(hit->rgb)), amb->ratio);
 	if (hit->obst)
 	{
-		*color = ambient;
+		*color = add_color(*color, ambient);
 		return ;
 	}
 	diffuse = diffuse_light(light, hit, color_x_fact(rgb_to_hex(amb->rgb),
 				amb->ratio), dot);
 	*color = add_color(color_mean(ambient, diffuse), *color);
-	if (dot_prod(&l_ray, &hit->norm) > 0.2)
+	if (dot_prod(&l_ray, &hit->norm) > 0.1)
 		*color = add_color(*color, phong_light(light, hit, dot, &l_ray));
 }
 
