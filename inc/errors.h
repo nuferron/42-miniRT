@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:07:57 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 18:59:28 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:08:14 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 # define ELEM "Element not found: "
 # define MUST "There must be ONE \"A\", ONE \"C\" and ONE \"L\" element\n"
 # define NEG "Negative number when expecting positive number: "
-
+# define BIG "Huge number detected in line: "
+# define REC "We recommend you to work with lower numbers\n"
 # define UNNORM "Unnormalized vector found in line "
 # define NORM "We'll work with its normalized version\n"
 

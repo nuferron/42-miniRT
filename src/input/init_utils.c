@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 21:10:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 12:45:18 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:16:45 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ float	check_range(char *line, char type, int i)
 		return (ft_dprintf(2, ERROR NEG "\"%s\"\n", line), -2);
 	if (type && type != 'p' && (input < rg[0] || input > rg[1]))
 		return (ft_dprintf(2, ERROR RANGE "([%d - %d]):\n\"%s\"\n",
-					(int)rg[0], (int)rg[1], line), -2);
+				(int)rg[0], (int)rg[1], line), -2);
+	if (int_len(input) >= 5)
+		ft_dprintf(2, WARN BIG "\"%s\"\n" REC, line);
 	return (input);
 }
 
