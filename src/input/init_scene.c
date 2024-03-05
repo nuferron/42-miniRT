@@ -6,11 +6,11 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:37:09 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/01 21:44:57 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 21:34:42 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "miniRT.h"
 
 /*It sets all t_amb variables. Returns 1 with fail and 0 with success*/
 int	get_ambient(char *line, int i, t_amb *amb)

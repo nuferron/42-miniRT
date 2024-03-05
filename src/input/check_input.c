@@ -6,11 +6,11 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/29 22:24:19 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 21:34:00 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "miniRT.h"
 
 /*It gets the first 5 (non-space like) characters and returns them*/
 static char	*get_element(char *line, int i)

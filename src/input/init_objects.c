@@ -6,11 +6,11 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/29 22:30:22 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 21:34:35 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "miniRT.h"
 
 /*It does a realloc of size 1 (kind of) of t_item structures*/
 t_item	*add_obj(t_item *item, t_sc *sc)

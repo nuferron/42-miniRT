@@ -6,11 +6,11 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 21:10:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 20:17:39 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 21:34:51 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "miniRT.h"
 
 /*It initializes a variable of type t_vec*/
 int	init_vec(t_vec *vec, char *line, int *i)

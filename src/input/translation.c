@@ -6,11 +6,11 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:36:32 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/29 22:27:20 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 21:35:00 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "miniRT.h"
 
 void	sph_translation(t_obj *obj, t_sc *sc)
 {
