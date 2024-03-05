@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 17:42:46 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:03:28 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,16 @@ static int	check_content(t_sc *sc, char *line)
 static int	check_file(int fd, t_sc *sc)
 {
 	char	*line;
+	int		i;
 
 	line = get_next_line(fd);
 	if (!line)
 		return (ft_dprintf(2, ERROR EMPTY), 1);
 	while (line)
 	{
+		i = ft_strlen(line) - 1;
+		if (line[i] == '\n')
+			line[i] = '\0';
 		if (check_content(sc, line))
 			exit(1);
 		free(line);
