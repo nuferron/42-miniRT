@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 21:10:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 15:16:45 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:51:07 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,27 +75,28 @@ float	check_range(char *line, char type, int i)
   Returns 0 when fails + displays an error message*/
 int	set_rgb(int *rgb, char *line, int i)
 {
-	int	j;
+	int		j;
+	float	fl;
 
-	j = 0;
-	skip_space(line, &i);
-	if (!line[i])
+	j = -1;
+	if (!skip_space(line, &i) && !line[i])
 		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), 0);
-	while (j < 3)
+	while (++j < 3)
 	{
 		if (!line[i])
 			return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), 0);
-		if (line[i] == '.')
-			return (ft_dprintf(2, ERROR INT "\"%s\"\n", line), 0);
-		rgb[j] = (int)check_range(line, 'c', i);
-		if (rgb[j++] == -2 || !is_float(&line[i]))
+		fl = check_range(line, 'c', i);
+		if (fl == -2)
 			return (0);
+		if (fl != (int)fl)
+			return (ft_dprintf(2, ERROR INT "\"%s\"\n", line), 0);
+		rgb[j] = (int)fl;
 		while (ft_isdigit(line[i]))
 			i++;
-		i++;
+		if (line[i] == ',')
+			i++;
 	}
-	skip_space(line, &i);
-	if (line[i])
+	if (skip_space(line, &i) && line[i])
 		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), 0);
 	return (1);
 }
