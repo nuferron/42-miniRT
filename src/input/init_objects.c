@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 15:13:11 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:12:36 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int	get_cone(char *line, int i, t_sc *sc)
 	co->h = check_range(line, 'p', i);
 	if (co->r == -1 || co->h == -2)
 		return (1);
-	if (skip_number(line, &i) && !set_rgb(co->rgb, line, i))
+	if (!skip_number(line, &i) && !set_rgb(co->rgb, line, i))
 		return (1);
 	norm_vector(&co->nov);
 	init_cn(obj, co);
