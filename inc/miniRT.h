@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 17:22:28 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:30:56 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_sc
 	t_mlx		mlx; //mlx_rt.h
 	t_screen	screen;
 	t_light		*light;
+	t_ray		ray;
 	t_amb		amb;
 	t_cam		cam;
 	t_item		*objs; //items.h

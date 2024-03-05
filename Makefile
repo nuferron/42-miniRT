@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/03/05 17:35:09 by nzhuzhle         ###   ########.fr        #
+#    Updated: 2024/03/05 17:37:16 by nzhuzhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,9 @@ norm:
 
 leaks: ${NAME}
 	leaks -atExit -- ./${NAME} ${MAP}
+
+run: ${NAME}
+	./${NAME} tests/${TEST}.rt
 
 ${OBJDIR}%.o: ${SRCDIR}%.c Makefile
 	@printf "${WHITE}${NAME}: ${CYAN}Compiling files: ${WHITE}$(notdir $<)...${RESET}\r"
