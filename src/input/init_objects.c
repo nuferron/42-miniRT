@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 16:12:36 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:05:19 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,16 @@ int	get_sphere(char *line, int i, t_sc *sc)
 	sp = malloc(sizeof(t_sp));
 	if (!sp)
 		exit(ft_dprintf(2, ERROR MEM));
-	skip_space(line, &i);
-	if (!line[i])
+	if (!skip_space(line, &i) && !line[i])
 		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	if (init_vec(&sp->pos, line, &i))
 		return (1);
-	skip_space(line, &i);
-	if (!is_float(&line[i]) || line[i] == ',')
+	if (!skip_space(line, &i) && (!is_float(&line[i]) || line[i] == ','))
 		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	sp->r = check_range(line, 'p', i) / 2;
 	if (sp->r == -1)
 		return (1);
-	skip_number(line, &i);
-	if (!set_rgb(sp->rgb, line, i))
+	if (!skip_number(line, &i) && !set_rgb(sp->rgb, line, i))
 		return (1);
 	init_sp(obj, sp);
 	return (0);
@@ -68,15 +65,13 @@ int	get_plane(char *line, int i, t_sc *sc)
 	pl = malloc(sizeof(t_pl));
 	if (!pl)
 		exit(ft_dprintf(2, ERROR MEM));
-	skip_space(line, &i);
-	if (!line[i])
+	if (!skip_space(line, &i) && !line[i])
 		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	if (init_vec(&pl->pos, line, &i) || init_vec(&pl->nov, line, &i))
 		return (1);
 	if (vec_mod(&pl->nov) != 1)
 		ft_dprintf(2, WARN UNNORM "\"%s\"\n" NORM, line);
-	skip_space(line, &i);
-	if (!set_rgb(pl->rgb, line, i))
+	if (!skip_space(line, &i) && !set_rgb(pl->rgb, line, i))
 		return (1);
 	norm_vector(&pl->nov);
 	init_pl(obj, pl);
