@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:28:21 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/02 21:16:20 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:49:16 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void	pl_intersect(t_obj *obj, t_ray *ray, t_item *item)
 //	printf("plane pointer %p, ray pointer %p, item pointer %p\n", obj, ray, item);
 }
 
-void	pl_get_norm(t_obj *pl, t_hit *hit)
+void	pl_get_norm(t_obj *pl, t_hit *hit, t_ray *ray)
 {
+	(void)ray;
 	hit->norm = pl->pl->nov;
 	hit->rgb = pl->pl->rgb;
 	hit->type = pla;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   items.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:27:29 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 16:34:02 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:51:35 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_item
 	void			(*intersect)(t_obj *, t_ray *, t_item *);
 	void			(*trans)(t_obj *obj, t_sc *sc);
 	void			(*obj_free)(t_obj *obj);
-	void			(*get_norm)(t_obj *, t_hit *);
+	void			(*get_norm)(t_obj *, t_hit *, t_ray *);
 	struct s_item	*next;
 }	t_item;
 

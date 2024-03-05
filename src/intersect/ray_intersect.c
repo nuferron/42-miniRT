@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/05 23:30:59 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:49:56 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 	}
 	if (ray->dist < MAXFLOAT)
 	{
-		ray->hit.obj->get_norm(&ray->hit.obj->type, &ray->hit);
+		ray->hit.obj->get_norm(&ray->hit.obj->type, &ray->hit, ray);
 		if (ray->hit.type == pla)
 		{
 			if (dot_prod(&ray->norm, &ray->hit.norm) > 0)

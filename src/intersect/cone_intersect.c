@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:28:24 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/05 23:27:26 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:49:27 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,16 +100,17 @@ void	cone_check_disk(t_ray *ray, t_co *co, t_item *item, float *dn)
 }
 
 
-void	cone_get_norm(t_obj *co, t_hit *hit)
+void	cone_get_norm(t_obj *co, t_hit *hit, t_ray *ray)
 {
 	t_vec	mvec;
 	float	a;
 
+	(void)ray;
 	hit->rgb = co->co->rgb;
 	if (hit->type == disk)
 	{
-//		hit->norm = cy->cy->nov;
-		hit->norm = mult_new(&co->co->nov, -1);
+		hit->norm = co->co->nov;
+//		hit->norm = mult_new(&co->co->nov, -1);
 		return ;
 	}
 	mvec = substr_vec(&hit->p, &co->co->pos);

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:01:29 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/04 16:44:04 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:50:47 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,24 @@ typedef struct s_ray
 
 /* plane_intersect.c - intersection with plane equations  **************/
 void	pl_intersect(t_obj *obj, t_ray *ray, t_item *item);
-void	pl_get_norm(t_obj *obj, t_hit *hit);
+void	pl_get_norm(t_obj *obj, t_hit *hit, t_ray *ray);
 
 /* sphere_intersect.c - intersection with sphere equations  **************/
 void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item);
-void	sp_get_norm(t_obj *sp, t_hit *hit);
+void	sp_get_norm(t_obj *sp, t_hit *hit, t_ray *ray);
 int		count_t(t_ray *ray, t_vars *var);
 
 /* cylinder_intersect.c - intersection with cylinder equations  **************/
 void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item);
 void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy);
 void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn);
-void	cy_get_norm(t_obj *obj, t_hit *hit);
+void	cy_get_norm(t_obj *obj, t_hit *hit, t_ray *ray);
 
 /* cone_intersect.c - intersection with cone equations  **************/
 void	cone_intersect(t_obj *obj, t_ray *ray, t_item *item);
 void	cone_check_body(t_ray *ray, t_item *item, t_co *co);
 void	cone_check_disk(t_ray *ray, t_co *co, t_item *item, float *dn);
-void	cone_get_norm(t_obj *obj, t_hit *hit);
+void	cone_get_norm(t_obj *obj, t_hit *hit, t_ray *ray);
 
 /* ray_intersect.c - dealing with ray variables  **************/
 void	ray_init(t_ray *ray);
