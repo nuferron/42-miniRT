@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:28:24 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/05 19:58:16 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 20:14:59 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	cone_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	co = obj->co;
 	var.oc = substr_vec(&ray->zero, &co->pos);
 	dn = dot_prod(&co->nov, &ray->norm);
-	if (ray->orig.x >= 0 && ray->orig.x <= 0.1 && ray->orig.y >= 0 && ray->orig.y <= 0.1) 
+	if (ray->orig.x >= 0 && ray->orig.x <= 0.01 && ray->orig.y >= 0 && ray->orig.y <= 0.01) 
 	{
 		printf("CONE INTER cone norm: %f, %f, %f\n", co->nov.x, obj->co->nov.y, obj->co->nov.z);
 		printf("CONE TRANS RAY norm: %f, %f, %f, DN: %f\n", ray->norm.x, ray->norm.y, ray->norm.z, dn);
