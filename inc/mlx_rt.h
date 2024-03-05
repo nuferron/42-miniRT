@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:38:35 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/02 17:23:41 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:26:37 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,25 @@
 
 # include "./mlx/mlx.h"
 typedef struct s_sc t_sc;
+
+typedef struct s_img
+{
+	void	*ipt;
+	char	*ppt;
+	int		bits;
+	int		endian;
+	int		line;
+}	t_img;
+
+typedef struct s_mlx
+{
+	t_img			img;
+	void			*init;
+	void			*win;
+	int				w;
+	int				h;
+	unsigned int	color;
+}	t_mlx;
 
 /***** mlx.c **********/
 int		init_mlx(t_sc *sc);

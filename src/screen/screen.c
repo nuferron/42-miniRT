@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:43:51 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 19:15:25 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:28:24 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	get_screen_vec(t_vec *cam, t_vec *x_ax, t_vec *y_ax)
 	{
 		axis = vec_new(0, 0, 1);
 		getting_new_axis(cam, x_ax, y_ax, &axis);
-		opp_vec(x_ax);
-		opp_vec(y_ax);
+		mult_fac(x_ax, -1);
+		mult_fac(y_ax, -1);
 	}
 	else
 	{
 		axis = vec_new(0, 1, 0);
 		getting_new_axis(cam, x_ax, y_ax, &axis);
-		opp_vec(y_ax);
+		mult_fac(y_ax, -1);
 	}
 }
 

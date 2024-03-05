@@ -6,11 +6,18 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:36:32 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/29 22:27:20 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:24:51 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
+
+void	translation(t_vec *new_origin, t_vec *p)
+{
+	p->x -= new_origin->x;
+	p->y -= new_origin->y;
+	p->z -= new_origin->z;
+}
 
 void	sph_translation(t_obj *obj, t_sc *sc)
 {
@@ -39,13 +46,9 @@ void	cone_translation(t_obj *obj, t_sc *sc)
 {
 	t_vec	temp;
 
-//	printf("[CYLINDER TRANSLATION] initial point  x: %f, y: %f, z: %f\n", obj->cy->pos.x, obj->cy->pos.y, obj->cy->pos.z); //erase
 	translation(&sc->cam.pos, &obj->co->pos);
-//	printf("[CYLINDER TRANSLATION] point after translation x: %f, y: %f, z: %f\n", obj->cy->pos.x, obj->cy->pos.y, obj->cy->pos.z); //erase
 	temp = mult_new(&obj->co->nov, obj->co->h);
 	obj->co->lim = sum_vec(&obj->co->pos, &temp);
 	obj->co->prod = dot_prod(&obj->co->lim, &obj->co->nov);
 	obj->co->tg = obj->co->r / obj->co->h;
-//	printf("[CYLINDER TRANSLATION] position point  x: %f, y: %f, z: %f\n", obj->cy->pos.x, obj->cy->pos.y, obj->cy->pos.z); //erase
-//	printf("[CYLINDER TRANSLATION] lim point  x: %f, y: %f, z: %f\n", obj->cy->lim.x, obj->cy->lim.y, obj->cy->lim.z); //erase
 }

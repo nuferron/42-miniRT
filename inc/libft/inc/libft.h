@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:39:28 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/15 21:41:51 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:04:28 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,11 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_atoi(const char *str);
-float	ft_atof(char *str);
+double	ft_atof(char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
+int		int_len(int n);
 
 /* WRITE ANYTHING SPECIFYING THE FD */
 

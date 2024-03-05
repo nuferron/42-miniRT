@@ -6,11 +6,13 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 21:23:28 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/16 17:25:45 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:20:42 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
+#include <float.h>
 
 static double	get_floating(char *str)
 {
@@ -29,7 +31,7 @@ static double	get_floating(char *str)
 	return (fl / 10);
 }
 
-float	ft_atof(char *str)
+double	ft_atof(char *str)
 {
 	int		i;
 	double	nb;
@@ -49,5 +51,5 @@ float	ft_atof(char *str)
 		nb = (nb * 10) + (str[i++] - '0');
 	if (str[i++] == '.')
 		nb += get_floating(&str[i]);
-	return ((float)(nb * neg));
+	return (nb * neg);
 }

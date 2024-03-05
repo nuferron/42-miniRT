@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/03/01 22:05:45 by nzhuzhle         ###   ########.fr        #
+#    Updated: 2024/03/05 17:35:09 by nzhuzhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ RESET = \033[0m
 
 SRCS_MLX = mlx.c draw.c
 SRCS_INPUT = check_input.c init_scene.c init_utils.c init_objects.c \
-translation.c
+				translation.c init_obj_utils.c
 SRCS_UTILS = num_utils.c utils.c mem_utils.c
 SRCS_OPER = vector_utils.c vector_utils2.c vector_utils3.c
 SRCS_INTERSEC = plane_intersect.c sphere_intersect.c ray_intersect.c \
@@ -46,6 +46,9 @@ INC = inc/
 MLXFLAGS = -Linc/mlx -lmlx -framework OpenGL -framework AppKit
 COLUMNS = $(shell tput cols)
 TEST = test
+HEADERS =	color.h errors.h input.h intersections.h miniRT.h mlx_rt.h \
+			operations.h items.h
+ALL_HEADERS = $(addprefix inc/,$(HEADERS))
 
 all: make_libs ${NAME}
 

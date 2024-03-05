@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 21:10:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 20:17:39 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:51:07 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,28 @@ int	init_vec(t_vec *vec, char *line, int *i)
 {
 	skip_space(line, i);
 	if (!line[*i])
-		return (ft_dprintf(2, PARAM, line), -2);
+		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), -2);
 	if (!is_float(&line[*i]) || line[*i] == ',')
-		return (ft_dprintf(2, LINE, line), -2);
+		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), -2);
 	vec->x = ft_atof(&line[*i]);
 	while (line[*i] && line[*i] != ',')
 		(*i)++;
 	if (!line[(*i)++])
-		return (ft_dprintf(2, PARAM, line), -2);
+		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), -2);
 	if (!is_float(&line[*i]) || line[*i] == ',')
-		return (ft_dprintf(2, LINE, line), -2);
+		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), -2);
 	vec->y = ft_atof(&line[*i]);
 	while (line[*i] && line[*i] != ',')
 		(*i)++;
 	if (!line[(*i)++])
-		return (ft_dprintf(2, PARAM, line), -2);
+		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), -2);
 	if (!is_float(&line[*i]) || line[*i] == ',')
-		return (ft_dprintf(2, LINE, line), -2);
+		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), -2);
 	vec->z = ft_atof(&line[*i]);
 	while (line[*i] && !is_whitespace(line[*i]))
 		(*i)++;
 	if (!line[*i])
-		return (ft_dprintf(2, PARAM, line), 1);
+		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), 1);
 	return (0);
 }
 
@@ -51,9 +51,9 @@ float	check_range(char *line, char type, int i)
 	float	input;
 
 	if (!line[i])
-		return (ft_dprintf(2, PARAM, line), -2);
+		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), -2);
 	if (!is_float(&line[i]) || line[i] == ',')
-		return (ft_dprintf(2, LINE, line), -2);
+		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), -2);
 	rg[0] = 0.0;
 	rg[1] = 1.0;
 	if (type == 'f')
@@ -62,9 +62,12 @@ float	check_range(char *line, char type, int i)
 		rg[1] = 255;
 	input = ft_atof(&line[i]);
 	if (input < 0 && type == 'p')
-		return (ft_dprintf(2, NEG, line), -2);
+		return (ft_dprintf(2, ERROR NEG "\"%s\"\n", line), -2);
 	if (type && type != 'p' && (input < rg[0] || input > rg[1]))
-		return (ft_dprintf(2, RANGE, &line[i], (int)rg[0], (int)rg[1]), -2);
+		return (ft_dprintf(2, ERROR RANGE "([%d - %d]):\n\"%s\"\n",
+				(int)rg[0], (int)rg[1], line), -2);
+	if (int_len(input) >= 5)
+		ft_dprintf(2, WARN BIG "\"%s\"\n" REC, line);
 	return (input);
 }
 
@@ -72,46 +75,43 @@ float	check_range(char *line, char type, int i)
   Returns 0 when fails + displays an error message*/
 int	set_rgb(int *rgb, char *line, int i)
 {
-	int	j;
+	int		j;
+	float	fl;
 
-	j = 0;
-//	printf("[SET RGB] ALL string is: %s\n", &line[i]); //erase
-	skip_space(line, &i);
-	if (!line[i])
-		return (ft_dprintf(2, PARAM, line), 0);
-	while (j < 3)
+	j = -1;
+	if (!skip_space(line, &i) && !line[i])
+		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), 0);
+	while (++j < 3)
 	{
 		if (!line[i])
-			return (ft_dprintf(2, PARAM, line), 0);
-		if (line[i] == '.')
-			return (ft_dprintf(2, INT, line), 0);
-		rgb[j] = (int)check_range(line, 'c', i);
-		if (rgb[j++] == -2 || !is_float(&line[i]))
+			return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), 0);
+		fl = check_range(line, 'c', i);
+		if (fl == -2)
 			return (0);
+		if (fl != (int)fl)
+			return (ft_dprintf(2, ERROR INT "\"%s\"\n", line), 0);
+		rgb[j] = (int)fl;
 		while (ft_isdigit(line[i]))
 			i++;
-		i++;
-//		printf("[SET RGB] rest of string is: %s\n", &line[i]); //erase
+		if (line[i] == ',')
+			i++;
 	}
-	skip_space(line, &i);
-
-	if (line[i])
-		return (ft_dprintf(2, PARAM, line), 0);
+	if (skip_space(line, &i) && line[i])
+		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), 0);
 	return (1);
-}
-
-void	translation(t_vec *new_origin, t_vec *p)
-{
-	p->x -= new_origin->x;
-	p->y -= new_origin->y;
-	p->z -= new_origin->z;
 }
 
 void	coord_transformation(t_sc *sc)
 {
 	t_item	*obj;
+	t_light	*light;
 
-	translation(&sc->cam.pos, &sc->light.pos);
+	light = sc->light;
+	while (light)
+	{
+		translation(&sc->cam.pos, &light->pos);
+		light = light->next;
+	}
 	obj = sc->objs;
 	while (obj)
 	{
