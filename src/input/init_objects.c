@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 17:22:24 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:51:54 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_item	*add_obj(t_item *item, t_sc *sc)
 
 	ret = ft_calloc(1, sizeof(t_item));
 	if (!ret)
-		exit(ft_dprintf(2, MEM));
+		exit(ft_dprintf(2, ERROR MEM));
 	ret->next = NULL;
 	if (!item)
 		sc->objs = ret;
@@ -38,15 +38,15 @@ int	get_sphere(char *line, int i, t_sc *sc)
 	obj = add_obj(sc->objs, sc);
 	sp = malloc(sizeof(t_sp));
 	if (!sp)
-		exit(ft_dprintf(2, MEM));
+		exit(ft_dprintf(2, ERROR MEM));
 	skip_space(line, &i);
 	if (!line[i])
-		return (ft_dprintf(2, LINE, line), 1);
+		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	if (init_vec(&sp->pos, line, &i))
 		return (1);
 	skip_space(line, &i);
 	if (!is_float(&line[i]) || line[i] == ',')
-		return (ft_dprintf(2, LINE, line), 1);
+		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	sp->r = check_range(line, 'p', i) / 2;
 	if (sp->r == -1)
 		return (1);
@@ -67,14 +67,14 @@ int	get_plane(char *line, int i, t_sc *sc)
 	obj = add_obj(sc->objs, sc);
 	pl = malloc(sizeof(t_pl));
 	if (!pl)
-		exit(ft_dprintf(2, MEM));
+		exit(ft_dprintf(2, ERROR MEM));
 	skip_space(line, &i);
 	if (!line[i])
-		return (ft_dprintf(2, LINE, line), 1);
+		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	if (init_vec(&pl->pos, line, &i) || init_vec(&pl->nov, line, &i))
 		return (1);
 	if (vec_mod(&pl->nov) != 1)
-		ft_dprintf(2, NORM, line);
+		ft_dprintf(2, ERROR UNNORM "\"%s\"\n" NORM, line);
 	skip_space(line, &i);
 	if (!set_rgb(pl->rgb, line, i))
 		return (1);
@@ -93,13 +93,13 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 	obj = add_obj(sc->objs, sc);
 	cy = malloc(sizeof(t_cy));
 	if (!cy)
-		exit(ft_dprintf(2, MEM));
+		exit(ft_dprintf(2, ERROR MEM));
 	if (!skip_space(line, &i) && !line[i])
-		return (ft_dprintf(2, LINE, line), 1);
+		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	if (init_vec(&cy->pos, line, &i) || init_vec(&cy->nov, line, &i))
 		return (1);
 	if (vec_mod(&cy->nov) != 1 && !skip_space(line, &i))
-		ft_dprintf(2, NORM, line);
+		ft_dprintf(2, ERROR UNNORM "\"%s\"\n" NORM, line);
 	cy->r = check_range(line, 'p', i) / 2;
 	skip_sp_num_sp(line, &i);
 	cy->h = check_range(line, 'p', i);
@@ -122,13 +122,13 @@ int	get_cone(char *line, int i, t_sc *sc)
 	obj = add_obj(sc->objs, sc);
 	co = malloc(sizeof(t_co));
 	if (!co)
-		exit(ft_dprintf(2, MEM));
+		exit(ft_dprintf(2, ERROR MEM));
 	if (!skip_space(line, &i) && !line[i])
-		return (ft_dprintf(2, LINE, line), 1);
+		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	if (init_vec(&co->pos, line, &i) || init_vec(&co->nov, line, &i))
 		return (1);
 	if (!skip_space(line, &i) && vec_mod(&co->nov) != 1)
-		ft_dprintf(2, NORM, line);
+		ft_dprintf(2, ERROR UNNORM "\"%s\"\n" NORM, line);
 	co->r = check_range(line, 'p', i) / 2;
 	skip_sp_num_sp(line, &i);
 	co->h = check_range(line, 'p', i);
