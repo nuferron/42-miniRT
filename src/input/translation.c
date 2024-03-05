@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:36:32 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/05 19:55:24 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:13:50 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	cy_translation(t_obj *obj, t_sc *sc)
 	obj->cy->pos = substr_vec(&obj->cy->pos, &temp);
 	obj->cy->prod[0] = dot_prod(&obj->cy->pos, &obj->cy->nov);
 	obj->cy->prod[1] = dot_prod(&obj->cy->lim, &obj->cy->nov);
-	printf("CYLINDER TRANS cone product: %f\n", obj->cy->prod[1]);
+//	printf("CYLINDER TRANS cone product: %f\n", obj->cy->prod[1]);
 }
 
 void	cone_translation(t_obj *obj, t_sc *sc)
@@ -52,6 +52,6 @@ void	cone_translation(t_obj *obj, t_sc *sc)
 	obj->co->lim = sum_vec(&obj->co->pos, &temp);
 	obj->co->prod = dot_prod(&obj->co->lim, &obj->co->nov);
 	obj->co->tg = obj->co->r / obj->co->h;
-	printf("CONE TRANS cone product: %f\n", obj->co->prod);
-	printf("CONE TRANS cone norm: %f, %f, %f\n", obj->co->nov.x, obj->co->nov.y, obj->co->nov.z);
+//	printf("CONE TRANS cone product: %f\n", obj->co->prod);
+//	printf("CONE TRANS cone norm: %f, %f, %f\n", obj->co->nov.x, obj->co->nov.y, obj->co->nov.z);
 }

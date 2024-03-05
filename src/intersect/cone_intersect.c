@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:28:24 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/05 20:14:59 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 22:04:26 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	cone_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	co = obj->co;
 	var.oc = substr_vec(&ray->zero, &co->pos);
 	dn = dot_prod(&co->nov, &ray->norm);
-	if (ray->orig.x >= 0 && ray->orig.x <= 0.01 && ray->orig.y >= 0 && ray->orig.y <= 0.01) 
+	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.1 && ray->orig.y >= 0 && ray->orig.y <= 0.1) 
 	{
 		printf("CONE INTER cone norm: %f, %f, %f\n", co->nov.x, obj->co->nov.y, obj->co->nov.z);
 		printf("CONE TRANS RAY norm: %f, %f, %f, DN: %f\n", ray->norm.x, ray->norm.y, ray->norm.z, dn);
 
-	}
+	}*/
 	var.k1 = 1 - (1 + co->tg * co->tg) * dn * dn;
 	posn = dot_prod(&co->nov, &var.oc);
 	var.k2 = 2 * (dot_prod(&ray->norm, &var.oc) - (1 + co->tg * co->tg) * dn * posn);
 	var.k3 = dot_prod(&var.oc, &var.oc) - (1 + co->tg * co->tg) * posn * posn;
-	cone_check_disk(ray, co, item, &dn);
+
 	if (!count_t(ray, &var))
 		return ;
 //	printf("discr: %f\n", var.discr);
@@ -46,6 +46,7 @@ void	cone_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	co->m[0] = (ray->t[0] * dn + posn);
 	co->m[1] = (ray->t[1] * dn + posn);
 	cone_check_body(ray, item, co);
+	cone_check_disk(ray, co, item, &dn);
 //	cone_check_disk(ray, co, item, &dn);
 	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
@@ -85,21 +86,21 @@ void	cone_check_disk(t_ray *ray, t_co *co, t_item *item, float *dn)
 
 	ray->hit.obst = false;
 	ray->t[0] = co->prod / *dn;
-	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.1 && ray->orig.y >= 0 && ray->orig.y <= 0.1) 
+	if (ray->orig.x >= 0 && ray->orig.x <= 0.1 && ray->orig.y >= 0 && ray->orig.y <= 0.1) 
 	{
-		printf("[DISK]: cone product: %f, dn: %f, t: %f,    \n", co->prod, *dn, ray->t[0]); //erase
-	}*/
+//		printf("[DISK]: cone product: %f, dn: %f, t: %f,    \n", co->prod, *dn, ray->t[0]); //erase
+	}
 	if (ray->t[0] > 0)
 	{
 		ray->p = mult_new(&ray->norm, ray->t[0]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
-		d = dist(&co->pos, &ray->p);
+		d = dist(&co->lim, &ray->p);
 		if (d <= co->r)
 			check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
 	if (ray->hit.obst == true)
 	{
-		printf("DISK IS HITTED %f, %f, %f\n", ray->p.x, ray->p.y, ray->p.z);
+//		printf("DISK IS HITTED %f, %f, %f\n", ray->p.x, ray->p.y, ray->p.z);
 		ray->hit.type = disk;
 	}
 	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 

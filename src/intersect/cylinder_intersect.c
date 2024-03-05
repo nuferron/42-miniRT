@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/05 20:09:49 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:18:28 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	cy = obj->cy;
 	var.oc = substr_vec(&ray->zero, &cy->pos);
 	dn = dot_prod(&cy->nov, &ray->norm);
-	if (ray->orig.x >= 0 && ray->orig.x <= 0.1 && ray->orig.y >= 0 && ray->orig.y <= 0.1) 
+	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.1 && ray->orig.y >= 0 && ray->orig.y <= 0.1) 
 	{
 		printf("CYL INTER cone norm: %f, %f, %f\n", obj->cy->nov.x, obj->cy->nov.y, obj->cy->nov.z);
 		printf("CYL TRANS RAY norm: %f, %f, %f, DN: %f\n", ray->norm.x, ray->norm.y, ray->norm.z, dn);
 
-	}
+	}*/
 	var.k1 = 1 - dn * dn;
 	posn = dot_prod(&cy->nov, &var.oc);
 	var.k2 = 2 * (dot_prod(&ray->norm, &var.oc) - dn * posn);
@@ -35,7 +35,6 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 //	cy_check_disk(ray, cy, item, &dn);
 	if (!count_t(ray, &var))
 		return ;
-//	printf("discr: %f\n", var.discr);
 	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
 		printf("discr: %f\n", var.discr);
@@ -64,14 +63,12 @@ void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 	ray->hit.obst = false;
 	if (ray->t[0] > 0 && cy->m[0] < cy->h && cy->m[0] > 0) // what do we do if the intrsection is in the zero point???
 	{
-	//	ray->hit.shadow = true;
 		ray->p = mult_new(&ray->norm, ray->t[0]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
 	if (ray->t[1] > 0 && cy->m[1] < cy->h  && cy->m[1] > 0 && ray->t[0] != ray->t[1])
 	{
-	//	ray->hit.shadow = true;
 		ray->p = mult_new(&ray->norm, ray->t[1]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
@@ -89,8 +86,13 @@ void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 {
 	double	d;
+//	t_vec	oc;
 
 	ray->hit.obst = false;
+	/*oc = substr_vec(&ray->zero, &cy->pos);
+	cy->prod[0] = dot_prod(&oc, &cy->nov) * -1;
+	oc = substr_vec(&ray->zero, &cy->lim);
+	cy->prod[1] = dot_prod(&oc, &cy->nov) * -1;*/
 	ray->t[0] = cy->prod[0] / *dn;
 	ray->t[1] = cy->prod[1] / *dn;
 	if (ray->t[0] > 0)
@@ -113,14 +115,14 @@ void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 	}
 	if (ray->hit.obst == true)
 		ray->hit.type = disk;
-	if (ray->hit.obst == true && ray->hit.p.x >= 0 && ray->hit.p.x <= 0.2 && ray->hit.p.y >= 0 && ray->hit.p.y <= 0.2) 
+	/*if (ray->hit.obst == true && ray->hit.p.x >= 0 && ray->hit.p.x <= 0.2 && ray->hit.p.y >= 0 && ray->hit.p.y <= 0.2) 
 	{
 		printf("[DISK]: cylinder point: x: %f, y: %f, z: %f,    ", ray->p.x, ray->p.y, ray->p.z); //erase
 		printf("[DISK]: winning point: x: %f, y: %f, z: %f,    ", ray->hit.p.x, ray->hit.p.y, ray->hit.p.z); //erase
 		printf("[DISK]: camera ray: x: %f, y: %f, z: %f,    ", ray->norm.x, ray->norm.y, ray->norm.z); //erase
 		printf("distance to DISK point: %f, t[0] --- %f, t[1] ----- %f, dn ---- %f\n", dist(&ray->p, &ray->zero), ray->t[0], ray->t[1], *dn); //erase
 		
-	}
+	}*/
 }
 
 void	cy_get_norm(t_obj *cy, t_hit *hit, t_ray *ray)
