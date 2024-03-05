@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 18:51:54 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:45:51 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	get_plane(char *line, int i, t_sc *sc)
 	if (init_vec(&pl->pos, line, &i) || init_vec(&pl->nov, line, &i))
 		return (1);
 	if (vec_mod(&pl->nov) != 1)
-		ft_dprintf(2, ERROR UNNORM "\"%s\"\n" NORM, line);
+		ft_dprintf(2, WARN UNNORM "\"%s\"\n" NORM, line);
 	skip_space(line, &i);
 	if (!set_rgb(pl->rgb, line, i))
 		return (1);
@@ -99,7 +99,7 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 	if (init_vec(&cy->pos, line, &i) || init_vec(&cy->nov, line, &i))
 		return (1);
 	if (vec_mod(&cy->nov) != 1 && !skip_space(line, &i))
-		ft_dprintf(2, ERROR UNNORM "\"%s\"\n" NORM, line);
+		ft_dprintf(2, WARN UNNORM "\"%s\"\n" NORM, line);
 	cy->r = check_range(line, 'p', i) / 2;
 	skip_sp_num_sp(line, &i);
 	cy->h = check_range(line, 'p', i);
@@ -128,7 +128,7 @@ int	get_cone(char *line, int i, t_sc *sc)
 	if (init_vec(&co->pos, line, &i) || init_vec(&co->nov, line, &i))
 		return (1);
 	if (!skip_space(line, &i) && vec_mod(&co->nov) != 1)
-		ft_dprintf(2, ERROR UNNORM "\"%s\"\n" NORM, line);
+		ft_dprintf(2, WARN UNNORM "\"%s\"\n" NORM, line);
 	co->r = check_range(line, 'p', i) / 2;
 	skip_sp_num_sp(line, &i);
 	co->h = check_range(line, 'p', i);

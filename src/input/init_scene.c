@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:37:09 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 18:47:15 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:58:59 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	get_ambient(char *line, int i, t_amb *amb)
 {
 	if (amb->ratio != -1)
-		return (ft_dprintf(2, ERROR REPE "%c", 'A'), 1);
+		return (ft_dprintf(2, ERROR REPE "\'%c\'\n", 'A'), 1);
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, ERROR LINE "\"%s\"", line), 1);
@@ -35,7 +35,7 @@ int	get_ambient(char *line, int i, t_amb *amb)
 int	get_camera(char *line, int i, t_cam *cam)
 {
 	if (cam->fov != -1)
-		return (ft_dprintf(2, ERROR REPE "\'%c\'", 'C'), 1);
+		return (ft_dprintf(2, ERROR REPE "\'%c\'\n", 'C'), 1);
 	skip_space(line, &i);
 	if (!line[i])
 		return (ft_dprintf(2, ERROR LINE "\"%s\"", line), 1);
@@ -50,6 +50,9 @@ int	get_camera(char *line, int i, t_cam *cam)
 	if (cam->fov != (int)cam->fov)
 		return (ft_dprintf(2, ERROR INT "\"%s\"", line), 1);
 	cam->fov = cam->fov * M_PI / 180;
+	skip_sp_num_sp(line, &i);
+	if (line[i])
+		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), 1);
 	return (0);
 }
 

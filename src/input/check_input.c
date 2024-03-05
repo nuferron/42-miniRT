@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 12:36:20 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:48:24 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static int	check_content(t_sc *sc, char *line)
 	if (!line[i])
 		return (0);
 	get_element(line, i, element);
-	printf("[%s]\n", element);
 	if (!ft_strncmp(element, "A", 2))
 		return (get_ambient(line, ++i, &sc->amb));
 	else if (!ft_strncmp(element, "C", 2))
@@ -101,7 +100,7 @@ int	check_input(int argc, char **argv, t_sc *sc)
 		return (ft_dprintf(2, ERROR FNF "%s\n", argv[1]), 1);
 	if (check_file(fd, sc))
 		return (1);
-	if (sc->amb.ratio == -1 || sc->cam.fov == -1 || sc->light->b == -1)
+	if (sc->amb.ratio == -1 || sc->cam.fov == -1 || !sc->light)
 		return (ft_dprintf(2, ERROR MUST), 1);
 	sc->screen.width = sin(sc->cam.fov / 2) * 2 * FOCAL;
 	sc->screen.pix_rat = sc->screen.width / WIDTH;
