@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:28:24 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/03 15:01:43 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:27:26 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	cone_check_disk(t_ray *ray, t_co *co, t_item *item, float *dn)
 	{
 		ray->p = mult_new(&ray->norm, ray->t[0]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
-		d = dist(&co->pos, &ray->p);
+		d = dist(&co->lim, &ray->p);
 		if (d <= co->r)
 			check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}

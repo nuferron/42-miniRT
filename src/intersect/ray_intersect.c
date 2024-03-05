@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/04 13:50:44 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:30:59 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ray_init(t_ray *ray)
 
 void	check_dist(t_point *p, t_ray *ray, t_item *obj, double dist)
 {
-	if (dist > ray->dist)
+	if (dist > ray->dist || dist < 0.001)
 		return ;
 	ray->dist = dist;
 	ray->hit.p = *p;
