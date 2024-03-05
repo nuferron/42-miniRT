@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/29 22:28:10 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:34:53 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,17 @@ void	ray_init(t_ray *ray)
 //	ray->k1 = dot_prod(&ray->norm, &ray->norm); //??? but it's 1
 //	ray->k1 = 1;
 	ray->dist = MAXFLOAT;
+	ray->hit.p = vec_new(0, 0, 0);
+	ray->hit.norm = vec_new(0, 0, 0);
 	ray->hit.obj = NULL;
+	ray->hit.rgb = NULL;
 	ray->hit.obst = false;
 }
 
 void	check_dist(t_point *p, t_ray *ray, t_item *obj, double dist)
 {
-	if (dist > ray->dist)
+//	printf("dist: %f, saved dist: %f, distance diff: %f\n", dist, ray->dist, fabs(dist - ray->dist));
+	if (dist > ray->dist || fabs(dist - ray->dist) < 0.1)
 		return ;
 	ray->dist = dist;
 	ray->hit.p = *p;

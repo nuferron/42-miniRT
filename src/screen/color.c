@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:18:22 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/29 23:16:42 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:11:13 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static unsigned int	phong_light(t_light *light, t_hit *hit, float dot,
 	reflex = substr_vec(&reflex, lray);
 	reflex = unit_vector(&reflex);
 	cam_hit = unit_vector(&hit->p);
-	s_fact = pow(dot_prod(&reflex, &cam_hit), 500);
+	s_fact = pow(dot_prod(&reflex, &cam_hit), 1000);
 	specular = color_x_fact(rgb_to_hex(light->rgb), s_fact);
 	return (specular);
 }
@@ -117,7 +117,7 @@ unsigned int	get_color(t_amb *amb, t_light *light, t_item *obj, t_hit *hit)
 			if (tmp != hit->obj) 
 			{
 				tmp->intersect(&tmp->type, &ray, tmp);
-				if (ray.dist < d && ray.hit.obst == true)
+				if (ray.dist < d && ray.hit.obst == true && fabs(ray.dist - d) > 0.1)
 				{
 					hit->obst = true;
 					break ;

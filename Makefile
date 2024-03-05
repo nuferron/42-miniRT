@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/02/29 22:23:46 by nzhuzhle         ###   ########.fr        #
+#    Updated: 2024/03/01 22:05:45 by nzhuzhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,11 @@ SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
 		main.c
 SRCDIR = src/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
+DEPS = $(addprefix $(OBJDIR),$(SRCS:.c=.d))
 OBJDIR = obj/
 NAME = miniRT
-CFLAGS = -Wall -Wextra -Werror -O3 -fsanitize=address
-LIB = inc/libft/libft.a inc/ft_dprintf/libftprintf.a
+CFLAGS = -Wall -Wextra -Werror -MMD -O3 -fsanitize=address
+LIB = inc/libft/libft.a inc/ft_dprintf/libftprintf.a inc/mlx/libmlx.a
 INC = inc/
 MLXFLAGS = -Linc/mlx -lmlx -framework OpenGL -framework AppKit
 COLUMNS = $(shell tput cols)
@@ -58,6 +59,7 @@ make_libs:
 		echo "${WHITE}MLX: ${GREEN}Compiled!"; \
 	fi
 
+-include $(DEPS)
 ${NAME}: ${OBJS} ${LIB}
 	cc ${CFLAGS} ${LIB} ${OBJS} ${MLXFLAGS} -o ${NAME}
 	echo "${WHITE}${NAME}: ${GREEN}Binary successfully created!${RESET}"
@@ -73,10 +75,7 @@ norm:
 leaks: ${NAME}
 	leaks -atExit -- ./${NAME} ${MAP}
 
-run: ${NAME}
-	./${NAME} tests/${TEST}.rt
-
-${OBJDIR}%.o: ${SRCDIR}%.c ${HEADER} Makefile
+${OBJDIR}%.o: ${SRCDIR}%.c Makefile
 	@printf "${WHITE}${NAME}: ${CYAN}Compiling files: ${WHITE}$(notdir $<)...${RESET}\r"
 	@mkdir -p $(dir $@)
 	@cc ${CFLAGS} -I ${INC} -c $< -o $@
@@ -89,6 +88,7 @@ clean:
 	fi
 	make -C inc/libft clean --no-print-directory
 	make -C inc/ft_dprintf clean --no-print-directory
+	make -s -C inc/mlx clean --no-print-directory
 
 fclean: 	clean
 	if [ -e ${NAME} ] ; then \
@@ -98,7 +98,6 @@ fclean: 	clean
 	fi
 	make -C inc/libft fclean --no-print-directory
 	make -C inc/ft_dprintf fclean --no-print-directory
-	@make -s -C inc/mlx clean --no-print-directory
 
 re:	fclean all
 

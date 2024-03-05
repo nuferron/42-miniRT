@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/28 18:50:32 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:16:50 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@ t_item	*item_lstlast(t_item *lst);
 
 
 /* MATH UTILS */
-double	exp_n(double b, int n);
-double	exp_2(double b);
+//double	exp_n(double b, int n);
+//double	exp_2(double b);
 
 void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax);
 //void	throw_rays(t_sc *sc, t_screen *pic);
 void	throw_rays(t_sc *sc, t_point *start, t_point *ctx, t_point *cty);
+int	check_first_pix(t_sc *sc, t_point *ctx, t_point *cty);
 
 #endif

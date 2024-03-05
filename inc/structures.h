@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:17:32 by nuferron          #+#    #+#             */
-/*   Updated: 2024/02/29 22:23:21 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:43:16 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,7 @@ typedef struct s_mlx
 //	SCENE - MAIN STRUCTURE------------------------------------------/
 typedef struct s_sc
 {
+	t_ray		ray;
 	t_mlx		mlx;
 	t_screen	screen;
 	t_light		light;

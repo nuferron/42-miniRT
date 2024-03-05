@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:58:21 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/29 15:27:38 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:15:32 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ void	draw_scene(t_sc *sc)
 	ct_y.x = -(sc->screen.pix_rat) * sc->screen.y_ax.x;
 	ct_y.y = -(sc->screen.pix_rat) * sc->screen.y_ax.y;
 	ct_y.z = -(sc->screen.pix_rat) * sc->screen.y_ax.z;
-	sc->mlx.w = 0;
-	while (sc->mlx.w < WIDTH)
+	if (check_first_pix(sc, &ct_x, &ct_y))
+		return ;
+	sc->mlx.w = -1;
+	while (++sc->mlx.w < WIDTH)
 	{
-		sc->mlx.h = 0;
-		while (sc->mlx.h < HEIGHT)
+		sc->mlx.h = -1;
+		while (++sc->mlx.h < HEIGHT)
 		{
 			sc->mlx.color = 0;
 			throw_rays(sc, &sc->screen.start, &ct_x, &ct_y);
 			put_pixel(sc);
-			sc->mlx.h++;
 		}
-		sc->mlx.w++;
 	}
 	mlx_put_image_to_window(sc->mlx.init, sc->mlx.win, sc->mlx.img.ipt, 0, 0);
 }

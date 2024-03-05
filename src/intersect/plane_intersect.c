@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:28:21 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/28 17:07:01 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:53:30 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	pl_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	ray->t[0] = pl->prod / d;
 //	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2)
 //		printf("[PLANE] Denom is: %f, PL->prod: %f, t: %f\n", d, pl->prod, ray->t); //erase
-	if (ray->t[0] <= 0 || fabs(d) < 0.00001)
+	if (ray->t[0] <= 0) // || fabs(d) < 0.00001
 		return ;
 	ray->p = mult_new(&ray->norm, ray->t[0]);
 	ray->p = sum_vec(&ray->zero, &ray->p);
