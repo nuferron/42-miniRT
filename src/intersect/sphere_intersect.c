@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:58:05 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/05 17:27:03 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:02:29 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void	sph_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	}*/
 }
 
-void	sp_get_norm(t_obj *sp, t_hit *hit)
+void	sp_get_norm(t_obj *sp, t_hit *hit, t_ray *ray)
 {
+	(void)ray;
 	hit->norm = substr_vec(&hit->p, &sp->sp->pos);
 	norm_vector(&hit->norm);
 	hit->rgb = sp->sp->rgb;
