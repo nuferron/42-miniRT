@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:37:09 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 12:58:59 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:22:26 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ int	get_camera(char *line, int i, t_cam *cam)
 	if (init_vec(&cam->pos, line, &i) || init_vec(&cam->nov, line, &i))
 		return (1);
 	if (vec_mod(&cam->nov) != 1)
+	{
+		norm_vector(&cam->nov);
 		ft_dprintf(2, WARN UNNORM "\"%s\"\n" NORM, line);
+	}
 	skip_space(line, &i);
 	cam->fov = check_range(line, 'f', i);
 	if (cam->fov == -2)

@@ -6,11 +6,13 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:43:51 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/06 17:04:42 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:17:59 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "errors.h"
+
 
 void	getting_new_axis(t_vec *cam, t_vec *h, t_vec *v, t_vec *ax)
 {
@@ -69,7 +71,7 @@ int	check_first_pix(t_sc *sc, t_point *ctx, t_point *cty)
 //	printf("after first ray: %f\n", dot_prod(&sc->ray.hit.norm, &sc->cam.nov));
 	if (sc->ray.hit.type == pla || dot_prod(&sc->ray.hit.norm, &sc->cam.nov) <= 0)
 		return (0);
-	printf("WARNING: your camera is inside of an object. Change the position to see the world.\n");
+	ft_dprintf(2, WARN CAM);
 	sc->mlx.color = 0;
 	sc->mlx.w = -1;
 	while (++sc->mlx.w < WIDTH)

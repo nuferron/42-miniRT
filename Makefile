@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/03/04 17:12:11 by nuferron         ###   ########.fr        #
+#    Updated: 2024/03/06 18:30:12 by nzhuzhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRCDIR = src/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 OBJDIR = obj/
 NAME = miniRT
-CFLAGS = -Wall -Wextra -Werror -O3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -O3 #-fsanitize=address
 LIB = inc/libft/libft.a inc/ft_dprintf/libftprintf.a
 INC = inc/
 MLXFLAGS = -Linc/mlx -lmlx -framework OpenGL -framework AppKit
