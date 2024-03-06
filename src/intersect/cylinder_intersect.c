@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/06 16:16:20 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/06 22:19:06 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	float	posn;
 
 	cy = obj->cy;
+	if (cy->r < 0.0000001)
+		return ;
 	var.oc = substr_vec(&ray->zero, &cy->pos);
 	dn = dot_prod(&cy->nov, &ray->norm);
 	var.k1 = 1 - dn * dn;
@@ -51,9 +53,9 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 
 void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 {
-//	bool	temp;
+	bool	temp;
 
-//	temp = ray->hit.obst;
+	temp = ray->hit.obst;
 	ray->hit.obst = false;
 	if (ray->t[0] > 0 && cy->m[0] < cy->h && cy->m[0] > 0) // what do we do if the intrsection is in the zero point???
 	{
@@ -71,8 +73,8 @@ void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 	}
 	if (ray->hit.obst == true)
 		ray->hit.type = cyl;
-//	else if (temp == true)
-//		ray->hit.obst = true;
+	else if (temp == true)
+		ray->hit.obst = true;
 	/*if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
 		printf("res: %i\n", res);
