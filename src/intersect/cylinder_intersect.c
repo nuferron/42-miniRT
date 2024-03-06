@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/05 16:59:24 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:56:46 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,16 +115,18 @@ void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 	}*/
 }
 
-void	cy_get_norm(t_obj *cy, t_hit *hit)
+void	cy_get_norm(t_obj *cy, t_hit *hit, t_ray *ray)
 {
 	t_vec	mvec;
 	t_point	a;
 
+//	(void)ray;
 	hit->rgb = cy->cy->rgb;
 	if (hit->type == disk)
 	{
-//		hit->norm = cy->cy->nov;
-		hit->norm = mult_new(&cy->cy->nov, -1);
+		hit->norm = cy->cy->nov;
+		if (dot_prod(&ray->norm, &hit->norm) > 0)
+			mult_fac(&hit->norm, -1);
 		return ;
 	}
 	mvec = mult_new(&cy->cy->nov, cy->cy->m[0]);
