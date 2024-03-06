@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 17:18:33 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:26:09 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_sc
 {
 	t_mlx		mlx; //mlx_rt.h
 	t_screen	screen;
+	t_ray		ray;
 	t_light		*light;
 	t_amb		amb;
 	t_cam		cam;
@@ -80,5 +81,7 @@ t_item	*item_lstlast(t_item *lst);
 
 void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax);
 void	throw_rays(t_sc *sc, t_point *start, t_point *ctx, t_point *cty);
+void	throw_first_ray(t_sc *sc, t_point *start, t_point *ctx, t_point *cty);
+int		check_first_pix(t_sc *sc, t_point *ctx, t_point *cty);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:18:22 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 20:16:49 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:09:05 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static unsigned int	phong_light(t_light *l, float dot, t_ray *lray)
 	s_fact = dot_prod(&reflex, &lray->zero);
 	if (s_fact >= 0)
 		return (0);
-	s_fact = pow(s_fact, 250);
+	s_fact = pow(s_fact, 1000);
 	if (s_fact < 0)
 		s_fact = -s_fact;
 	return (color_x_fact(rgb_to_hex(l->rgb), s_fact * l->b));
@@ -68,7 +68,7 @@ static void	get_shadows(t_ray *lray, t_hit *hit, t_item *obj, double dot)
 				break ;
 			}
 			tmp->intersect(&tmp->type, lray, tmp);
-			if (lray->dist < d) // dona algunes sombres rares
+			if (lray->dist < d && fabs(lray->dist - d) > 0.00001 && d > 0.0001) // dona algunes sombres rares
 			{
 				//printf("d %f\tray.dist %f\n", d, ray.dist);
 				hit->obst = true;

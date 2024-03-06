@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:58:21 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/02/29 15:27:38 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:26:38 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	draw_scene(t_sc *sc)
 	ct_y.x = -(sc->screen.pix_rat) * sc->screen.y_ax.x;
 	ct_y.y = -(sc->screen.pix_rat) * sc->screen.y_ax.y;
 	ct_y.z = -(sc->screen.pix_rat) * sc->screen.y_ax.z;
+	if (check_first_pix(sc, &ct_x, &ct_y))
+		return ;
 	sc->mlx.w = 0;
 	while (sc->mlx.w < WIDTH)
 	{
