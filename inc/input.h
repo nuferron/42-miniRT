@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:04:16 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 17:14:23 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:25:17 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int		check_input(int argc, char **argv, t_sc *sc);
 
 /* init_obj_utils.c - init t_item for a specific obj type*/
 void	init_sp(t_item *obj, t_sp *sp);
-void	init_pl(t_item *obj, t_pl *pl);
-void	init_cy(t_item *obj, t_cy *cy);
-void	init_cn(t_item *obj, t_co *co);
+void	init_pl(t_item *obj, t_pl *pl, char *line);
+void	init_cy(t_item *obj, t_cy *cy, char *line);
+void	init_cn(t_item *obj, t_co *co, char *line);
 
 #endif
