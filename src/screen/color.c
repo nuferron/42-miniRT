@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:18:22 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 20:16:49 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/06 14:54:13 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,8 @@ static void	get_shadows(t_ray *lray, t_hit *hit, t_item *obj, double dot)
 				break ;
 			}
 			tmp->intersect(&tmp->type, lray, tmp);
-			if (lray->dist < d) // dona algunes sombres rares
+			if (lray->dist < d && d - lray->dist > 0.0001)
 			{
-				//printf("d %f\tray.dist %f\n", d, ray.dist);
 				hit->obst = true;
 				break ;
 			}
