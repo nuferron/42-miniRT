@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/05 23:56:46 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:16:20 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
 	double	d;
 
 	ray->hit.obst = false;
-	ray->t[0] = cy->prod[0] / *dn;
-	ray->t[1] = cy->prod[1] / *dn;
+	ray->t[0] = (cy->prod[0] - dot_prod(&ray->zero, &cy->nov)) / *dn;
+	ray->t[1] = (cy->prod[1] - dot_prod(&ray->zero, &cy->nov)) / *dn;
 	if (ray->t[0] > 0)
 	{
 	//	ray->hit.shadow = true;

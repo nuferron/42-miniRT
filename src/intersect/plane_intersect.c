@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:28:21 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/05 23:49:16 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:14:05 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ void	pl_intersect(t_obj *obj, t_ray *ray, t_item *item)
 //	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2)
 //		printf("[PLANE] POSITION is x: %f, y: %f, z: %f\n", pl->pos.x, pl->pos.y, pl->pos.z); //erase
 	d = dot_prod(&ray->norm, &pl->nov);
-	ray->t[0] = pl->prod / d;
+	if (fabs(d) < 0.00001)
+		return ;
+	ray->t[0] = (pl->prod - dot_prod(&ray->zero, &pl->nov)) / d;
 //	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2)
 //		printf("[PLANE] Denom is: %f, PL->prod: %f, t: %f\n", d, pl->prod, ray->t); //erase
-	if (ray->t[0] <= 0 || fabs(d) < 0.00001)
+	if (ray->t[0] <= 0)
 		return ;
 //	ray->hit.shadow = true;
 	ray->p = mult_new(&ray->norm, ray->t[0]);
