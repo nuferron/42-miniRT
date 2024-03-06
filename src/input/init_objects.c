@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 18:05:19 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:26:11 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ int	get_plane(char *line, int i, t_sc *sc)
 		ft_dprintf(2, WARN UNNORM "\"%s\"\n" NORM, line);
 	if (!skip_space(line, &i) && !set_rgb(pl->rgb, line, i))
 		return (1);
-	norm_vector(&pl->nov);
-	init_pl(obj, pl);
+	init_pl(obj, pl, line);
 	return (0);
 }
 
@@ -102,8 +101,7 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 		return (1);
 	if (!skip_number(line, &i) && !set_rgb(cy->rgb, line, i))
 		return (1);
-	norm_vector(&cy->nov);
-	init_cy(obj, cy);
+	init_cy(obj, cy, line);
 	return (0);
 }
 
@@ -122,8 +120,9 @@ int	get_cone(char *line, int i, t_sc *sc)
 		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	if (init_vec(&co->pos, line, &i) || init_vec(&co->nov, line, &i))
 		return (1);
-	if (!skip_space(line, &i) && vec_mod(&co->nov) != 1)
-		ft_dprintf(2, WARN UNNORM "\"%s\"\n" NORM, line);
+	skip_space(line, &i);
+	//if (vec_mod(&co->nov) != 1)
+	//	ft_dprintf(2, WARN UNNORM "\"%s\"\n" NORM, line);
 	co->r = check_range(line, 'p', i) / 2;
 	skip_sp_num_sp(line, &i);
 	co->h = check_range(line, 'p', i);
@@ -131,7 +130,6 @@ int	get_cone(char *line, int i, t_sc *sc)
 		return (1);
 	if (!skip_number(line, &i) && !set_rgb(co->rgb, line, i))
 		return (1);
-	norm_vector(&co->nov);
-	init_cn(obj, co);
+	init_cn(obj, co, line);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 17:06:57 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 17:14:33 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:27:55 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	init_sp(t_item *obj, t_sp *sp)
 	obj->get_norm = sp_get_norm;
 }
 
-void	init_pl(t_item *obj, t_pl *pl)
+void	init_pl(t_item *obj, t_pl *pl, char *line)
 {
+	(void)line;
+	norm_vector(&pl->nov);
 	obj->type.pl = pl;
 	obj->intersect = pl_intersect;
 	obj->trans = pl_translation;
@@ -30,8 +32,10 @@ void	init_pl(t_item *obj, t_pl *pl)
 	obj->get_norm = pl_get_norm;
 }
 
-void	init_cy(t_item *obj, t_cy *cy)
+void	init_cy(t_item *obj, t_cy *cy, char *line)
 {
+	(void)line;
+	norm_vector(&cy->nov);
 	obj->type.cy = cy;
 	obj->intersect = cy_intersect;
 	obj->trans = cy_translation;
@@ -39,8 +43,18 @@ void	init_cy(t_item *obj, t_cy *cy)
 	obj->get_norm = cy_get_norm;
 }
 
-void	init_cn(t_item *obj, t_co *co)
+void	init_cn(t_item *obj, t_co *co, char *line)
 {
+	float	n;
+
+	n = vec_mod(&co->nov);
+	if (n && n != 1)
+	{
+		ft_dprintf(2, WARN UNNORM "\"%s\"\n" NORM, line);
+		norm_vector(&co->nov);
+	}
+	else if (!n)
+		ft_dprintf(2, WARN BLIND);
 	obj->type.co = co;
 	obj->intersect = cone_intersect;
 	obj->trans = cone_translation;
