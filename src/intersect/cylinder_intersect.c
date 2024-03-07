@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 21:53:10 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/06 22:19:06 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:21:00 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item)
 {
 	t_vars	var;
 	t_cy	*cy;
-	float	dn;
-	float	posn;
+	double	dn;
+	double	posn;
 
 	cy = obj->cy;
 	if (cy->r < 0.0000001)
@@ -81,7 +81,7 @@ void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy)
 	}*/
 }
 
-void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn)
+void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, double *dn)
 {
 	double	d;
 

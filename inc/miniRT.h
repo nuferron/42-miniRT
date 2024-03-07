@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/06 16:26:09 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:30:58 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ typedef struct s_screen
 	t_vec	x_ax;
 	t_vec	y_ax;
 	t_point	start;
-	float	width;
-	float	height;
-	float	pix_rat;
+	double	width;
+	double	height;
+	double	pix_rat;
 }	t_screen;
 
 typedef struct s_sc
@@ -78,10 +78,13 @@ int		skip_space(char *line, int *i);
 int		skip_number(char *line, int *i);
 void	skip_sp_num_sp(char *line, int *i);
 t_item	*item_lstlast(t_item *lst);
+void	free_all(t_sc *sc);
 
 void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax);
 void	throw_rays(t_sc *sc, t_point *start, t_point *ctx, t_point *cty);
 void	throw_first_ray(t_sc *sc, t_point *start, t_point *ctx, t_point *cty);
 int		check_first_pix(t_sc *sc, t_point *ctx, t_point *cty);
+
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:27:29 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 23:51:35 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:29:46 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_hit t_hit;
 typedef struct s_sp //SPHERE
 {
 	t_point	pos;	//center point
-	float	r;		//radius
+	double	r;		//radius
 	int		rgb[3];
 }	t_sp;
 
@@ -28,7 +28,7 @@ typedef struct s_pl //PLANE
 {
 	t_point	pos;	//center point
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
-	float	prod;	// dot product of pos and nov
+	double	prod;	// dot product of pos and nov
 	int		rgb[3];
 }	t_pl;
 
@@ -37,10 +37,10 @@ typedef struct s_cy //CYLINDER
 	t_point	pos;	//bottom point
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
 	t_point	lim;	//upper point
-	float	prod[2];	// dot products of pos and nov for the planes
-	float	m[2];	//solution to count the normal
-	float	r;		//radius
-	float	h;		//height
+	double	prod[2];	// dot products of pos and nov for the planes
+	double	m[2];	//solution to count the normal
+	double	r;		//radius
+	double	h;		//height
 	int		rgb[3];
 //	int		flag;	//0 - winner point is on the body, 1 - winner point is on a plane
 }	t_cy;
@@ -50,11 +50,11 @@ typedef struct s_co //CONO
 	t_point	pos;	//top point
 	t_vec	nov;	//3D normalized orientation vector for x [-1.0 - 1.0]
 	t_point	lim;	//bottom point
-	float	prod;	// dot product of pos and nov for the plane
-	float	m[2];	//solution to count the normal
-	float	r;		//radius
-	float	h;		//height
-	float	tg;		//tangent of the half angle
+	double	prod;	// dot product of pos and nov for the plane
+	double	m[2];	//solution to count the normal
+	double	r;		//radius
+	double	h;		//height
+	double	tg;		//tangent of the half angle
 	int		rgb[3];
 }	t_co;
 

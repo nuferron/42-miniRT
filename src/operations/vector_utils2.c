@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 21:44:54 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/06 22:07:51 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:43:40 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ double	dist(t_point *p1, t_point *p2)
 
 	temp = substr_vec(p1, p2);
 	d = vec_mod(&temp);
-	if (d < 0.0001)
-		return (0);
+//	if (d < 0.0001)
+//		return (0);
 	return (d);
 }
 
