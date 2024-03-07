@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:07:57 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/07 16:03:21 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:09:04 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@
 # define REC "We recommend you to work with lower numbers\n"
 # define UNNORM "Unnormalized vector found in line "
 # define NORM "We'll work with its normalized version\n"
-
+# define CAM "Your camera is inside of an object. \
+Change the position to see the world.\n"
 #endif

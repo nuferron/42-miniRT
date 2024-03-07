@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:27:20 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/04 16:38:08 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:25:36 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 /* Structure for coordinates ("absolute" or normalized) */
 typedef struct s_vec
 {
-	float	x;
-	float	y;
-	float	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_vec;
 
 typedef struct s_vec t_point;
@@ -45,7 +45,7 @@ void	norm_vector(t_vec *n);
 // returns a the vector v multiplied by the float "factor"
 t_vec	mult_new(t_vec *v, double factor);
 // changes the vector v multiplying it by a factor
-void	mult_fac(t_vec *v, float factor);
+void	mult_fac(t_vec *v, double factor);
 // returns a the vector, that is a multiplication of v1 and v2
 t_vec	mult_vec(t_vec *v1, t_vec *v2);
 // returns a the vector v divided by the float "factor"

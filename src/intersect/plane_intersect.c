@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:28:21 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/06 16:14:05 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:35:56 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	pl_intersect(t_obj *obj, t_ray *ray, t_item *item)
 {
 	t_pl	*pl;
-	float	d;
+	double	d;
 
 	pl = obj->pl;
 	ray->hit.obst = false;

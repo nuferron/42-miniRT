@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/07 18:58:26 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:10:28 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	get_plane(char *line, int i, t_sc *sc)
 	obj = add_obj(sc->objs, sc);
 	pl = malloc(sizeof(t_pl));
 	if (!pl)
-		return (ft_error_mlx(sc, ft_dprintf(2, ERROR MEM)));
+		ft_error_mlx(sc, ft_dprintf(2, ERROR MEM));
 	init_pl(obj, pl);
 	if (!skip_space(line, &i) && !line[i])
 		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
@@ -88,7 +88,7 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 	obj = add_obj(sc->objs, sc);
 	cy = malloc(sizeof(t_cy));
 	if (!cy)
-		return (ft_error_mlx(sc, ft_dprintf(2, ERROR MEM)));
+		ft_error_mlx(sc, ft_dprintf(2, ERROR MEM));
 	init_cy(obj, cy);
 	if (!skip_space(line, &i) && !line[i])
 		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
@@ -117,7 +117,7 @@ int	get_cone(char *line, int i, t_sc *sc)
 	obj = add_obj(sc->objs, sc);
 	co = malloc(sizeof(t_co));
 	if (!co)
-		return (ft_error_mlx(sc, ft_dprintf(2, ERROR MEM)));
+		ft_error_mlx(sc, ft_dprintf(2, ERROR MEM));
 	init_cn(obj, co);
 	if (!skip_space(line, &i) && !line[i])
 		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);

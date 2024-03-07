@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:01:29 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/05 23:50:47 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:22:55 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ int		count_t(t_ray *ray, t_vars *var);
 /* cylinder_intersect.c - intersection with cylinder equations  **************/
 void	cy_intersect(t_obj *obj, t_ray *ray, t_item *item);
 void	cy_check_body(t_ray *ray, t_item *item, t_cy *cy);
-void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, float *dn);
+void	cy_check_disk(t_ray *ray, t_cy *cy, t_item *item, double *dn);
 void	cy_get_norm(t_obj *obj, t_hit *hit, t_ray *ray);
 
 /* cone_intersect.c - intersection with cone equations  **************/
 void	cone_intersect(t_obj *obj, t_ray *ray, t_item *item);
 void	cone_check_body(t_ray *ray, t_item *item, t_co *co);
-void	cone_check_disk(t_ray *ray, t_co *co, t_item *item, float *dn);
+void	cone_check_disk(t_ray *ray, t_co *co, t_item *item, double *dn);
 void	cone_get_norm(t_obj *obj, t_hit *hit, t_ray *ray);
 
 /* ray_intersect.c - dealing with ray variables  **************/

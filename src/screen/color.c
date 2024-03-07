@@ -6,17 +6,17 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:18:22 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/07 17:49:19 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:05:02 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "color.h"
 
-static unsigned int	phong_light(t_light *l, float dot, t_ray *lray)
+static unsigned int	phong_light(t_light *l, double dot, t_ray *lray)
 {
 	t_vec			reflex;
-	float			s_fact;
+	double			s_fact;
 
 	lray->zero = unit_vector(&lray->hit.p);
 	reflex = mult_new(&lray->hit.norm, 2 * dot);
@@ -31,7 +31,7 @@ static unsigned int	phong_light(t_light *l, float dot, t_ray *lray)
 	return (color_x_fact(rgb_to_hex(l->rgb), s_fact * l->b));
 }
 
-static unsigned int	diffuse_light(t_light *light, t_hit *hit, float d_fact)
+static unsigned int	diffuse_light(t_light *light, t_hit *hit, double d_fact)
 {
 	unsigned int	d_color;
 

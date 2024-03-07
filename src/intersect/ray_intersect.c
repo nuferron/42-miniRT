@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/07 18:20:01 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:07:17 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_light_ray(t_ray *ray, t_light *light, t_hit *hit)
 
 void	check_dist(t_point *p, t_ray *ray, t_item *obj, double dist)
 {
-	if (dist > ray->dist || dist < 0.001)
+	if (dist > ray->dist || dist < 0.0001 || fabs(ray->dist - dist) < 0.0001)
 		return ;
 	ray->dist = dist;
 	ray->hit.p = *p;

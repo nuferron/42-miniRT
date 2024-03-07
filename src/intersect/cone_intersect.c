@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:28:24 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/06 16:15:35 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:35:19 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	cone_intersect(t_obj *obj, t_ray *ray, t_item *item)
 {
 	t_vars	var;
 	t_co	*co;
-	float	dn;
-	float	posn;
+	double	dn;
+	double	posn;
 
 	co = obj->co;
 	var.oc = substr_vec(&ray->zero, &co->pos);
@@ -58,8 +58,8 @@ void	cone_check_body(t_ray *ray, t_item *item, t_co *co)
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
-	if (ray->t[0] == ray->t[1])
-		return ;
+//	if (ray->t[0] == ray->t[1])
+//		return ;
 	if (ray->t[1] > 0 && co->m[1] < co->h  && co->m[1] > 0 && ray->t[0] != ray->t[1])
 	{
 		ray->p = mult_new(&ray->norm, ray->t[1]);
@@ -74,10 +74,12 @@ void	cone_check_body(t_ray *ray, t_item *item, t_co *co)
 	}*/
 }
 
-void	cone_check_disk(t_ray *ray, t_co *co, t_item *item, float *dn)
+void	cone_check_disk(t_ray *ray, t_co *co, t_item *item, double *dn)
 {
 	double	d;
+	bool	temp;
 
+	temp = ray->hit.obst;
 	ray->hit.obst = false;
 	ray->t[0] = (co->prod - dot_prod(&ray->zero, &co->nov)) / *dn;
 	if (ray->t[0] > 0)
@@ -90,6 +92,8 @@ void	cone_check_disk(t_ray *ray, t_co *co, t_item *item, float *dn)
 	}
 	if (ray->hit.obst == true)
 		ray->hit.type = disk;
+	if (temp == true)
+		ray->hit.obst = true;
 /*	if (ray->orig.x >= 0 && ray->orig.x <= 0.2 && ray->orig.y >= 0 && ray->orig.y <= 0.2) 
 	{
 		printf("[DISK]: cylinder point: x: %f, y: %f, z: %f,    ", ray->p.x, ray->p.y, ray->p.z); //erase
@@ -103,7 +107,7 @@ void	cone_check_disk(t_ray *ray, t_co *co, t_item *item, float *dn)
 void	cone_get_norm(t_obj *co, t_hit *hit, t_ray *ray)
 {
 	t_vec	mvec;
-	float	a;
+	double	a;
 
 	(void)ray;
 	hit->rgb = co->co->rgb;

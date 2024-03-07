@@ -6,13 +6,13 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 21:10:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/07 16:37:47 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:12:36 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-static int	put_vec(char *line, int *i, float *coord)
+static int	put_vec(char *line, int *i, double *coord)
 {
 	if (!line[*i])
 		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), -2);
@@ -59,10 +59,10 @@ int	init_vec(t_vec *vec, char *line, int *i)
 /*it checks if the range is correct. If it is, it returns the value,
   otherwise, it returns -2.
   a=amb.ratio / f=cam.fov / c=rgb */
-float	check_range(char *line, char type, int i)
+double	check_range(char *line, char type, int i)
 {
 	float	rg[2];
-	float	input;
+	double	input;
 
 	if (!line[i])
 		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), -2);
