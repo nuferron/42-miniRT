@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:57:27 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 17:19:04 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:14:36 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,26 @@ t_item	*item_lstlast(t_item *lst)
 	while (lst->next != NULL)
 		lst = lst->next;
 	return (lst);
+}
+
+/*It checks if the whole string is a float
+ returns 0 if it's not a float and 1 if it is*/
+int	is_float(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	if (!ft_isdigit(str[i]))
+		return (0);
+	while (str[i] && ft_isdigit(str[i]))
+		i++;
+	if (str[i] == '.')
+		i++;
+	while (str[i] && ft_isdigit(str[i]))
+		i++;
+	if (!str[i] || is_whitespace(str[i]) || str[i] == ',')
+		return (1);
+	return (0);
 }

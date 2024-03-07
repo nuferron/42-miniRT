@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:50:51 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/04 13:08:42 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:47:48 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,23 @@ int	ft_key_hook(int key, t_sc *sc)
 	return (0);
 }
 
-/* Cleans up and exits in case of error 
-flag = -1 - no display, only structure free
-flag = 0 - only mlx.init is allocated
-flag = 1 - we should destroy the display */
-int	ft_error_mlx(t_sc *sc, int flag)
+/*Cleans up and exits in case of error
+flag > -2 - no display, only structure free
+flag = -2 - only mlx.init is allocated
+flag = -3 - we should destroy the display */
+int ft_error_mlx(t_sc *sc, int flag)
 {
-	if (flag > 0)
-		mlx_destroy_window(sc->mlx.init, sc->mlx.win);
-	else if (flag < 0)
-		free(sc->mlx.init);
-	exit (1);
+    if (flag == -3)
+        mlx_destroy_window(sc->mlx.init, sc->mlx.win);
+    else if (flag == -2)
+        free(sc->mlx.init);
+    free_all(sc);
+    return(1);
 }
-
-int	ft_exit_mlx(t_sc *sc)
+int ft_exit_mlx(t_sc *sc)
 {
-	if (sc->mlx.win)
-		mlx_destroy_window(sc->mlx.init, sc->mlx.win);
-	exit (0);
+    if (sc->mlx.win)
+        mlx_destroy_window(sc->mlx.init, sc->mlx.win);
+    free_all(sc);
+    exit (0);
 }

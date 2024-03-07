@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:58:50 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 16:55:03 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:53:50 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 
 	init_sc(&sc);
 	if (check_input(argc, argv, &sc))
-		return (1);
+		return (ft_error_mlx(&sc, 42));
 	coord_transformation(&sc);
 	init_mlx(&sc);
 	draw_scene(&sc);

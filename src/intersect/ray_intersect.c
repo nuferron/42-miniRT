@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:31 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/05 23:49:56 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:20:01 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ void	ray_init(t_ray *ray)
 	ray->dist = MAXFLOAT;
 	ray->hit.obj = NULL;
 	ray->hit.obst = false;
+}
+
+void	init_light_ray(t_ray *ray, t_light *light, t_hit *hit)
+{
+	ray->orig = light->pos;
+	ray->zero = hit->p;
+	ray->norm = substr_vec(&ray->orig, &ray->zero);
+	norm_vector(&ray->norm);
+	ray->dist = MAXFLOAT;
+	ray->hit.obj = NULL;
 }
 
 void	check_dist(t_point *p, t_ray *ray, t_item *obj, double dist)
@@ -50,16 +60,6 @@ void	all_intersect(t_sc *sc, t_ray *ray)
 			if (dot_prod(&ray->norm, &ray->hit.norm) > 0)
 				ray->hit.norm = mult_new(&ray->hit.norm, -1);
 		}
-		sc->mlx.color = get_color(sc, sc->objs, &ray->hit);
+		get_color(sc, sc->objs, &ray->hit);
 	}
-}
-
-void	init_light_ray(t_ray *ray, t_light *light, t_hit *hit)
-{
-	ray->orig = light->pos;
-	ray->zero = hit->p;
-	ray->norm = substr_vec(&ray->orig, &ray->zero);
-	norm_vector(&ray->norm);
-	ray->dist = MAXFLOAT;
-	ray->hit.obj = NULL;
 }

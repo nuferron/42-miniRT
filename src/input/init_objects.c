@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/07 16:14:18 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:53:31 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_item	*add_obj(t_item *item, t_sc *sc)
 
 	ret = ft_calloc(1, sizeof(t_item));
 	if (!ret)
-		exit(ft_dprintf(2, ERROR MEM));
+		ft_error_mlx(sc, ft_dprintf(2, ERROR MEM));
 	ret->next = NULL;
 	if (!item)
 		sc->objs = ret;
@@ -38,7 +38,8 @@ int	get_sphere(char *line, int i, t_sc *sc)
 	obj = add_obj(sc->objs, sc);
 	sp = malloc(sizeof(t_sp));
 	if (!sp)
-		exit(ft_dprintf(2, ERROR MEM));
+		ft_error_mlx(sc, ft_dprintf(2, ERROR MEM));
+	init_sp(obj, sp);
 	if (!skip_space(line, &i) && !line[i])
 		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	if (init_vec(&sp->pos, line, &i))
@@ -50,7 +51,6 @@ int	get_sphere(char *line, int i, t_sc *sc)
 		return (1);
 	if (!skip_number(line, &i) && !set_rgb(sp->rgb, line, i))
 		return (1);
-	init_sp(obj, sp);
 	return (0);
 }
 
@@ -64,7 +64,8 @@ int	get_plane(char *line, int i, t_sc *sc)
 	obj = add_obj(sc->objs, sc);
 	pl = malloc(sizeof(t_pl));
 	if (!pl)
-		exit(ft_dprintf(2, ERROR MEM));
+		ft_error_mlx(sc, ft_dprintf(2, ERROR MEM));
+	init_pl(obj, pl);
 	if (!skip_space(line, &i) && !line[i])
 		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	if (init_vec(&pl->pos, line, &i) || init_vec(&pl->nov, line, &i))
@@ -74,7 +75,6 @@ int	get_plane(char *line, int i, t_sc *sc)
 	if (!skip_space(line, &i) && !set_rgb(pl->rgb, line, i))
 		return (1);
 	norm_vector(&pl->nov);
-	init_pl(obj, pl);
 	return (0);
 }
 
@@ -88,7 +88,8 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 	obj = add_obj(sc->objs, sc);
 	cy = malloc(sizeof(t_cy));
 	if (!cy)
-		exit(ft_dprintf(2, ERROR MEM));
+		ft_error_mlx(sc, ft_dprintf(2, ERROR MEM));
+	init_cy(obj, cy);
 	if (!skip_space(line, &i) && !line[i])
 		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	if (init_vec(&cy->pos, line, &i) || init_vec(&cy->nov, line, &i))
@@ -103,7 +104,6 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 	if (!skip_number(line, &i) && !set_rgb(cy->rgb, line, i))
 		return (1);
 	norm_vector(&cy->nov);
-	init_cy(obj, cy);
 	return (0);
 }
 
@@ -117,7 +117,8 @@ int	get_cone(char *line, int i, t_sc *sc)
 	obj = add_obj(sc->objs, sc);
 	co = malloc(sizeof(t_co));
 	if (!co)
-		exit(ft_dprintf(2, ERROR MEM));
+		ft_error_mlx(sc, ft_dprintf(2, ERROR MEM));
+	init_cn(obj, co);
 	if (!skip_space(line, &i) && !line[i])
 		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	if (init_vec(&co->pos, line, &i) || init_vec(&co->nov, line, &i))
@@ -132,6 +133,5 @@ int	get_cone(char *line, int i, t_sc *sc)
 	if (!skip_number(line, &i) && !set_rgb(co->rgb, line, i))
 		return (1);
 	norm_vector(&co->nov);
-	init_cn(obj, co);
 	return (0);
 }

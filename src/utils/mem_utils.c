@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 20:47:10 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/03 15:03:42 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:54:30 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,24 @@ void	free_all(t_sc *sc)
 
 void	sp_free(t_obj *obj)
 {
-	free(obj->sp);
+	if (obj->sp)
+		free(obj->sp);
 }
 
 void	pl_free(t_obj *obj)
 {
-	free(obj->pl);
+	if (obj->pl)
+		free(obj->pl);
 }
 
 void	cy_free(t_obj *obj)
 {
-	free(obj->cy);
+	if (obj->cy)
+		free(obj->cy);
 }
 
 void	cone_free(t_obj *obj)
 {
-	free(obj->co);
+	if (obj->co)
+		free(obj->co);
 }
