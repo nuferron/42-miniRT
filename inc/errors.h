@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:07:57 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/06 18:17:05 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:52:11 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@
 # define REC "We recommend you to work with lower numbers\n"
 # define UNNORM "Unnormalized vector found in line "
 # define NORM "We'll work with its normalized version\n"
-# define CAM "Your camera is inside of an object. Change the position to see the world.\n"
+# define CAM "Your camera is inside of an object. \
+Change the position to see the world.\n"
 #endif

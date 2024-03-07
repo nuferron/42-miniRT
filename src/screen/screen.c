@@ -6,13 +6,12 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:43:51 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/06 18:17:59 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:50:51 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "errors.h"
-
 
 void	getting_new_axis(t_vec *cam, t_vec *h, t_vec *v, t_vec *ax)
 {
@@ -68,8 +67,8 @@ int	check_first_pix(t_sc *sc, t_point *ctx, t_point *cty)
 	sc->mlx.w = 0;
 	sc->mlx.h = 0;
 	throw_first_ray(sc, &sc->screen.start, ctx, cty);
-//	printf("after first ray: %f\n", dot_prod(&sc->ray.hit.norm, &sc->cam.nov));
-	if (sc->ray.hit.type == pla || dot_prod(&sc->ray.hit.norm, &sc->cam.nov) <= 0)
+	if (sc->ray.hit.type == pla || \
+	dot_prod(&sc->ray.hit.norm, &sc->cam.nov) <= 0)
 		return (0);
 	ft_dprintf(2, WARN CAM);
 	sc->mlx.color = 0;

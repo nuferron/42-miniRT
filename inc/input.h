@@ -6,17 +6,17 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:04:16 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/07 18:32:45 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:52:52 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INPUT_H
 # define INPUT_H
 
-#include "miniRT.h"
-#include "errors.h"
+# include "miniRT.h"
+# include "errors.h"
 
-#define LIGHT (int[3]){128,0,128}
+# define LIGHT (int[3]){128,0,128}
 
 /* CHECKING INPUT + INITIALIZING STRUCTS */
 /* init_scene.c */
