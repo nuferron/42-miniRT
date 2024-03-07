@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:41:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 18:05:19 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:14:18 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	get_cylinder(char *line, int i, t_sc *sc)
 		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), 1);
 	if (init_vec(&cy->pos, line, &i) || init_vec(&cy->nov, line, &i))
 		return (1);
-	if (vec_mod(&cy->nov) != 1 && !skip_space(line, &i))
+	if (!skip_space(line, &i) && vec_mod(&cy->nov) != 1)
 		ft_dprintf(2, WARN UNNORM "\"%s\"\n" NORM, line);
 	cy->r = check_range(line, 'p', i) / 2;
 	skip_sp_num_sp(line, &i);
