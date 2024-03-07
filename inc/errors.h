@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:07:57 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 19:10:17 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:03:21 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@
 # define PARAM "Invalid number of parameters in line "
 # define ELEM "Element not found: "
 # define MUST "There must be ONE \"A\", ONE \"C\" and ONE \"L\" element\n"
-# define NEG "Negative number when expecting positive number: "
+# define SIZE "Length must be greater than 0\n"
 # define BIG "Huge number detected in line: "
 # define REC "We recommend you to work with lower numbers\n"
 # define UNNORM "Unnormalized vector found in line "
 # define NORM "We'll work with its normalized version\n"
-# define BLIND "The camera appears to be inside an object\n"
 
 #endif
