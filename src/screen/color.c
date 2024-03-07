@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:18:22 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/04 20:16:49 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:49:19 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static unsigned int	phong_light(t_light *l, float dot, t_ray *lray)
 	s_fact = dot_prod(&reflex, &lray->zero);
 	if (s_fact >= 0)
 		return (0);
-	s_fact = pow(s_fact, 250);
+	s_fact = pow(s_fact, 500);
 	if (s_fact < 0)
 		s_fact = -s_fact;
 	return (color_x_fact(rgb_to_hex(l->rgb), s_fact * l->b));
@@ -58,19 +58,15 @@ static void	get_shadows(t_ray *lray, t_hit *hit, t_item *obj, double dot)
 
 	d = dist(&lray->zero, &lray->orig);
 	tmp = obj;
+	if (dot < 0)
+		return ;
 	while (tmp)
 	{
 		if (tmp != hit->obj)
 		{
-			if (dot < 0)
-			{
-				hit->obst = true;
-				break ;
-			}
 			tmp->intersect(&tmp->type, lray, tmp);
-			if (lray->dist < d) // dona algunes sombres rares
+			if (lray->dist < d)
 			{
-				//printf("d %f\tray.dist %f\n", d, ray.dist);
 				hit->obst = true;
 				break ;
 			}
@@ -79,7 +75,7 @@ static void	get_shadows(t_ray *lray, t_hit *hit, t_item *obj, double dot)
 	}
 }
 
-unsigned int	get_color(t_sc *sc, t_item *obj, t_hit *hit)
+void	get_color(t_sc *sc, t_item *obj, t_hit *hit)
 {
 	t_ray	lray;
 	t_light	*light;
@@ -104,5 +100,4 @@ unsigned int	get_color(t_sc *sc, t_item *obj, t_hit *hit)
 			obj_color(light, &lray, &sc->mlx.color, dot);
 		light = light->next;
 	}
-	return (sc->mlx.color);
 }
