@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 20:12:16 by nuferron          #+#    #+#             */
-/*   Updated: 2024/01/16 16:58:34 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:54:11 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ int	is_float(char *str)
 	i = 0;
 	if (str[i] == '+' || str[i] == '-')
 		i++;
-	while (str[i] && ft_isdigit(str[i]))
-		i++;
-	if (str[i] == '.' && str[i + 1] >= '0' && str[i + 1] <= '9')
-		i++;
-	while (str[i] && ft_isdigit(str[i]))
-		i++;
-	if (str[i] && !is_whitespace(str[i]) && str[i] != ',')
+	if (!ft_isdigit(str[i]))
 		return (0);
-	return (1);
+	while (str[i] && ft_isdigit(str[i]))
+		i++;
+	if (str[i] == '.')
+		i++;
+	while (str[i] && ft_isdigit(str[i]))
+		i++;
+	if (!str[i] || is_whitespace(str[i]) || str[i] == ',')
+		return (1);
+	return (0);
 }

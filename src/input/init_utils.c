@@ -6,45 +6,53 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 21:10:53 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 18:37:33 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:53:20 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-static int	put_vec(char *line, int *i, float *coord, int flag)
+static int	put_vec(char *line, int *i, float *coord)
 {
 	if (!line[*i])
 		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), -2);
-	if (!is_float(&line[*i]) || line[*i] == ',')
+	if (!is_float(&line[*i]))
 		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), -2);
 	*coord = ft_atof(&line[*i]);
 	if (int_len(*coord) >= 5)
 		ft_dprintf(2, WARN BIG "\"%s\"\n" REC, line);
-	while (flag && line[*i] && line[*i] != ',')
+	if (line[*i] == '+' || line[*i] == '-')
+		(*i)++;
+	while (line[*i] && ft_isdigit(line[*i]))
+		(*i)++;
+	if (line[*i] == '.' && ft_isdigit(line[*i + 1]))
+		(*i)++;
+	while (line[*i] && ft_isdigit(line[*i]))
 		(*i)++;
 	return (0);
 }
 
-/*It initializes a variable of type t_vec*/
+/*It initializes a t_vec and displays an error if something's wrong*/
 int	init_vec(t_vec *vec, char *line, int *i)
 {
 	int	r;
 
 	skip_space(line, i);
-	r = put_vec(line, i, &vec->x, 1);
-	if ((*i)++ && r == -2)
+	r = put_vec(line, i, &vec->x);
+	if (r)
 		return (-2);
-	r = put_vec(line, i, &vec->y, 1);
-	if ((*i)++ && r == -2)
-		return (-2);
-	r = put_vec(line, i, &vec->z, 0);
-	if (r == -2)
-		return (-2);
-	while (line[*i] && !is_whitespace(line[*i]))
+	if (line[*i] == ',')
 		(*i)++;
-	if (!line[*i])
-		return (ft_dprintf(2, ERROR PARAM "\"%s\"\n", line), -2);
+	r = put_vec(line, i, &vec->y);
+	if (r)
+		return (-2);
+	if (line[*i] == ',')
+		(*i)++;
+	r = put_vec(line, i, &vec->z);
+	if (r)
+		return (-2);
+	if (!is_whitespace(line[*i]))
+		return (ft_dprintf(2, ERROR LINE "\"%s\"\n", line), -2);
 	return (0);
 }
 
