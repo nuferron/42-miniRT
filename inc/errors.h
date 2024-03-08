@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:07:57 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/07 19:09:04 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:35:59 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@
 # define NORM "We'll work with its normalized version\n"
 # define CAM "Your camera is inside of an object. \
 Change the position to see the world.\n"
+# define LIGHT "No light color specified, default color is set\n"
 #endif

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:37:09 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/08 11:39:34 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:36:42 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int	get_light(char *line, int i, t_light **light)
 		last->rgb[0] = 128;
 		last->rgb[1] = 128;
 		last->rgb[2] = 0;
+		ft_dprintf(2, WARN LIGHT);
 	}
 	else if (!set_rgb(last->rgb, line, i))
 		return (1);

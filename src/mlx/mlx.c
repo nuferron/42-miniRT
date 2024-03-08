@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:50:51 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/07 19:06:55 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:38:07 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int	ft_error_mlx(t_sc *sc, int flag)
 	free_all(sc);
 	exit (1);
 }
-int ft_exit_mlx(t_sc *sc)
+
+int	ft_exit_mlx(t_sc *sc)
 {
 	if (sc->mlx.win)
 		mlx_destroy_window(sc->mlx.init, sc->mlx.win);
