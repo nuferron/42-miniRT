@@ -6,7 +6,7 @@
 /*   By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:39:28 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 15:04:28 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:44:45 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 # include <unistd.h>
 # include <limits.h>
 
-#define RED		"\033[1;31m"
-#define GREEN	"\033[1;32m"
-#define YELLOW	"\033[1;33m"
-#define BLUE 	"\033[1;34m"
-#define PURPLE	"\033[1;35m"
-#define CYAN	"\033[1;36m"
-#define WHITE	"\033[1;37m"
-#define RESET	"\033[0m"
+# define RED	"\033[1;31m"
+# define GREEN	"\033[1;32m"
+# define YELLOW	"\033[1;33m"
+# define BLUE 	"\033[1;34m"
+# define PURPLE	"\033[1;35m"
+# define CYAN	"\033[1;36m"
+# define WHITE	"\033[1;37m"
+# define RESET	"\033[0m"
 
 typedef struct s_list
 {

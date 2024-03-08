@@ -6,22 +6,22 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/07 19:08:16 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:51:13 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-#include <math.h>
-#include <fcntl.h>
-#include <stdbool.h>
+# include <math.h>
+# include <fcntl.h>
+# include <stdbool.h>
 
-#include "operations.h"
-#include "mlx_rt.h"
-#include "intersections.h"
-#include "libft/inc/libft.h"
-#include "ft_dprintf/inc/libftprintf.h"
+# include "operations.h"
+# include "mlx_rt.h"
+# include "intersections.h"
+# include "libft/inc/libft.h"
+# include "ft_dprintf/inc/libftprintf.h"
 
 typedef struct s_amb //AMBIENT LIGHTNING
 {
@@ -85,7 +85,5 @@ void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax);
 void	throw_rays(t_sc *sc, t_point *start, t_point *ctx, t_point *cty);
 void	throw_first_ray(t_sc *sc, t_point *start, t_point *ctx, t_point *cty);
 int		check_first_pix(t_sc *sc, t_point *ctx, t_point *cty);
-
-
 
 #endif

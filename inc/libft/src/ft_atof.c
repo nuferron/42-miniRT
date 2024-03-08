@@ -6,13 +6,11 @@
 /*   By: nuferron <nuferron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 21:23:28 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/05 14:20:42 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:46:23 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <float.h>
 
 static double	get_floating(char *str)
 {

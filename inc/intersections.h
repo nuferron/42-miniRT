@@ -6,20 +6,20 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:01:29 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/07 18:22:55 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:14:15 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INTERSECTIONS_H
 # define INTERSECTIONS_H
 
-#include "items.h"
+# include "items.h"
 
-typedef struct s_light t_light;
-typedef struct s_vec t_vec;
-typedef struct s_vec t_point;
-typedef struct s_ray t_ray;
-typedef struct s_sp t_sp;
+typedef struct s_light	t_light;
+typedef struct s_vec	t_vec;
+typedef struct s_vec	t_point;
+typedef struct s_ray	t_ray;
+typedef struct s_sp		t_sp;
 
 enum	e_type
 {
@@ -46,7 +46,7 @@ typedef struct s_hit
 	t_vec		norm;	// normalized vector of the hit
 	t_item		*obj;	// pointer to the winner object
 	int			*rgb;
-	bool		obst; 	// obstices 0 if there is access to light
+	bool		obst;	// obstices 0 if there is access to light
 	enum e_type	type;
 }	t_hit;
 

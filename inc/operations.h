@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:27:20 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/07 18:25:36 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:52:45 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_vec
 	double	z;
 }	t_vec;
 
-typedef struct s_vec t_point;
+typedef struct s_vec	t_point;
 
 /****** VECTOR UTILS: creation, normalization & dot & cros prod ***********/
 t_vec	vec_new(double x, double y, double z);

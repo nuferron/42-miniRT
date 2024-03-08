@@ -6,16 +6,16 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:27:29 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/07 18:29:46 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:50:27 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITEMS_H
 # define ITEMS_H
 
-typedef struct s_ray t_ray;
-typedef struct s_item t_item;
-typedef struct s_hit t_hit;
+typedef struct s_ray	t_ray;
+typedef struct s_item	t_item;
+typedef struct s_hit	t_hit;
 
 typedef struct s_sp //SPHERE
 {
@@ -42,7 +42,6 @@ typedef struct s_cy //CYLINDER
 	double	r;		//radius
 	double	h;		//height
 	int		rgb[3];
-//	int		flag;	//0 - winner point is on the body, 1 - winner point is on a plane
 }	t_cy;
 
 typedef struct s_co //CONO
