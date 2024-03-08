@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:28:24 by nzhuzhle          #+#    #+#             */
-/*   Updated: 2024/03/08 12:39:18 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/08 13:47:06 by nzhuzhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	cone_intersect(t_obj *obj, t_ray *ray, t_item *item)
 	dn = dot_prod(&co->nov, &ray->norm);
 	var.k1 = 1 - (1 + co->tg * co->tg) * dn * dn;
 	posn = dot_prod(&co->nov, &var.oc);
-	var.k2 = 2 * (dot_prod(&ray->norm, &var.oc) - (1 + co->tg * co->tg) * dn * posn);
+	var.k2 = 2 * (dot_prod(&ray->norm, &var.oc) - \
+	(1 + co->tg * co->tg) * dn * posn);
 	var.k3 = dot_prod(&var.oc, &var.oc) - (1 + co->tg * co->tg) * posn * posn;
 	cone_check_disk(ray, co, item, &dn);
 	if (!count_t(ray, &var))
@@ -36,6 +37,9 @@ void	cone_intersect(t_obj *obj, t_ray *ray, t_item *item)
 
 void	cone_check_body(t_ray *ray, t_item *item, t_co *co)
 {
+	bool	temp;
+
+	temp = ray->hit.obst;
 	ray->hit.obst = false;
 	if (ray->t[0] > 0 && co->m[0] < co->h && co->m[0] > 0)
 	{
@@ -43,7 +47,8 @@ void	cone_check_body(t_ray *ray, t_item *item, t_co *co)
 		ray->p = sum_vec(&ray->zero, &ray->p);
 		check_dist(&ray->p, ray, item, dist(&ray->p, &ray->zero));
 	}
-	if (ray->t[1] > 0 && co->m[1] < co->h && co->m[1] > 0 && ray->t[0] != ray->t[1])
+	if (ray->t[1] > 0 && co->m[1] < co->h && co->m[1] > 0 && \
+	ray->t[0] != ray->t[1])
 	{
 		ray->p = mult_new(&ray->norm, ray->t[1]);
 		ray->p = sum_vec(&ray->zero, &ray->p);
@@ -51,14 +56,14 @@ void	cone_check_body(t_ray *ray, t_item *item, t_co *co)
 	}
 	if (ray->hit.obst == true)
 		ray->hit.type = cone;
+	if (temp == true)
+		ray->hit.obst = true;
 }
 
 void	cone_check_disk(t_ray *ray, t_co *co, t_item *item, double *dn)
 {
 	double	d;
-	bool	temp;
 
-	temp = ray->hit.obst;
 	ray->hit.obst = false;
 	ray->t[0] = (co->prod - dot_prod(&ray->zero, &co->nov)) / *dn;
 	if (ray->t[0] > 0)
@@ -71,8 +76,6 @@ void	cone_check_disk(t_ray *ray, t_co *co, t_item *item, double *dn)
 	}
 	if (ray->hit.obst == true)
 		ray->hit.type = disk;
-	if (temp == true)
-		ray->hit.obst = true;
 }
 
 void	cone_get_norm(t_obj *co, t_hit *hit, t_ray *ray)
