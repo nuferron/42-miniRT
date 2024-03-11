@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nuferron <nuferron@student.42barcelona.co  +#+  +:+       +#+         #
+#    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 00:01:43 by nuferron          #+#    #+#              #
-#    Updated: 2024/01/16 19:46:33 by nuferron         ###   ########.fr        #
+#    Updated: 2024/03/08 14:08:28 by nzhuzhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ norm:
 	| awk '{if($$2 == "Error!") print "\n${RED}"$$1" "$$2; \
 	else print "${RESET}"$$0}'
 
-${OBJDIR}%.o:	${SRCDIR}%.c ${INC} | ${OBJDIR}
+${OBJDIR}%.o:	${SRCDIR}%.c Makefile ${INC} | ${OBJDIR}
 		@printf "${WHITE}FT_DPRINTF:${CYAN}Compiling files: ${WHITE}$(notdir $<)...${RESET}\r"
 		@cc $(CFLAGS) -I $(INC) -c $< -o $@
 		@printf "\r%-${COLUMNS}s\r" ""

@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:18:22 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/08 14:59:04 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:46:31 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static void	get_shadows(t_ray *lray, t_hit *hit, t_item *obj, double dot)
 	t_item	*tmp;
 
 	d = dist(&lray->zero, &lray->orig);
+	if (d < 0.0000001)
+		d = 0;
 	tmp = obj;
 	if (dot < 0)
 		return ;
@@ -65,7 +67,7 @@ static void	get_shadows(t_ray *lray, t_hit *hit, t_item *obj, double dot)
 		if (tmp != hit->obj)
 		{
 			tmp->intersect(&tmp->type, lray, tmp);
-			if (d > 0.0001 && lray->dist < d && d - lray->dist > 0.001)
+			if (lray->dist < d && d - lray->dist > 0.000001)
 			{
 				hit->obst = true;
 				break ;

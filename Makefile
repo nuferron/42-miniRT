@@ -6,7 +6,7 @@
 #    By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 16:44:50 by nuferron          #+#    #+#              #
-#    Updated: 2024/03/07 19:09:22 by nuferron         ###   ########.fr        #
+#    Updated: 2024/03/08 14:02:28 by nzhuzhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,9 +37,10 @@ SRCS = 	$(addprefix input/,$(SRCS_INPUT)) \
 		main.c
 SRCDIR = src/
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
+DEPS = $(addprefix $(OBJDIR),$(SRCS:.c=.d))
 OBJDIR = obj/
 NAME = miniRT
-CFLAGS = -Wall -Wextra -Werror -O3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -MMD -O3 #-fsanitize=address
 LIB = inc/libft/libft.a inc/ft_dprintf/libftprintf.a
 INC = inc/
 MLXFLAGS = -Linc/mlx -lmlx -framework OpenGL -framework AppKit
@@ -61,6 +62,7 @@ make_libs:
 		echo "${WHITE}MLX: ${GREEN}Compiled!"; \
 	fi
 
+-include $(DEPS)
 ${NAME}: ${OBJS} ${LIB}
 	cc ${CFLAGS} ${LIB} ${OBJS} ${MLXFLAGS} -o ${NAME}
 	echo "${WHITE}${NAME}: ${GREEN}Binary successfully created!${RESET}"
@@ -74,12 +76,12 @@ norm:
 	else print "${RESET}"$$0}'
 
 leaks: ${NAME}
-	leaks -atExit -- ./${NAME} ${MAP}
+	leaks -atExit -- ./${NAME} tests/${TEST}.rt
 
 run: ${NAME}
 	./${NAME} tests/${TEST}.rt
 
-${OBJDIR}%.o: ${SRCDIR}%.c ${ALL_HEADERS} Makefile
+${OBJDIR}%.o: ${SRCDIR}%.c Makefile
 	@printf "${WHITE}${NAME}: ${CYAN}Compiling files: ${WHITE}$(notdir $<)...${RESET}\r"
 	@mkdir -p $(dir $@)
 	@cc ${CFLAGS} -I ${INC} -c $< -o $@
