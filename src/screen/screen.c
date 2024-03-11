@@ -6,39 +6,55 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:43:51 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/08 13:55:18 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:48:15 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "errors.h"
 
-void	getting_new_axis(t_vec *cam, t_vec *h, t_vec *v, t_vec *ax)
+static void	get_new_axis(t_vec *cam, t_screen *s, t_vec *ax, int f)
 {
-	h->x = cam->y * ax->z - cam->z * ax->y;
-	h->y = cam->z * ax->x - cam->x * ax->y;
-	h->z = cam->x * ax->y - cam->y * ax->x;
-	v->x = cam->y * h->z - cam->z * h->y;
-	v->y = cam->z * h->x - cam->x * h->z;
-	v->z = cam->x * h->y - cam->y * h->x;
+	if (!f)
+	{
+		s->x_ax.x = cam->y * ax->z - cam->z * ax->y;
+		s->x_ax.y = cam->z * ax->x - cam->x * ax->y;
+		s->x_ax.z = cam->x * ax->y - cam->y * ax->x;
+	}
+	else
+	{
+		s->x_ax.x = ax->y * cam->z - ax->z * cam->y;
+		s->x_ax.y = ax->z * cam->x - ax->x * cam->y;
+		s->x_ax.z = ax->x * cam->y - ax->y * cam->x;
+	}
+	s->y_ax.x = cam->y * s->x_ax.z - cam->z * s->x_ax.y;
+	s->y_ax.y = cam->z * s->x_ax.x - cam->x * s->x_ax.z;
+	s->y_ax.z = cam->x * s->x_ax.y - cam->y * s->x_ax.x;
+	norm_vector(&s->x_ax);
+	norm_vector(&s->y_ax);
 }
 
-void	get_screen_vec(t_vec *cam, t_vec *x_ax, t_vec *y_ax)
+void	get_screen_vec(t_vec *cam, t_screen *s)
 {
 	t_vec	axis;
 
-	if (!cam->x && cam->y == 1 && !cam->z)
+	if (cam->y > cam->x && cam->y > cam->z)
 	{
 		axis = vec_new(0, 0, 1);
-		getting_new_axis(cam, x_ax, y_ax, &axis);
-		mult_fac(x_ax, -1);
-		mult_fac(y_ax, -1);
+		get_new_axis(cam, s, &axis, 0);
+		mult_fac(&s->x_ax, -1);
+	}
+	else if (cam->x > cam->y && cam->x > cam->z)
+	{
+		axis = vec_new(0, 1, 0);
+		get_new_axis(cam, s, &axis, 1);
+		mult_fac(&s->y_ax, -1);
 	}
 	else
 	{
 		axis = vec_new(0, 1, 0);
-		getting_new_axis(cam, x_ax, y_ax, &axis);
-		mult_fac(y_ax, -1);
+		get_new_axis(cam, s, &axis, 1);
+		mult_fac(&s->x_ax, -1);
 	}
 }
 

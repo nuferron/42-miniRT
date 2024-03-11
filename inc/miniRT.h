@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:59:25 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/08 11:51:13 by nuferron         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:03:00 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void	skip_sp_num_sp(char *line, int *i);
 t_item	*item_lstlast(t_item *lst);
 void	free_all(t_sc *sc);
 
-void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax);
+//void	get_screen_vec(t_vec *z_ax, t_vec *x_ax, t_vec *y_ax);
+void	get_screen_vec(t_vec *z_ax, t_screen *s);
 void	throw_rays(t_sc *sc, t_point *start, t_point *ctx, t_point *cty);
 void	throw_first_ray(t_sc *sc, t_point *start, t_point *ctx, t_point *cty);
 int		check_first_pix(t_sc *sc, t_point *ctx, t_point *cty);

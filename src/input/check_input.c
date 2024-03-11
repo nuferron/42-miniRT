@@ -6,7 +6,7 @@
 /*   By: nzhuzhle <nzhuzhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:05:38 by nuferron          #+#    #+#             */
-/*   Updated: 2024/03/08 13:46:11 by nzhuzhle         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:00:18 by nuferron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	check_input(int argc, char **argv, t_sc *sc)
 	sc->screen.pix_rat = sc->screen.width / WIDTH;
 	sc->screen.height = sc->screen.pix_rat * HEIGHT;
 	sc->screen.center = mult_new(&sc->cam.nov, FOCAL);
-	get_screen_vec(&sc->cam.nov, &sc->screen.x_ax, &sc->screen.y_ax);
+	get_screen_vec(&sc->cam.nov, &sc->screen);
 	sc->screen.start.x = sc->screen.center.x + sc->screen.x_ax.x \
 		* sc->screen.width / 2 + sc->screen.y_ax.x * sc->screen.height / 2;
 	sc->screen.start.y = sc->screen.center.y + sc->screen.x_ax.y \
