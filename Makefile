@@ -45,7 +45,7 @@ LIB = inc/libft/libft.a inc/ft_dprintf/libftprintf.a
 INC = inc/
 MLXFLAGS = -Linc/mlx -lmlx -framework OpenGL -framework AppKit
 COLUMNS = $(shell tput cols)
-TEST = test
+TEST = sunset
 HEADERS =	color.h errors.h input.h intersections.h miniRT.h mlx_rt.h \
 			operations.h items.h
 ALL_HEADERS = $(addprefix inc/,$(HEADERS))
