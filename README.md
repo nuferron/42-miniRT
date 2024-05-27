@@ -17,7 +17,7 @@ make
 ./miniRT tests/mountains.rt
 ```
 4. Enjoy the views!
-<img width="1457" alt="Screen Shot 2024-05-27 at 8 10 15 PM" src="https://github.com/nuferron/42-miniRT/assets/138325463/08ff332e-6cff-4b15-925a-a548c93a32d5">
+<img width="1457" alt="mountains.rt" src="https://github.com/nuferron/42-miniRT/assets/138325463/08ff332e-6cff-4b15-925a-a548c93a32d5">
 
 >[!NOTE]
 >Don't hesitate to do your own tests! You can check *.rt file's format in the provided tests and the [wiki](https://github.com/nuferron/42-miniRT/wiki/Scene-file).
